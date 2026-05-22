@@ -28,7 +28,11 @@ We welcome contributions from the community and the team to help make LuxRent th
 ## Get Started
 ### Installation
 1. Clone the repository:
-bash git clone https://github.com/JeromeJason-dev/Grande-Auto-Hut-LTD.git cd Grande-Auto-Hut-LTD 
+```bash 
+git clone https://github.com/JeromeJason-dev/Grande-Auto-Hut-LTD.git 
+
+cd Grande-Auto-Hut-LTD 
+```
 
 2. Open the project: Simply open the index.html file in your preferred browser to view the current build.
 
