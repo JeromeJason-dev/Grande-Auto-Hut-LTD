@@ -10,7 +10,7 @@
    align-items: center;
    padding: 13px;
    position: sticky;
-   background-color: rgb(90, 90, 204);
+   background-color: rgb(72, 113, 152);
    height: 20vh;
    margin-bottom: 2rem;
    
@@ -33,7 +33,7 @@
     
 }
 
-.cart-btn {
+.cart-icon {
     border: none;
     padding: 0.8rem 1rem;
     margin-left: 5rem;
@@ -54,9 +54,9 @@
 }
 
 body {
-    background-color: antiquewhite;
+    background-color:rgb(229, 217, 201);
     font-family: 'Times New Roman', Times, serif;
-    
+
 }
 /* HERO SECTION */
 .hero {
@@ -74,6 +74,12 @@ body {
     margin-left: 5rem;
 }
 
+.image-set {
+    width: 70vw;
+    height: 90vh;
+    margin-bottom: 3rem;
+}
+
 h2 {
     font-size: 2.4rem
     
@@ -83,3 +89,48 @@ h1 {
    color: rgb(224, 9, 9); 
 }
 
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,2fr));
+    gap: 2rem;
+    padding: 2rem;
+    margin-left: 20rem;
+ }
+
+ /* Product Card */
+ .product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: rgb(125, 112, 112);
+    border-radius: 8px;
+   
+ }
+
+ .product-card:hover {
+    transform: translateY(-15px);
+ }
+
+ .product-card img {
+    height: 260px;
+    object-fit: cover;
+ }
+
+ .product-info {
+    padding: 1rem;
+ }
+
+ .product-info h3 {
+    margin-bottom:0.5rem;
+ }
+ .rating {
+    color: gold;
+    margin-bottom: 0.5rem;
+ }
+
+ .price {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+ }
