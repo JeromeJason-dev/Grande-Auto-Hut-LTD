@@ -76,12 +76,12 @@ body {
 }
 
 h2 {
-    font-size: 2.4rem;
-    
+    font-size: 2.8rem;
 }
 
 h1 {
-   color: rgb(224, 9, 9); 
+   color: gold;
+   font-size: 2.2rem; 
 }
 
 .product-grid {
@@ -98,7 +98,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     padding: 1rem 2rem;
-    background: rgb(125, 112, 112);
+    background: white;
     border-radius: 8px;
    
  }
@@ -157,10 +157,10 @@ h1 {
 
   .footer-section p {
     line-height: 1.8;
-    color: black;
+    color: white;
   }
   .footer-section a {
-    color: rgb(103, 8, 8);
+    color: gold;
     text-decoration: none;
     transition: 0.4s ease;
     
@@ -204,14 +204,14 @@ h1 {
    border: none;
    border-radius: 8px;
    background: rgb(99, 149, 125);
-  
+    color: white;
   }
   .newsletter-form button {
    padding: 1rem;
    border: none;
    border-radius: 8px;
    background: rgb(98, 40, 25);
-   color: rgb(31, 186, 69);
+   color: white;
    transition: 0.3s ease;
   }
 
