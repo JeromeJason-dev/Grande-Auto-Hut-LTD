@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="contact.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <h1><i class="fa-solid fa-shop"></i> GRANDE AUTO HUT LTD</h1>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fa-solid fa-house"></i>Home</a></li>
+                <li><a href="product"><i class="fa-brands fa-product-hunt"></i>Product</a></li>
+                <li><a href="about"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                <li><a href="contact"><i class="fa-solid fa-address-book"></i>Contact</a></li>
+            </ul>
+            <div class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+        </nav>
+
+    </header>
+    <form action="#">
+        <h2>Contact Us</h2>
+        <div>
+            <input type="name" name="name" placeholder="Your name" required autocomplete="off">
+            <input type="email" name="email" placeholder="Your Email" required autocomplete="off">
+            <input type="tel" id="phone" name="phone" placeholder="07XXXXXXXX" required pattern="[0]{1}[0-9]{9}" autocomplete="off">
+            <textarea name="message" rows="5" cols="40" placeholder="Enter message"></textarea>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <div><a href="index.html">Back to Home</a></div>
+</body>
+
+</html>
