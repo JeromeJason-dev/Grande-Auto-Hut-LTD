@@ -1,6 +1,6 @@
 # GRANDE AUTO HUT LTD
 ## Overview
-A startic website for Grande Auto Hut LTD, an auto shop offering genuine car parts with premium customer service and top-grade retail pricing.
+A static website for Grande Auto Hut LTD, an auto shop offering genuine car parts with premium customer service and top-grade retail pricing.
 
 ## Current Features
 * Responsive Layout: Fully optimized for mobile, tablet, and desktop viewing.
@@ -35,7 +35,7 @@ Grande-Auto-Hut-LTD/
 │
 ├── css/                        # Responsive CSS architecture
 │   ├── contact.css                
-│   ├── style.css                # Flexible structures (Flexbox & CSS Grid) for product cards. Global style rules, color variables, and CSS typography 
+│   ├── style.css                # Flexible structures (Flex box & CSS Grid) for product cards. Global style rules, color variables, and CSS typography 
 │   └── about.css
 ```
 
