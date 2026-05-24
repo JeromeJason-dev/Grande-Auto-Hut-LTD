@@ -11,7 +11,7 @@
    padding: 13px;
    position: sticky;
    background-color: rgb(53, 70, 170);
-   height: 15vh;
+   height: 25vh;
    margin-bottom: 2rem;
    
 }
@@ -41,6 +41,10 @@
     border-radius: 8px;
     margin-top: 15px;
     cursor: pointer;
+}
+
+button a {
+    text-decoration: none;
 }
 
 .cta-btn:hover {
@@ -86,10 +90,10 @@ h1 {
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,2fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
     gap: 3rem;
     padding: 3rem;
-    margin-left: 5rem;
+    margin-left: 3rem;
  }
 
  /* Product Card */
@@ -226,4 +230,49 @@ h1 {
    text-align: center;
    border-top: 1px solid rgba(16, 16, 15, 0.6);
   
+}
+
+@media (max-width: 768px){
+    .hero {
+        flex-direction: column;
+        width: 100%;
+    }
+    .image {
+        width: 100%;
+        margin-left: 20px;
+        height: auto;
+    }
+
+    .product-grid {
+        margin-left: 10px;
+    }
+}
+
+.hamburger {
+    position: fixed;
+    z-index: 100;
+    top: 15rem;
+    right: 65rem;
+    padding: 4px;
+    border: black solid 1px;
+    background: white;
+    cursor: pointer;
+}
+
+.closeIcon {
+    display: none;
+}
+
+.fadeInMenu {
+    position: fixed;
+    transition: transform 0.2s;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: black;
+    color: white;
+    list-style: none;
+    padding-top: 4rem;
 }
