@@ -11,6 +11,16 @@ A startic website for Grande Auto Hut LTD, an auto shop offering genuine car par
 * Styling: CSS3 and Tailwindcss
 * Icons: High-quality vector iconography for a modern look.
 
+## Get Started
+### Installation
+1. Clone the repository:
+```bash 
+git clone https://github.com/JeromeJason-dev/Grande-Auto-Hut-LTD.git 
+
+cd Grande-Auto-Hut-LTD 
+```
+
+2. Open the project: Simply open the index.html file in your preferred browser to view the current build.
 ## Collaboration & Contribution
 We welcome contributions from the community and the team to help make LuxRent the gold standard for real estate platforms.
 
@@ -25,17 +35,6 @@ We welcome contributions from the community and the team to help make LuxRent th
 
 5. Open a Pull Request: Describe your changes and submit for review.
 
-## Get Started
-### Installation
-1. Clone the repository:
-```bash 
-git clone https://github.com/JeromeJason-dev/Grande-Auto-Hut-LTD.git 
-
-cd Grande-Auto-Hut-LTD 
-```
-
-2. Open the project: Simply open the index.html file in your preferred browser to view the current build.
-
 ## Future Roadmap
 Backend Integration: Implementing a Django-based management system for dynamic product listings.
 
@@ -44,3 +43,33 @@ This project is licensed under the MIT license.
 
 ## Copyright 
 &copy; 2026 Grande Auto Hut LTD. All rights reserved.
+
+## Project Structure
+Grande-Auto-Hut-LTD/
+│
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          
+│
+|                 
+├── README.md                   # Project documentation, local setup guide, and features list
+├── index.html                  # Homepage (Featured parts, hero section)
+│
+├── pages/                      # Sub-pages for site navigation
+│   ├── about.html              # The specialized "About Us" page for Grande Auto Hut LTD
+│   ├── product.html            # Spare parts marketplace grid (brakes, fluids, accessories)
+│   ├── contact.html            # Branch locations (South B, Industrial Area), phone, and WhatsApp links
+│                  
+│
+├── assets/                     # Shared static media
+│   ├── images/
+│   │   |            
+│   │   ├── hero-bg.jpg         # High-resolution shop storefront banner image
+│   │   ├── categories/         # Bumper images, lubricants, shock absorbers
+│   │   └── products/           # shopping cart, facebook and instagram links
+│   └── icons/                  
+│
+├── css/                        # Responsive CSS architecture
+│   ├── contact.css                
+│   ├── style.css                # Flexible structures (Flexbox & CSS Grid) for product cards. Global style rules, color variables, and CSS typography resets
+│ └── about.css
