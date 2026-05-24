@@ -35,18 +35,6 @@
     padding: 2rem;
 }
 
-.cta-btn {
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 15px;
-    cursor: pointer;
-}
-
-.cta-btn:hover {
-    transform: translateY(-5px);
-    background-color:azure;
-}
-
 body {
     background: linear-gradient(antiquewhite, rgb(53, 70, 170));
     font-family: 'Times New Roman', Times, serif;
