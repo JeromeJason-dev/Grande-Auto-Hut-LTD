@@ -11,6 +11,34 @@ A startic website for Grande Auto Hut LTD, an auto shop offering genuine car par
 * Styling: CSS3 and Tailwindcss
 * Icons: High-quality vector iconography for a modern look.
 
+## Project Structure
+```
+Grande-Auto-Hut-LTD/         
+│
+|                 
+├── README.md                   # Project documentation, local setup guide, and features list
+├── index.html                  # Homepage (navbar and hero section)
+│
+├── pages/                      # Sub-pages for site navigation
+│   ├── about.html              # The specialized "About Us" page for Grande Auto Hut LTD
+│   ├── product.html            # Spare parts marketplace grid (brakes, fluids, accessories)
+│   ├── contact.html            # Branch locations (South B, Industrial Area), phone
+│                  
+│
+├── assets/                     # Shared static media
+│   ├── images/
+│   │   |            
+│   │   ├── hero-bg.jpg         # High-resolution shop storefront banner image
+│   │   ├── categories/         # Bumper images, lubricants, shock absorbers
+│   │   └── products/           # shopping cart, facebook and instagram links
+│   └── icons/                  
+│
+├── css/                        # Responsive CSS architecture
+│   ├── contact.css                
+│   ├── style.css                # Flexible structures (Flexbox & CSS Grid) for product cards. Global style rules, color variables, and CSS typography 
+│   └── about.css
+```
+
 ## Get Started
 ### Installation
 1. Clone the repository:
@@ -44,32 +72,3 @@ This project is licensed under the MIT license.
 ## Copyright 
 &copy; 2026 Grande Auto Hut LTD. All rights reserved.
 
-## Project Structure
-Grande-Auto-Hut-LTD/
-│
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          
-│
-|                 
-├── README.md                   # Project documentation, local setup guide, and features list
-├── index.html                  # Homepage (Featured parts, hero section)
-│
-├── pages/                      # Sub-pages for site navigation
-│   ├── about.html              # The specialized "About Us" page for Grande Auto Hut LTD
-│   ├── product.html            # Spare parts marketplace grid (brakes, fluids, accessories)
-│   ├── contact.html            # Branch locations (South B, Industrial Area), phone, and WhatsApp links
-│                  
-│
-├── assets/                     # Shared static media
-│   ├── images/
-│   │   |            
-│   │   ├── hero-bg.jpg         # High-resolution shop storefront banner image
-│   │   ├── categories/         # Bumper images, lubricants, shock absorbers
-│   │   └── products/           # shopping cart, facebook and instagram links
-│   └── icons/                  
-│
-├── css/                        # Responsive CSS architecture
-│   ├── contact.css                
-│   ├── style.css                # Flexible structures (Flexbox & CSS Grid) for product cards. Global style rules, color variables, and CSS typography resets
-│ └── about.css
