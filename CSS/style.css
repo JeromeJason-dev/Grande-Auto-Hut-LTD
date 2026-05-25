@@ -31,9 +31,9 @@
     gap: 3rem;
 }
 
-.cart-icon {
-    padding: 2rem;
-  
+.cart-btn {
+    padding: 1px;
+    background-color: white;
 }
 
 .cta-btn {

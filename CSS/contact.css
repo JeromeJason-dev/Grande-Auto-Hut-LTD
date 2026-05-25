@@ -31,9 +31,6 @@
     gap: 3rem;  
 }
 
-.cart-icon {
-    padding: 2rem;
-}
 
 body {
     background: linear-gradient(antiquewhite, rgb(53, 70, 170));
@@ -84,7 +81,7 @@ textarea:focus-within {
     border-width: 3px;
 }
 
-button {
+.submit-btn {
     background-color: rgb(82, 122, 186);
     border-radius: 20px;
     border-color: black;

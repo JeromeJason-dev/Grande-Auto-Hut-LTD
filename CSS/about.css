@@ -31,9 +31,8 @@
     gap: 3rem;
 }
 
-.cart-icon {
-    padding: 3rem;
-    
+.cart-btn {
+    background-color: white;
 }
 
 body {
