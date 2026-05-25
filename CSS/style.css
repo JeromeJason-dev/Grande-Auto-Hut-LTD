@@ -139,6 +139,15 @@ h1 {
     font-size: 22px;
  }
 
+ article a {
+    text-decoration: underline;
+    color: red;
+ }
+
+ article a:hover {
+    color: rgb(145, 16, 16);
+ }
+
  /* Footer */
   .footer {
     background-color: rgb(53, 70, 170);
