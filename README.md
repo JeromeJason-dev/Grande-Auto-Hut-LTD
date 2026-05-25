@@ -37,6 +37,7 @@ Grande-Auto-Hut-LTD/
 │   ├── contact.css                
 │   ├── style.css                # Flexible structures (Flex box & CSS Grid) for product cards. Global style rules, color variables, and CSS typography 
 │   └── about.css
+    |__ product.css
 ```
 
 ## Get Started
@@ -65,6 +66,8 @@ We welcome contributions from the community and the team to help make LuxRent th
 
 ## Future Roadmap
 Backend Integration: Implementing a Django-based management system for dynamic product listings.
+
+Implementation of Javascript for more interactive responses
 
 ## License
 This project is licensed under the MIT license.
