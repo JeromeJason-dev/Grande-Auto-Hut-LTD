@@ -72,7 +72,7 @@ section.flex {
   padding: 1rem;
   display: flex;
   flex-wrap: wrap; /* Prevents drops downs from clipping out of the screen */
-  gap: 1rem !important; /* Overriding your inline class tailwind gaps */
+  gap: 1rem; /* Overriding your inline class tailwind gaps */
   justify-content: flex-start;
 }
 
