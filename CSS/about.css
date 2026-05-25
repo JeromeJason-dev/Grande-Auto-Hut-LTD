@@ -33,6 +33,7 @@
 
 .cart-btn {
     background-color: white;
+    cursor: pointer;
 }
 
 body {
