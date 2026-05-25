@@ -1,0 +1,286 @@
+/* ==========================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  background-color: #f9fafb;
+  color: #1f2937;
+  padding: 0;
+}
+
+/* Ensure images don't break layouts */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================
+   2. NAVBAR (Mobile-First Layout)
+   ========================================== */
+.navbar {
+  display: flex;
+  flex-direction: column; /* Stack components on mobile */
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap; /* Let menus wrap if screens get too tight */
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cart-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+/* ==========================================
+   3. FILTERS SECTION
+   ========================================== */
+section.flex {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap; /* Prevents drops downs from clipping out of the screen */
+  gap: 1rem !important; /* Overriding your inline class tailwind gaps */
+  justify-content: flex-start;
+}
+
+section.flex select {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  background-color: #fff;
+  font-size: 1rem;
+}
+
+/* ==========================================
+   4. PRODUCT GRID & CARDS
+   ========================================== */
+.product-grid {
+  display: grid;
+  /* Automatically fits items depending on space; min width of 250px per card */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.product-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain; /* Keeps product pictures looking sharp and un-stretched */
+  background-color: #f3f4f6;
+  padding: 1rem;
+}
+
+.product-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Keeps buttons aligned even with different text heights */
+}
+
+.product-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.rating {
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.product-info button {
+  margin-top: auto; /* Pushes button to bottom of the card */
+  background-color: #2563eb;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.product-info button a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+}
+
+/* ==========================================
+   5. FOOTER
+   ========================================== */
+.footer {
+  background-color: #111827;
+  color: #9ca3af;
+  padding: 3rem 1rem 1.5rem 1rem;
+  margin-top: 3rem;
+}
+
+.footer-container {
+  display: grid;
+  /* 1 Column on mobile, adapts to tablet and desktop screens later */
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section h2, 
+.footer-section h3 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a,
+.social-icons a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-section ul li a:hover,
+.social-icons a:hover {
+  color: #ffffff;
+}
+
+.social-icons {
+  margin-top: 1rem;
+  line-height: 2;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.newsletter-form input {
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #374151;
+  background-color: #1f2937;
+  color: white;
+}
+
+.newsletter-form button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #374151;
+  font-size: 0.875rem;
+}
+
+/* ==========================================
+   6. RESPONSIVE BREAKPOINTS (Desktop Enhancements)
+   ========================================== */
+
+/* Tablet & Up (Screens wider than 768px) */
+@media screen and (min-width: 768px) {
+  .navbar {
+    flex-direction: row; /* Align horizontal on desktop */
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar h1 {
+    text-align: left;
+  }
+
+  .product-grid {
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .footer-container {
+    /* Changes seamlessly to a 2-column layout on tablets */
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  
+  .newsletter-form {
+    flex-direction: row;
+  }
+  
+  .newsletter-form input {
+    flex-grow: 1;
+  }
+}
+
+/* Large Screens (Screens wider than 1024px) */
+@media screen and (min-width: 1024px) {
+  .footer-container {
+    /* Shifts to a 4-column structure on modern desktop monitors */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
