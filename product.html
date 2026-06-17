@@ -22,10 +22,20 @@
             </ul>
            <button class="cart-icon" onclick="location.href='cart.html'">
                 <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count" class="cart-badge">0</span>
             </button>
         </nav>
 
     </header>
+     <!-- SEARCH -->
+    <section class="search-section">
+        <input
+        type="text"
+        id="searchInput"
+        placeholder="Search auto parts..."
+    >
+        <div id="suggestions"></div>
+    </section>
     <!-- FILTER -->
     <section class="flex">
         <select class="border ">
@@ -35,7 +45,7 @@
         </select>
 
         <select class="border">
-            <option>Filter</option>
+            <option>All Items</option>
             <option>Radiator</option>
             <option>Battery</option>
             <option>Coolant</option>
@@ -59,7 +69,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 6,000</p>
-                <button><a href="#cart-btn">Add to cart</a></button>
+               <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
           <article class="product-card">
@@ -74,7 +84,7 @@
                     <i class="fa-solid fa-star"></i>
                 </div>
                 <p class="price">Ksh 30,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -89,7 +99,7 @@
                     <i class="fa-solid fa-star"></i>
                 </div>
                 <p class="price">Ksh 45,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -104,7 +114,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 25,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -119,7 +129,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 13,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -134,7 +144,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 10,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -149,7 +159,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 2,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -164,7 +174,7 @@
                     <i class="fa-solid fa-star"></i>
                 </div>
                 <p class="price">Ksh 10,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -179,7 +189,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 800</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -194,7 +204,7 @@
                     <i class="fa-solid fa-star"></i>
                 </div>
                 <p class="price">Ksh 12,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -209,7 +219,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 1,500</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -224,7 +234,7 @@
                     <i class="fa-solid fa-star"></i>
                 </div>
                 <p class="price">Ksh 20,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -239,7 +249,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 2,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -254,7 +264,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 1,800</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -269,7 +279,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 7,000</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
         <article class="product-card">
@@ -284,7 +294,7 @@
                     <i class="fa-regular fa-star"></i>
                 </div>
                 <p class="price">Ksh 800</p>
-                 <button><a href="#cart-btn">Add to cart</a></button>
+                 <button class="add-to-cart-btn">Add to cart</button>
             </div>
         </article>
       
@@ -359,6 +369,7 @@
             </p>
         </div>
     </footer>
+    <script src="JS/product.js"></script>
 </body>
 
 </html>
