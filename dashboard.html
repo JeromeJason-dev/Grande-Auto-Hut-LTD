@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-wrapper">
+
+        <aside class="profile-sidebar">
+            <div class="sidebar-card">
+                <div class="avatar-container">
+                    <img id="sidebarAvatar" src="assets/images/default-avatar.png" alt="User Avatar">
+                </div>
+                <h3 class="user-name" id="dashUserName">Jerome Jason</h3>
+                <p class="user-role">Premium Customer</p>
+
+                <hr class="divider">
+
+                <div class="profile-details-list">
+                    <div class="detail-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span id="dashUserEmail">jerome@example.com</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span id="dashUserPhone">+254 700 000000</span>
+                    </div>
+                </div>
+
+                <a href="profile.html" class="edit-profile-btn">
+                    <i class="fa-solid fa-user-gear"></i> Edit Profile
+                </a>
+
+                <button id="logoutBtn" class="logout-sidebar-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-dashboard-content">
+            <section class="welcome-banner">
+                <div class="welcome-text">
+                    <h1>Welcome Back, <span class="highlight-name" id="welcomeName">Jerome</span>!</h1>
+                    <p>Track your automotive orders, manage your spare parts delivery history, and configure your
+                        account details right here.</p>
+                </div>
+            </section>
+
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon blue"><i class="fa-solid fa-box"></i></div>
+                    <div class="metric-info">
+                        <h4>Total Orders</h4>
+                        <p class="metric-number">12</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon orange"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="metric-info">
+                        <h4>In Transit</h4>
+                        <p class="metric-number">1</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="orders-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-clock-history"></i> Recent Orders</h2>
+                    <a href="product.html" class="browse-more-link">Order Spare Parts →</a>
+                </div>
+
+                <div class="table-container">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="order-id">#G-98421</td>
+                                <td>June 14, 2026</td>
+                                <td>Brake Pads x2, Oil Filter</td>
+                                <td class="price-cell">Ksh 14,500</td>
+                                <td><span class="status-badge processing">Processing</span></td>
+                                <td><button class="track-btn" onclick="openTracker('#G-98421', 'processing')"><i class="fa-solid fa-location-dot"></i> Track</button></td>
+                            </tr>
+                            <tr>
+                                <td class="order-id">#G-97310</td>
+                                <td>May 28, 2026</td>
+                                <td>Brembo Brake Discs (Pair)</td>
+                                <td class="price-cell">Ksh 32,000</td>
+                                <td><span class="status-badge shipped">Shipped</span></td>
+                                <td><button class="track-btn" onclick="openTracker('#G-97310', 'shipped')"><i class="fa-solid fa-location-dot"></i> Track</button></td>
+                            </tr>
+                            <tr>
+                                <td class="order-id">#G-95104</td>
+                                <td>May 12, 2026</td>
+                                <td>Spark Plugs (Set of 4)</td>
+                                <td class="price-cell">Ksh 6,800</td>
+                                <td><span class="status-badge delivered">Delivered</span></td>
+                                <td><button class="track-btn" onclick="openTracker('#G-95104', 'delivered')"><i class="fa-solid fa-location-dot"></i> Track</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div id="trackingModal" class="tracking-modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Tracking Details Summary (<span id="modalOrderId"></span>)</h3>
+                        <span class="close-modal" onclick="closeTracker()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tracking-stepper">
+                            <div class="step" id="step-processing">
+                                <div class="step-icon"><i class="fa-solid fa-warehouse"></i></div>
+                                <p>Order Confirmed</p>
+                            </div>
+                            <div class="step" id="step-shipped">
+                                <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                                <p>In Transit</p>
+                            </div>
+                            <div class="step" id="step-delivered">
+                                <div class="step-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+                                <p>Delivered</p>
+                            </div>
+                        </div>
+                        <div class="tracking-meta-info">
+                            <p><strong>Carrier Logistics Provider:</strong> Wells Fargo / G4S Courier Services</p>
+                            <p><strong>Estimated Arrival Window:</strong> Next working day by 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <script src="JS/auth.js"></script>
+</body>
+</html>
