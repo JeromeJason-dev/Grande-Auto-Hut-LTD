@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart - GRANDE AUTO HUT LTD</title>
+    <link rel="stylesheet" href="CSS/product.css">
+   
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+     <header>
+        <nav class="navbar">
+            <h1> GRANDE AUTO HUT LTD</h1>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+                <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i>Product</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-address-book"></i>Contact</a></li>
+            </ul>
+            <button class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="nav-cart-count">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="text-align: center; margin-top: 30px;">Your Shopping Cart</h2>
+        
+        <div class="cart-container">
+            <section class="cart-items-list">
+                <div id="cart-items-container">
+                    </div>
+            </section>
+
+            <aside class="cart-summary">
+                <h3>Order Summary</h3>
+                <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 15px;">
+                <div class="summary-row">
+                    <span>Items Count:</span>
+                    <span id="summary-item-count">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery:</span>
+                    <span style="color: #28a745; font-weight: bold;">FREE</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Total Cost:</span>
+                    <span id="summary-total-price">Ksh 0</span>
+                </div>
+                <button class="checkout-btn" id="checkout-btn" onclick="location.href='payment.html'">Proceed to Checkout</button>
+            </aside>
+        </div>
+    </main>
+
+     <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <!-- BRAND SECTION -->
+            <div class="footer-section">
+                <h2>GRANDE AUTO HUT LTD</h2>
+
+                <p>
+                    Where our service to you is our top priority.
+                </p>
+
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i
+                            class="fa-brands fa-facebook"></i>Facebook</a> |
+                    <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i>Instagram</a> |
+                    <a href="https://www.tiktok.com/grandeautohutltd" target="_blank"><i
+                            class="fa-brands fa-tiktok"></i>TikTok</a>
+                </div>
+            </div>
+            <!-- QUICK LINKS -->
+            <div class="footer-section">
+                <h3 class="text-white">QUICK LINKS</h3>
+
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <!-- NEWSLETTER -->
+            <div class="footer-section">
+                <h3 class="text-white">STAY UPDATED</h3>
+
+                <p>
+                    Get updates on exclusive deals and new arrivals.
+                </p>
+
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email">
+
+                    <button type="submit">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+
+            <!-- CUSTOMER SERVICE -->
+            <div class="footer-section">
+                <h3 class="text-white">CUSTOMER SERVICE</h3>
+
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- FOOTER BOTTOM -->
+        <div class="footer-bottom">
+            <p>
+                &copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="JS/cart.js"></script>
+</body>
+</html>
+</body>
+</html>
