@@ -23,6 +23,11 @@ body {
   padding: 1rem;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar h1 {
@@ -42,17 +47,28 @@ body {
   text-decoration: none;
   color: #4b5563;
   font-weight: 500;
-  display: flex;
+  font-size: 0.95rem;
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.cart-btn {
+.nav-links a:hover {
+  color: #2563eb; 
+}
+
+.cart-icon {
   background: none;
   border: none;
   font-size: 1.25rem;
   cursor: pointer;
   color: #1f2937;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+  color: #2563eb;
 }
 
 /* ==========================================
