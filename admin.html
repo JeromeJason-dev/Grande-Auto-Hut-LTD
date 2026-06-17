@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Control Panel - GRANDE AUTO HUT LTD</title>
+    
+    <script>
+        if (sessionStorage.getItem('isAdminAuthenticated') !== 'true') {
+            alert('Unauthorized Access Attempt. Redirecting to Gateway.');
+            window.location.replace('admin-login.html');
+        }
+    </script>
+
+    <link rel="stylesheet" href="CSS/product.css">
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="CSS/admin.css">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>GRANDE AUTO HUT LTD (ADMIN PANEL)</h1>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="product.html"><i class="fa-solid fa-cart-shopping"></i> Shop View</a></li>
+                <li><a href="#" id="logoutAction" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="admin-main">
+        <h2 class="admin-title"><i class="fa-solid fa-boxes-stacked"></i> Live Product Availability Matrix</h2>
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Stock Status</th>
+                    <th>Quantity On Hand</th>
+                    <th>Availability Control</th>
+                </tr>
+            </thead>
+            <tbody id="admin-matrix-body"></tbody>
+        </table>
+    </main>
+
+    <script src="JS/admin.js"></script>
+</body>
+</html>
