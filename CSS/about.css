@@ -57,6 +57,10 @@ body {
   transition: color 0.2s ease;
 }
 
+.nav-links a:hover {
+  color: #2563eb; 
+}
+
 .cart-icon {
   background: none;
   border: none;

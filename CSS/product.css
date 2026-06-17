@@ -12,7 +12,7 @@ body {
   line-height: 1.5;
   background-color: #f9fafb;
   color: #1f2937;
-  padding: 0;
+  padding-top: 195px;
 }
 
 /* Ensure images don't break layouts */
@@ -33,6 +33,11 @@ img {
   padding: 1rem;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar h1 {
@@ -52,17 +57,29 @@ img {
   text-decoration: none;
   color: #4b5563;
   font-weight: 500;
-  display: flex;
+  font-size: 0.95rem;
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  transition: color 0.2s ease;
 }
 
-.cart-btn {
+.nav-links a:hover {
+  color: #2563eb; 
+}
+
+.cart-icon {
   background: none;
   border: none;
   font-size: 1.25rem;
   cursor: pointer;
   color: #1f2937;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+  color: #2563eb;
 }
 
 /* ==========================================
@@ -250,6 +267,10 @@ section.flex select {
 
 /* Tablet & Up (Screens wider than 768px) */
 @media screen and (min-width: 768px) {
+  /* Shrinks spacing since desktop navbar is much shorter */
+  body {
+    padding-top: 90px; 
+  }
   .navbar {
     flex-direction: row; /* Align horizontal on desktop */
     justify-content: space-between;
@@ -285,4 +306,62 @@ section.flex select {
     /* Shifts to a 4-column structure on modern desktop monitors */
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+  .cart-btn {
+    position: relative; /* Allows positioning context for the badge */
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-badge {
+    background-color: #ff3333; /* Notification red */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    min-width: 15px;
+    text-align: center;
+}
+
+.search-section{
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    position: relative;
+}
+
+#searchInput{
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+#searchInput:focus{
+    border-color: #ff6600;
+}
+
+#suggestions{
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#suggestions div{
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestions div:hover{
+    background-color: #f5f5f5;
 }
