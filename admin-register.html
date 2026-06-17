@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration - GRANDE AUTO HUT LTD</title>
+    <link rel="stylesheet" href="CSS/admin-register.css">
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>GRANDE AUTO HUT LTD (PORTAL)</h1>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i> Shop Frontend</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="register-container">
+        <h2><i class="fa-solid fa-user-plus"></i> Admin Registration</h2>
+        <p class="subtitle">Create a management personnel credential profile</p>
+        
+        <div id="alertBox" class="alert-msg"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="regUsername">System Username</label>
+                <input type="text" id="regUsername" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="regPassword">Account Password</label>
+                <input type="password" id="regPassword" placeholder="Minimum 6 characters" required autocomplete="new-password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Repeat your password" required autocomplete="new-password">
+            </div>
+            <button type="submit" class="register-btn">Register Admin Account</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="admin-login.html">Log In Here</a>
+        </div>
+    </div>
+
+    <script src="JS/admin-register.js"></script>
+</body>
+</html>
