@@ -25,24 +25,88 @@
         </nav>
 
     </header>
-    <form action="#">
-        <h2>Contact Us</h2>
-        <div>
-            <input type="name" name="name" placeholder="Your name" required autocomplete="off">
-            <input type="email" name="email" placeholder="Your Email" required autocomplete="off">
-            <input type="tel" id="phone" name="phone" placeholder="07XXXXXXXX" required pattern="[0]{1}[0-9]{9}" autocomplete="off">
-            <textarea name="message" rows="5" cols="40" placeholder="Enter message"></textarea>
-            <button class="submit-btn" type="submit">Submit</button>
-        </div>
-    </form>
-    <div>
-        <p>We are located at (South B, Industrial area). For more information you can contact us at</p>
-        <p><i class="fa-solid fa-phone"></i>+254 723 113311</p>
-        <p>or email us at</p>
-        <p><i class="fa-solid fa-envelope"></i> grandeautohut@gmail.com</p>
-    </div>
+   <main>
+        <section class="contact-wrapper">
 
-    <div><a href="index.html">Back to Home</a></div>
+            <!-- Contact Form -->
+            <div class="contact-form-card">
+                <h2>Contact Us</h2>
+                <form action="#">
+                    <input type="text" name="name" placeholder="Your name" required autocomplete="off">
+                    <input type="email" name="email" placeholder="Your Email" required autocomplete="off">
+                    <input type="tel" id="phone" name="phone" placeholder="07XXXXXXXX" required
+                        pattern="[0]{1}[0-9]{9}" autocomplete="off">
+                    <textarea name="message" rows="5" placeholder="Enter message"></textarea>
+                    <button class="submit-btn" type="submit">Submit</button>
+                </form>
+            </div>
+
+            <!-- Info Card -->
+            <div class="contact-info-card">
+                <h2>Get in Touch</h2>
+                <p class="info-subtitle">We're here to help you find the right vehicle.</p>
+
+                <div class="info-row">
+                    <div class="icon-wrap">
+                        <i class="fa-solid fa-map-pin"></i>
+                    </div>
+                    <div>
+                        <p class="info-label">Location</p>
+                        <p class="info-value">South B, Industrial Area, Nairobi, Kenya</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="icon-wrap">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <p class="info-label">Phone</p>
+                        <p class="info-value"><a href="tel:+254723113311">+254 723 113311</a></p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="icon-wrap">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <p class="info-label">Email</p>
+                        <p class="info-value"><a href="mailto:grandeautohut@gmail.com">grandeautohut@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="icon-wrap">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div>
+                        <p class="info-label">Working Hours</p>
+                        <table class="hours-table">
+                            <tr>
+                                <td>Mon – Fri</td>
+                                <td>8:00 AM – 6:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>9:00 AM – 3:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td>Closed</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="back-link">
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </main>
 </body>
 
 </html>
