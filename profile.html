@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="CSS/profile.css">
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            
+            <div class="card-header-nav">
+                <a href="dashboard.html" class="back-dash-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+            </div>
+
+            <h2>Account Settings</h2>
+            
+            <form id="profileForm">
+                <div class="form-section-title">
+                    <h3><i class="fa-solid fa-user"></i> Public Profile</h3>
+                    <p>Update your personal info and identification media.</p>
+                </div>
+
+                <div class="avatar-upload-wrapper">
+                    <div class="avatar-preview-box">
+                        <img id="profilePreview" src="assets/images/default-avatar.png" alt="Profile Preview">
+                    </div>
+                    <label for="fileInput" class="custom-file-upload">
+                        <i class="fa-solid fa-camera"></i> Change Photo
+                    </label>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">Full Name</label>
+                    <input type="text" id="profileName" value="Jerome Jason" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">Email Address</label>
+                    <input type="email" id="profileEmail" value="jerome@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">Phone Number</label>
+                    <input type="tel" id="profilePhone" value="+254 700 000000" required>
+                </div>
+
+                <button type="submit" class="save-btn">Save Personal Info</button>
+            </form>
+
+            <hr class="section-divider">
+
+            <form id="passwordChangeForm">
+                <div class="form-section-title">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Security Configuration</h3>
+                    <p>Ensure your account is using a secure, robust access password.</p>
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">Current Password</label>
+                    <input type="password" id="currentPassword" placeholder="••••••••" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="field-label">New Password</label>
+                    <input type="password" id="newPassword" placeholder="Minimum 8 characters" required>
+                </div>
+                
+                <div id="passwordStrength"></div>
+
+                <div class="input-group">
+                    <label class="field-label">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" placeholder="Match new password exactly" required>
+                </div>
+
+                <button type="submit" class="save-btn secondary-btn">Update Password</button>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>
