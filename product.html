@@ -370,6 +370,46 @@
             </p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Read the current state set by management panel
+    const inventoryRegistry = JSON.parse(localStorage.getItem('grande_inventory_status')) || [];
+
+    // Loop through your hardcoded product cards or dynamic element loops
+    inventoryRegistry.forEach(item => {
+        // Find matching item elements by a descriptive data attribute or item name
+        const productCards = document.querySelectorAll('.product-card'); // Update selector to match your CSS classes
+        
+        productCards.forEach(card => {
+            const titleElement = card.querySelector('.product-title'); // Update selector to match your layout
+            if (titleElement && titleElement.textContent.trim() === item.name) {
+                
+                // CRITICAL CHECK: Determine if item is unavailable or empty
+                const isUnavailable = !item.inStock || item.quantity <= 0;
+                
+                const actionButton = card.querySelector('.add-to-cart-btn'); // Update to match your button class
+                const statusBadge = card.querySelector('.stock-badge'); // Optional: reference a badge element if you have one
+                
+                if (isUnavailable) {
+                    card.classList.add('out-of-stock-disabled');
+                    if (actionButton) {
+                        actionButton.disabled = true;
+                        actionButton.innerText = "Out of Stock";
+                        actionButton.style.backgroundColor = "#dc3545";
+                    }
+                } else {
+                    card.classList.remove('out-of-stock-disabled');
+                    if (actionButton) {
+                        actionButton.disabled = false;
+                        actionButton.innerText = "Add to Cart";
+                        actionButton.style.backgroundColor = ""; // Restores your primary theme style
+                    }
+                }
+            }
+        });
+    });
+});
+    </script>
     <script src="JS/product.js"></script> 
 </body>
 
