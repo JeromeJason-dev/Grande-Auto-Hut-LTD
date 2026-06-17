@@ -1,0 +1,223 @@
+/* ==========================================================================
+   1. Base Reset & Page Layout
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.profile-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    padding: 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================================================
+   2. Header Navigation & Typography
+   ========================================================================== */
+.card-header-nav {
+    margin-bottom: 20px;
+}
+
+.back-dash-link {
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.back-dash-link:hover {
+    color: #007bff;
+}
+
+.profile-card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 10px;
+}
+
+.form-section-title {
+    margin-bottom: 20px;
+}
+
+.form-section-title h3 {
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-section-title h3 i {
+    color: #007bff;
+}
+
+.form-section-title p {
+    font-size: 0.85rem;
+    color: #777777;
+    margin-top: 2px;
+}
+
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-color: #eef1f6;
+    margin: 35px 0;
+}
+
+/* ==========================================================================
+   3. Interactive Profile Picture Section
+   ========================================================================== */
+.avatar-upload-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    background-color: #fafbfc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed #e2e8f0;
+}
+
+.avatar-preview-box {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #e9ecef;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 12px;
+}
+
+.avatar-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #007bff;
+    background-color: #e6f0ff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-file-upload:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+#fileInput {
+    display: none; /* Keep browser raw element completely hidden */
+}
+
+/* ==========================================================================
+   4. Structured Input Form Blocks
+   ========================================================================== */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.field-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+#profileForm input,
+#passwordChangeForm input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #333333;
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+    outline: none;
+}
+
+#profileForm input:focus,
+#passwordChangeForm input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
+}
+
+#passwordStrength {
+    font-size: 0.8rem;
+    margin-top: -12px;
+    margin-bottom: 14px;
+    font-weight: 500;
+    padding-left: 2px;
+}
+
+/* ==========================================================================
+   5. Form Submit Action Buttons
+   ========================================================================== */
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 5px;
+}
+
+.save-btn:hover {
+    background-color: #0056b3;
+}
+
+.save-btn:active {
+    transform: scale(0.99);
+}
+
+/* Secondary alternate version for structural variety */
+.save-btn.secondary-btn {
+    background-color: #212529;
+}
+
+.save-btn.secondary-btn:hover {
+    background-color: #000000;
+}
