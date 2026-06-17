@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account - GRANDE AUTO HUT LTD</title>
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="CSS/register.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="brand">
+            <h1>Grande Auto Hut Ltd</h1>
+            <p>Where our service to you is our top priority</p>
+        </div>
+
+        <div class="auth-card">
+            <h2>Create an account</h2>
+            <p class="subtitle">Join us to start shopping for auto parts.</p>
+
+            <div id="registerError" class="error-toast"></div>
+
+            <form id="registerForm">
+                <div class="field-group">
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="fullName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="phone" placeholder="Phone Number" required>
+                    </div>
+                    <div>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+                        <div id="passwordStrength"><div id="strengthBar"></div></div>
+                        <div id="strengthLabel"></div>
+                    </div>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    </div>
+                </div>
+
+                <label class="terms-label">
+                    <input type="checkbox" id="termsCheck" required>
+                    I agree to the <a href="#">Terms and Conditions</a>
+                </label>
+
+                <button type="submit" class="submit-btn">Register</button>
+
+                <p class="redirect-text">
+                    Already have an account? <a href="login.html">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const pwInput = document.getElementById('password');
+        const bar = document.getElementById('strengthBar');
+        const label = document.getElementById('strengthLabel');
+
+        pwInput.addEventListener('input', () => {
+            const val = pwInput.value;
+            let score = 0;
+            if (val.length >= 8) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const levels = [
+                { w: '0%', color: '#2a2d3a', text: '' },
+                { w: '30%', color: '#c0392b', text: 'Weak' },
+                { w: '55%', color: '#e8a020', text: 'Fair' },
+                { w: '80%', color: '#2980b9', text: 'Good' },
+                { w: '100%', color: '#27ae60', text: 'Strong' },
+            ];
+
+            const lvl = val.length === 0 ? levels[0] : levels[Math.max(1, score)];
+            bar.style.width = lvl.w;
+            bar.style.background = lvl.color;
+            label.textContent = lvl.text;
+            label.style.display = val.length ? 'block' : 'none';
+            label.style.color = lvl.color;
+        });
+    </script>
+    <script src="JS/auth.js"></script>
+</body>
+</html>
