@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Login - GRANDE AUTO HUT LTD</title>
+    <link rel="stylesheet" href="CSS/admin-login.css">
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>GRANDE AUTO HUT LTD</h1>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i> Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <h2><i class="fa-solid fa-lock"></i> Staff Authentication</h2>
+        <p>Access restricted to management personnel</p>
+        
+        <form id="loginForm" class="login-form">
+            <input type="text" id="username" placeholder="Username" required autocomplete="username">
+            <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+            <button type="submit" class="login-btn">Verify Identity</button>
+        </form>
+        <div id="errorMessage" class="error-message">Invalid Username or Password. Access Denied.</div>
+        
+        <div class="reg-link">
+            New System Manager? <a href="admin-register.html">Register Profile Here</a>
+        </div>
+    </div>
+
+    <script>
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+            
+            errorMsg.style.display = 'none';
+
+            // 1. Check fallback Master Credential
+            if (user === "admin" && pass === "Grande2026!") {
+                sessionStorage.setItem('isAdminAuthenticated', 'true');
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // 2. Scan Hashed Registration Profiles
+            const adminRegistry = JSON.parse(localStorage.getItem('grande_admins')) || [];
+            const hashedInputPassword = await hashPassword(pass);
+
+            const verifiedUser = adminRegistry.find(admin => 
+                admin.username.toLowerCase() === user.toLowerCase() && 
+                admin.password === hashedInputPassword
+            );
+
+            if (verifiedUser) {
+                sessionStorage.setItem('isAdminAuthenticated', 'true');
+                window.location.href = 'admin.html';
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

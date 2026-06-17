@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    background-color: #f9fafb;
+    color: #1f2937;
+    padding-top: 100px;
+
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    /* Stack components on mobile */
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    /* Let menus wrap if screens get too tight */
+    justify-content: center;
+    gap: 1rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+/* Supports both class variations used in your templates */
+.cart-icon {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #1f2937;
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+    color: #2563eb;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: none;
+}
+
+.reg-link {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.reg-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
