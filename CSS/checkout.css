@@ -135,8 +135,8 @@
     }
 
     .step.active .step-circle {
-        background: #007bff;
-        border-color: #007bff;
+        background: #1c3a70;
+        border-color: #1c3a70;
         color: #fff;
     }
 
@@ -407,7 +407,7 @@
     /* Place order button */
     .place-order-btn {
         width: 100%;
-        background: #007bff;
+        background: #1c3a70;
         color: #fff;
         border: none;
         padding: 14px;
