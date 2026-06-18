@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // --- YOUR SIPPET GOES RIGHT HERE ---
         let totalPriceSum = 0;
         
         // RESTORE BUTTON VISUALS IF ITEMS EXIST
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             checkoutBtn.style.opacity = '1';
             checkoutBtn.style.cursor = 'pointer';
         }
-        // ------------------------------------
 
         // Loop array and build layout blocks sequentially
         cart.forEach((item, index) => {
@@ -52,14 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
             totalItemsCount += itemQuantity;
             totalPriceSum += itemTotal;
 
+            // FIX: Map item.image safely to ensure fallback protection if image key variations occur
+            const imagePath = item.image || item.img || 'assets/images/placeholder.png';
+
             const itemElement = document.createElement('div');
             itemElement.classList.add('cart-item');
             
             itemElement.innerHTML = `
-                <img src="${item.img}" alt="${item.name}">
+                <img src="${imagePath}" alt="${item.name}" onerror="this.src='https://placehold.co/100x100?text=Auto+Part'">
                 <div class="cart-item-details">
                     <h4>${item.name}</h4>
-                    <p class="cart-item-price">Ksh ${item.price.toLocaleString()}</p>
+                    <p class="cart-item-price">${item.currency || 'Ksh'} ${item.price.toLocaleString()}</p>
                     <div class="quantity-controls">
                         <button class="qty-btn minus-btn" data-index="${index}">-</button>
                         <span class="qty-value">${itemQuantity}</span>
