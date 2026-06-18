@@ -1,207 +1,188 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM ELEMENT INITIALIZATION ---
-    const productGrid = document.querySelector('.product-grid');
-    const sortSelect = document.querySelector('.flex select:nth-of-type(1)');
-    const filterSelect = document.querySelector('.flex select:nth-of-type(2)');
-    const productCards = Array.from(document.querySelectorAll('.product-card'));
-    const cartCountElement = document.getElementById('cart-count');
-    
-    // Search Elements
-    const searchInput = document.getElementById("searchInput");
-    const suggestions = document.getElementById("suggestions");
+  // --- DOM CACHE DECK REGISTER ---
+  const productGrid = document.querySelector('.product-grid');
+  const sortSelect = document.getElementById('sortSelect');
+  const filterSelect = document.getElementById('filterSelect');
+  const cartCountElement = document.getElementById('cart-count');
+  const searchInput = document.getElementById('searchInput');
+  const suggestionsPanel = document.getElementById('suggestions');
 
-    // Pull cart from local storage using your dedicated key 'grande_cart'
-    let cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
+  // Unified Runtime App States 
+  let allProducts = [];
+  let currentProducts = [];
+  let cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
 
-    // --- 1. CART COUNT REFRESH LOGIC ---
-    function updateCartCountDOM() {
-        if (!cartCountElement) return;
-        
-        // Refresh the local reference to stay synced
-        const currentCart = JSON.parse(localStorage.getItem('grande_cart')) || [];
-        
-        // Count reflects total elements stored in context
-        cartCountElement.textContent = currentCart.length;
+  // --- 1. INITIALIZATION DATA PIPELINE RUNNERS ---
+  async function initializeProductCatalogue() {
+    try {
+      const response = await fetch('product.json');
+      if (!response.ok) throw new Error('Failed to acquire API products data ledger.');
+      
+      const data = await response.json();
+      allProducts = data.products;
+      currentProducts = [...allProducts];
+      
+      renderGrid(currentProducts);
+      refreshCartCountUI();
+    } catch (error) {
+      console.error('System Data Loading Error Exception:', error);
+      if (productGrid) {
+        productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color: #ef4444; font-weight:600;">Unable to connect to product inventory. Please verify your local live server connection state configurations and try again.</p>`;
+      }
+    }
+  }
+
+  // --- 2. LAYOUT ENGINE MATRIX GENERATOR ---
+  function renderGrid(productsToRender) {
+    if (!productGrid) return;
+    productGrid.innerHTML = '';
+
+    if (productsToRender.length === 0) {
+      productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 3rem; color: #6b7280;">No auto parts found matching your selection criteria.</p>`;
+      return;
     }
 
-    // Run immediately on page load to render existing cart totals
-    updateCartCountDOM();
+    productsToRender.forEach(product => {
+      // FontAwesome Star Component Generator Loop
+      let starsHTML = '';
+      const baselineRating = Math.floor(product.rating || 5);
+      for (let i = 1; i <= 5; i++) {
+        starsHTML += i <= baselineRating 
+          ? `<i class="fa-solid fa-star"></i>` 
+          : `<i class="fa-regular fa-star"></i>`;
+      }
 
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/250x200?text=${encodeURIComponent(product.name)}'">
+        <div class="product-info">
+          <h3>${product.name}</h3>
+          <div class="rating">${starsHTML}</div>
+          <p class="price">${product.currency} ${product.price.toLocaleString()}</p>
+          <button class="add-to-cart-btn" data-id="${product.id}">Add to cart</button>
+        </div>
+      `;
 
-    // --- 2. GLOBAL CLICK & ADD-TO-CART LOGIC ---
-    if (productGrid) {
-        productGrid.addEventListener('click', (e) => {
-            // Check if clicked element is the button, or an icon inside the button
-            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-                e.preventDefault(); 
-                
-                const button = e.target.tagName === 'BUTTON' ? e.target : e.target.closest('button');
-                
-                // Ensure it's an add-to-cart action button
-                if (!button.classList.contains('add-to-cart-btn')) return;
+      // Interactive Add-To-Cart Execution 
+      const actionButton = card.querySelector('.add-to-cart-btn');
+      if (actionButton) {
+        actionButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          const cartItemPayload = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            currency: product.currency,
+            image: product.image
+          };
 
-                const card = button.closest('.product-card');
-                if (!card) return;
+          cart.push(cartItemPayload);
+          localStorage.setItem('grande_cart', JSON.stringify(cart));
+          refreshCartCountUI();
 
-                // Extract data directly from your clean HTML tags
-                const productName = card.querySelector('h3').textContent.trim();
-                const priceText = card.querySelector('.price').textContent; 
-                
-                // Clean the price string into a pure integer
-                const productPrice = parseInt(priceText.replace(/[^\d]/g, ''), 10);
-                const productImage = card.querySelector('img').getAttribute('src');
-
-                // Build the item payload object
-                const product = {
-                    name: productName,
-                    price: productPrice,
-                    img: productImage
-                };
-
-                // Push item to storage array
-                cart.push(product);
-                localStorage.setItem('grande_cart', JSON.stringify(cart));
-
-                // --- UPDATE NAV BAR BADGE IMMEDIATELY ---
-                updateCartCountDOM();
-
-                // Quick visual confirmation on button
-                const originalText = button.innerHTML;
-                button.innerHTML = 'Added! ✓';
-                button.style.backgroundColor = '#28a745';
-                
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.style.backgroundColor = '';
-                }, 800);
-            }
+          // UI Button Interaction Feedback Flash Loops
+          actionButton.textContent = 'Added! ✓';
+          actionButton.style.backgroundColor = '#22c55e';
+          
+          setTimeout(() => {
+            actionButton.textContent = 'Add to cart';
+            actionButton.style.backgroundColor = '';
+          }, 1000);
         });
+      }
+
+      productGrid.appendChild(card);
+    });
+  }
+
+  // --- 3. PIPELINE FILTER & SORT INTERACTION CONTROL SYSTEM ---
+  function applyCombinedFiltersAndSorting() {
+    const searchValue = searchInput.value.toLowerCase().trim();
+    const filterValue = filterSelect.value.toLowerCase();
+    const sortValue = sortSelect.value;
+
+    // A. Apply Search Filter Rules
+    let processedProducts = allProducts.filter(product => 
+      product.name.toLowerCase().includes(searchValue)
+    );
+
+    // B. Apply Dropdown Filter Match Settings Matrix
+    if (filterValue !== 'all') {
+      processedProducts = processedProducts.filter(product => {
+        const name = product.name.toLowerCase();
+        if (filterValue === 'brake') {
+          return name.includes('brake');
+        }
+        if (filterValue === 'wipers') {
+          return name.includes('wiper') || name.includes('windshield');
+        }
+        return name.includes(filterValue);
+      });
     }
 
-
-    // --- 3. SORTING LOGIC ---
-    if (sortSelect) {
-        sortSelect.addEventListener('change', () => {
-            const sortValue = sortSelect.value;
-            if (sortValue === 'Sort by Price') return;
-
-            const sortedCards = [...productCards].sort((a, b) => {
-                const priceA = parseInt(a.querySelector('.price').textContent.replace(/[^\d]/g, ''), 10);
-                const priceB = parseInt(b.querySelector('.price').textContent.replace(/[^\d]/g, ''), 10);
-                return sortValue === 'Low to High' ? priceA - priceB : priceB - priceA;
-            });
-
-            productGrid.innerHTML = '';
-            sortedCards.forEach(card => productGrid.appendChild(card));
-        });
+    // C. Apply Multi-Directional Currency Sort Computations
+    if (sortValue === 'low-to-high') {
+      processedProducts.sort((a, b) => a.price - b.price);
+    } else if (sortValue === 'high-to-low') {
+      processedProducts.sort((a, b) => b.price - a.price);
     }
 
+    currentProducts = processedProducts;
+    renderGrid(currentProducts);
+  }
 
-    // --- 4. FILTER LOGIC ---
-    if (filterSelect) {
-        filterSelect.addEventListener('change', () => {
-            const selectedValue = filterSelect.value.toLowerCase();
-            
-            productCards.forEach(card => {
-                const productName = card.querySelector('h3').textContent.toLowerCase();
-                if (selectedValue === 'filter' || productName.includes(selectedValue) || (selectedValue === 'brake pad' && productName.includes('brake'))) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
+  // --- 4. ASYNC SEARCH AUTOCOMPLETE INDEPENDENT ENGINE ---
+  function handleSearchAutocompleteUI() {
+    const value = searchInput.value.toLowerCase().trim();
+    suggestionsPanel.innerHTML = '';
+
+    if (value === '') {
+      applyCombinedFiltersAndSorting();
+      return;
     }
 
+    const matchedSuggestions = allProducts.filter(p => 
+      p.name.toLowerCase().includes(value)
+    );
 
-    // --- 5. SEARCH & AUTOCOMPLETE SUGGESTIONS LOGIC ---
-    if (searchInput && suggestions) {
-        searchInput.addEventListener("input", () => {
-            const value = searchInput.value.toLowerCase();
-            suggestions.innerHTML = "";
+    matchedSuggestions.slice(0, 5).forEach(product => {
+      const rowItem = document.createElement('div');
+      rowItem.className = 'suggestion-item';
+      rowItem.textContent = product.name;
 
-            productCards.forEach(product => {
-                const productName = product.querySelector("h3").textContent;
+      rowItem.addEventListener('click', () => {
+        searchInput.value = product.name;
+        suggestionsPanel.innerHTML = '';
+        applyCombinedFiltersAndSorting();
+      });
 
-                if (productName.toLowerCase().includes(value) && value !== "") {
-                    const item = document.createElement("div");
-                    item.textContent = productName;
-                    item.classList.add("suggestion-item"); // Useful hook for your custom drop-down styling
+      suggestionsPanel.appendChild(rowItem);
+    });
 
-                    item.addEventListener("click", () => {
-                        searchInput.value = productName;
-                        suggestions.innerHTML = "";
+    applyCombinedFiltersAndSorting();
+  }
 
-                        // Make sure the hidden matching element is visible again if filter rules hide it
-                        product.style.display = 'block';
+  // --- 5. COMPONENT UI PERSISTENCE MANAGEMENT UPDATER ---
+  function refreshCartCountUI() {
+    if (!cartCountElement) return;
+    const trackingCartData = JSON.parse(localStorage.getItem('grande_cart')) || [];
+    cartCountElement.textContent = trackingCartData.length;
+  }
 
-                        product.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center"
-                        });
+  // --- 6. EVENT BINDING SUITE LISTENERS ---
+  if (sortSelect) sortSelect.addEventListener('change', applyCombinedFiltersAndSorting);
+  if (filterSelect) filterSelect.addEventListener('change', applyCombinedFiltersAndSorting);
+  if (searchInput) searchInput.addEventListener('input', handleSearchAutocompleteUI);
 
-                        // Orange highlight indicator context flash
-                        product.style.border = "3px solid orange";
-
-                        setTimeout(() => {
-                            product.style.border = "";
-                        }, 2000);
-                    });
-
-                    suggestions.appendChild(item);
-                }
-            });
-        });
-
-        // Hide suggestions drop-down box context when clicking outside it
-        document.addEventListener("click", (e) => {
-            if (e.target !== searchInput && e.target !== suggestions) {
-                suggestions.innerHTML = "";
-            }
-        });
+  // Structural Blur Listener to clean suggestions list layout nodes safely
+  document.addEventListener('click', (e) => {
+    if (suggestionsPanel && e.target !== searchInput && e.target !== suggestionsPanel) {
+      suggestionsPanel.innerHTML = '';
     }
-    // --- 6. ADMIN STOCK AVAILABILITY ENFORCEMENT ---
-    function applyAdminStockStatus() {
-        // Grab the status registry arrays 
-        const inventoryStatus = JSON.parse(localStorage.getItem('grande_inventory_status'));
-        
-        // If the admin matrix hasn't been set up yet, stop execution safely
-        if (!inventoryStatus) return;
+  });
 
-        productCards.forEach(card => {
-            const productName = card.querySelector('h3').textContent.trim();
-            
-            // Find matched item status based on textual product keys
-            const matchedItem = inventoryStatus.find(item => item.name.toLowerCase() === productName.toLowerCase());
-            
-            if (matchedItem && !matchedItem.inStock) {
-                const addToCartBtn = card.querySelector('.add-to-cart-btn');
-                
-                // 1. Gray out and visually fade down card container opacity
-                card.style.opacity = "0.55";
-                card.style.transition = "all 0.3s ease";
-                
-                // 2. Safely lock down the button interaction controls
-                if (addToCartBtn) {
-                    addToCartBtn.textContent = "Out of Stock";
-                    addToCartBtn.disabled = true;
-                    addToCartBtn.style.backgroundColor = "#dc3545"; // Alert red status indication color
-                    addToCartBtn.style.cursor = "not-allowed";
-                }
-
-                // 3. Optional: Add a clean contextual visual label across the card
-                if (!card.querySelector('.stock-status-notice')) {
-                    const notice = document.createElement('div');
-                    notice.className = 'stock-status-notice';
-                    notice.innerHTML = `<span style="color: #721c24; background: #f8d7da; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; display: inline-block; margin-bottom: 10px;">Temporarily Unavailable</span>`;
-                    
-                    const infoDiv = card.querySelector('.product-info');
-                    infoDiv.insertBefore(notice, infoDiv.firstChild);
-                }
-            }
-        });
-    }
-
-    // Initialize checking process instantly on runtime access loop
-    applyAdminStockStatus();
+  // Ignition Loop Trigger
+  initializeProductCatalogue();
 });

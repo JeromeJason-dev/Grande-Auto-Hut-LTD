@@ -1,415 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>products-page</title>
-    <link rel="stylesheet" href="CSS/product.css">
-    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grande Auto Hut Ltd - Products</title>
+  <link rel="stylesheet" href="CSS/product.css">
+  <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <header>
-        <nav class="navbar">
-            <h1> GRANDE AUTO HUT LTD</h1>
-            <ul class="nav-links">
-                <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
-                <li><a href="#"><i class="fa-brands fa-product-hunt"></i>Product</a></li>
-                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-address-book"></i>Contact</a></li>
-            </ul>
-           <button class="cart-icon" onclick="location.href='cart.html'">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span id="cart-count" class="cart-badge">0</span>
-            </button>
-        </nav>
 
-    </header>
-     <!-- SEARCH -->
-    <section class="search-section">
-        <input
-        type="text"
-        id="searchInput"
-        placeholder="Search auto parts..."
-    >
-        <div id="suggestions"></div>
-    </section>
-    <!-- FILTER -->
-    <section class="flex">
-        <select class="border ">
-            <option>Sort by Price</option>
-            <option>Low to High</option>
-            <option>High to Low</option>
-        </select>
+  <div class="dashboard-core-wrapper">
+    
+    <input type="checkbox" id="menu-toggle">
 
-        <select class="border">
-            <option>All Items</option>
-            <option>Radiator</option>
-            <option>Battery</option>
-            <option>Coolant</option>
-            <option>Headlights</option>
-            <option>Shock Absorber</option>
-            <option>Brake Pad</option>
-        </select>
-    </section>
-    <!-- GRID -->
-    <main class="product-grid">
-        <!-- CARD -->
-           <article class="product-card">
-            <img src="assets/images/ignition-coil.png" alt="ignition coil">
-            <div class="product-info">
-                <h3>Ignition Coil</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 6,000</p>
-               <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-          <article class="product-card">
-            <img src="assets/images/crankshaft.png" alt="crankshaft">
-            <div class="product-info">
-                <h3>Crankshaft</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="price">Ksh 30,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/bumper.png" alt="bumper">
-            <div class="product-info">
-                <h3>Bumper</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="price">Ksh 45,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/clutch-kit.png" alt="clutch kit">
-            <div class="product-info">
-                <h3>Clutch Kit</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 25,000</p>
-                <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/alternator.png" alt="alternator">
-            <div class="product-info">
-                <h3>Alternator</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 13,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/water-pump.png" alt="water pump">
-            <div class="product-info">
-                <h3>Water Pump</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 10,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/oil-filter.png" alt="oil filter">
-            <div class="product-info">
-                <h3>Oil Filter</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 2,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/shock-absorber.png" alt="shock absorber">
-            <div class="product-info">
-                <h3>Shock Absorber</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="price">Ksh 10,000</p>
-                <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/radiator.png" alt="radiator">
-            <div class="product-info">
-                <h3>Radiator</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 800</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/headlights.png" alt="headlights">
-            <div class="product-info">
-                <h3>Headlights</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="price">Ksh 12,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/coolant.png" alt="coolant">
-            <div class="product-info">
-                <h3>Coolant</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 1,500</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/battery.png" alt="battery">
-            <div class="product-info">
-                <h3>Battery</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p class="price">Ksh 20,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/brake-pads.png" alt="brake pads">
-            <div class="product-info">
-                <h3>Brake Pads</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 2,000</p>
-                <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/spark-plug.png" alt="spark plug">
-            <div class="product-info">
-                <h3>Spark Plug</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 1,800</p>
-                <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/brake-cylinder.png" alt="brake cylinder">
-            <div class="product-info">
-                <h3>Brake Cylinder</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 7,000</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-        <article class="product-card">
-            <img src="assets/images/windshield-wipers.png" alt="windshield wipers">
-            <div class="product-info">
-                <h3>Windshield Wipers</h3>
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </div>
-                <p class="price">Ksh 800</p>
-                 <button class="add-to-cart-btn">Add to cart</button>
-            </div>
-        </article>
-      
-      
-    </main>
-    <!-- FOOTER -->
-    <footer class="footer">
+    <aside class="sidebar">
+      <div class="sidebar-header-wrapper">
+        <div class="sidebar-brand">
+          <h2>GRANDE AUTO HUT LTD</h2>
+          <p class="tagline">Service is our top priority</p>
+        </div>
+        <label for="menu-toggle" class="hamburger-label">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
 
+      <nav class="sidebar-nav">
+        <ul class="nav-links">
+          <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="#" class="active"><i class="fa-brands fa-product-hunt"></i> Product</a></li>
+          <li><a href="#"><i class="fa-solid fa-circle-info"></i> About</a></li>
+          <li><a href="#"><i class="fa-solid fa-address-book"></i> Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="cart-icon" onclick="location.href='cart.html'">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>View Cart</span>
+          <span id="cart-count" class="cart-badge">0</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-layout-content">
+      <header class="top-controls-container">
+        <section class="search-section">
+          <input type="text" id="searchInput" placeholder="Search auto parts...">
+          <div id="suggestions"></div>
+        </section>
+
+        <section class="filter-section-wrapper">
+          <select id="sortSelect">
+            <option value="default">Sort by Price</option>
+            <option value="low-to-high">Low to High</option>
+            <option value="high-to-low">High to Low</option>
+          </select>
+          
+          <select id="filterSelect">
+            <option value="all">All Items</option>
+            <option value="ignition coil">Ignition Coil</option>
+            <option value="crankshaft">Crankshaft</option>
+            <option value="bumper">Bumper</option>
+            <option value="clutch kit">Clutch Kit</option>
+            <option value="alternator">Alternator</option>
+            <option value="water pump">Water Pump</option>
+            <option value="oil filter">Oil Filter</option>
+            <option value="shock absorber">Shock Absorber</option>
+            <option value="radiator">Radiator</option>
+            <option value="headlights">Headlights</option>
+            <option value="coolant">Coolant</option>
+            <option value="battery">Battery</option>
+            <option value="brake">Brakes (Pads/Cylinder)</option>
+            <option value="spark plug">Spark Plug</option>
+            <option value="wipers">Windshield Wipers</option>
+          </select>
+        </section>
+      </header>
+
+      <main class="product-grid" aria-live="polite"></main>
+
+      <footer class="footer">
         <div class="footer-container">
-
-            <!-- BRAND SECTION -->
-            <div class="footer-section">
-                <h2>GRANDE AUTO HUT LTD</h2>
-
-                <p>
-                    Where our service to you is our top priority.
-                </p>
-
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i
-                            class="fa-brands fa-facebook"></i>Facebook</a> |
-                    <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i>Instagram</a> |
-                    <a href="https://www.tiktok.com/grandeautohutltd" target="_blank"><i
-                            class="fa-brands fa-tiktok"></i>TikTok</a>
-                </div>
+          <div class="footer-section">
+            <h2>GRANDE AUTO HUT LTD</h2>
+            <p>Where our service to you is our top priority.</p>
+            <div class="social-icons">
+              <a href="#" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a> |
+              <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a> |
+              <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
             </div>
-            <!-- QUICK LINKS -->
-            <div class="footer-section">
-                <h3 class="text-white">QUICK LINKS</h3>
-
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <!-- NEWSLETTER -->
-            <div class="footer-section">
-                <h3 class="text-white">STAY UPDATED</h3>
-
-                <p>
-                    Get updates on exclusive deals and new arrivals.
-                </p>
-
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email">
-
-                    <button type="submit">
-                        Subscribe
-                    </button>
-                </form>
-            </div>
-
-            <!-- CUSTOMER SERVICE -->
-            <div class="footer-section">
-                <h3 class="text-white">CUSTOMER SERVICE</h3>
-
-                <ul>
-                    <li><a href="#">Shipping Policy</a></li>
-                    <li><a href="#">Returns & Refunds</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Track Order</a></li>
-                </ul>
-            </div>
-
+          </div>
+          <div class="footer-section">
+            <h3>QUICK LINKS</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>STAY UPDATED</h3>
+            <p>Get updates on exclusive deals and new arrivals.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault();">
+              <input type="email" placeholder="Enter your email" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+          <div class="footer-section">
+            <h3>CUSTOMER SERVICE</h3>
+            <ul>
+              <li><a href="#">Shipping Policy</a></li>
+              <li><a href="#">Returns & Refunds</a></li>
+              <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
         </div>
-        <!-- FOOTER BOTTOM -->
         <div class="footer-bottom">
-            <p>
-                &copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.
-            </p>
+          <p>&copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.</p>
         </div>
-    </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    // Read the current state set by management panel
-    const inventoryRegistry = JSON.parse(localStorage.getItem('grande_inventory_status')) || [];
+      </footer>
+    </div>
+  </div>
 
-    // Loop through your hardcoded product cards or dynamic element loops
-    inventoryRegistry.forEach(item => {
-        // Find matching item elements by a descriptive data attribute or item name
-        const productCards = document.querySelectorAll('.product-card'); // Update selector to match your CSS classes
-        
-        productCards.forEach(card => {
-            const titleElement = card.querySelector('.product-title'); // Update selector to match your layout
-            if (titleElement && titleElement.textContent.trim() === item.name) {
-                
-                // CRITICAL CHECK: Determine if item is unavailable or empty
-                const isUnavailable = !item.inStock || item.quantity <= 0;
-                
-                const actionButton = card.querySelector('.add-to-cart-btn'); // Update to match your button class
-                const statusBadge = card.querySelector('.stock-badge'); // Optional: reference a badge element if you have one
-                
-                if (isUnavailable) {
-                    card.classList.add('out-of-stock-disabled');
-                    if (actionButton) {
-                        actionButton.disabled = true;
-                        actionButton.innerText = "Out of Stock";
-                        actionButton.style.backgroundColor = "#dc3545";
-                    }
-                } else {
-                    card.classList.remove('out-of-stock-disabled');
-                    if (actionButton) {
-                        actionButton.disabled = false;
-                        actionButton.innerText = "Add to Cart";
-                        actionButton.style.backgroundColor = ""; // Restores your primary theme style
-                    }
-                }
-            }
-        });
-    });
-});
-    </script>
-    <script src="JS/product.js"></script> 
+  <script src="JS/product.js"></script>
 </body>
-
 </html>

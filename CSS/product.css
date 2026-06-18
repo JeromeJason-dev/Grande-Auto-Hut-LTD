@@ -8,107 +8,251 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  background-color: #f9fafb;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
   color: #1f2937;
-  padding-top: 195px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Ensure images don't break layouts */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* ==========================================
-   2. NAVBAR (Mobile-First Layout)
-   ========================================== */
-.navbar {
+/* Flex Wrapper holding side navigation grid profile elements */
+.dashboard-core-wrapper {
   display: flex;
-  flex-direction: column; /* Stack components on mobile */
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Hidden control checkbox input tracking responsive toggle interaction loops */
+#menu-toggle {
+  display: none;
+}
+
+/* ==========================================
+   2. SIDEBAR STRUCTURE
+   ========================================== */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: #1a252f;
+  color: #ffffff;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.navbar h1 {
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.nav-links {
   display: flex;
-  flex-wrap: wrap; /* Let menus wrap if screens get too tight */
-  justify-content: center;
-  gap: 1rem;
-  list-style: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.5rem;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: #4b5563;
-  font-weight: 500;
-  font-size: 0.95rem;
-  display: inline-flex;
+.sidebar-header-wrapper {
+  display: flex;
   align-items: center;
-  gap: 0.35rem;
-  transition: color 0.2s ease;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.nav-links a:hover {
-  color: #2563eb; 
+.sidebar-brand h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #f39c12;
+}
+
+.sidebar-brand .tagline {
+  font-size: 0.75rem;
+  color: #bdc3c7;
+  font-style: italic;
+}
+
+.hamburger-label {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  width: 30px;
+  z-index: 1010;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-nav {
+  margin: 3rem 0 auto 0;
+  width: 100%;
+}
+
+.sidebar-nav .nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-nav .nav-links li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.sidebar-nav .nav-links li a:hover,
+.sidebar-nav .nav-links li a.active {
+  background-color: #34495e;
+  color: #f39c12;
+}
+
+.sidebar-footer {
+  border-top: 1px solid #34495e;
+  padding-top: 1.5rem;
+  width: 100%;
 }
 
 .cart-icon {
-  background: none;
+  width: 100%;
+  background-color: #f39c12;
   border: none;
-  font-size: 1.25rem;
+  padding: 0.9rem;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   cursor: pointer;
-  color: #1f2937;
-  padding: 0.25rem;
-  transition: color 0.2s ease;
+  transition: background-color 0.2s;
 }
 
 .cart-icon:hover {
-  color: #2563eb;
+  background-color: #e67e22;
+}
+
+.cart-badge {
+  background-color: #2c3e50;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
 }
 
 /* ==========================================
-   3. FILTERS SECTION
+   3. MAIN CONTENT ENGINE LAYOUT WRAPPER
    ========================================== */
-section.flex {
-  padding: 1rem;
+.main-layout-content {
+  margin-left: 280px;
+  flex: 1;
+  padding: 2rem;
   display: flex;
-  flex-wrap: wrap; /* Prevents drops downs from clipping out of the screen */
-  gap: 1rem; /* Overriding your inline class tailwind gaps */
-  justify-content: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 100vh;
 }
 
-section.flex select {
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  background-color: #fff;
-  font-size: 1rem;
+.top-controls-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 990;
+}
+
+.search-section {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+#searchInput:focus {
+  border-color: #f39c12;
+}
+
+#suggestions {
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ced4da;
+  border-top: none;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f8f9fa;
+  color: #f39c12;
+}
+
+.filter-section-wrapper {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.filter-section-wrapper select {
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-section-wrapper select:focus {
+  border-color: #f39c12;
 }
 
 /* ==========================================
-   4. PRODUCT GRID & CARDS
+   4. PRODUCT GRID AND CARDS
    ========================================== */
 .product-grid {
   display: grid;
-  /* Automatically fits items depending on space; min width of 250px per card */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
-  padding: 1rem;
+  flex-grow: 1;
 }
 
 .product-card {
@@ -118,7 +262,7 @@ section.flex select {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .product-card:hover {
@@ -129,78 +273,84 @@ section.flex select {
 .product-card img {
   width: 100%;
   height: 200px;
-  object-fit: contain; /* Keeps product pictures looking sharp and un-stretched */
+  object-fit: contain;
   background-color: #f3f4f6;
   padding: 1rem;
 }
 
 .product-info {
-  padding: 1rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Keeps buttons aligned even with different text heights */
+  flex-grow: 1;
 }
 
 .product-info h3 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  color: #111827;
 }
 
 .rating {
   color: #fbbf24;
   margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .price {
   font-weight: 700;
   font-size: 1.2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   color: #111827;
 }
 
-.product-info button {
-  margin-top: auto; /* Pushes button to bottom of the card */
-  background-color: #2563eb;
+.add-to-cart-btn {
+  margin-top: auto;
+  background-color: #1a252f;
+  color: white;
   border: none;
   border-radius: 0.375rem;
   padding: 0.75rem;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
 }
 
-.product-info button a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  display: block;
-  width: 100%;
+.add-to-cart-btn:hover {
+  background-color: #34495e;
 }
 
 /* ==========================================
-   5. FOOTER
+   5. FOOTER COMPONENT
    ========================================== */
 .footer {
   background-color: #111827;
   color: #9ca3af;
-  padding: 3rem 1rem 1.5rem 1rem;
-  margin-top: 3rem;
+  padding: 3rem 2rem 1.5rem 2rem;
+  margin-top: auto;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .footer-container {
   display: grid;
-  /* 1 Column on mobile, adapts to tablet and desktop screens later */
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.footer-section h2{
-  color: red;
-} 
+.footer-section h2 {
+  color: #f39c12;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
 .footer-section h3 {
   color: #ffffff;
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
 }
 
 .footer-section ul {
@@ -225,7 +375,6 @@ section.flex select {
 
 .social-icons {
   margin-top: 1rem;
-  line-height: 2;
 }
 
 .newsletter-form {
@@ -241,16 +390,22 @@ section.flex select {
   border: 1px solid #374151;
   background-color: #1f2937;
   color: white;
+  outline: none;
 }
 
 .newsletter-form button {
-  background-color: #ef4444;
+  background-color: #f39c12;
   color: white;
   border: none;
   padding: 0.75rem;
   border-radius: 0.375rem;
   cursor: pointer;
   font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.newsletter-form button:hover {
+  background-color: #e67e22;
 }
 
 .footer-bottom {
@@ -262,106 +417,84 @@ section.flex select {
 }
 
 /* ==========================================
-   6. RESPONSIVE BREAKPOINTS (Desktop Enhancements)
+   6. RESPONSIVE BREAKPOINTS
    ========================================== */
-
-/* Tablet & Up (Screens wider than 768px) */
-@media screen and (min-width: 768px) {
-  /* Shrinks spacing since desktop navbar is much shorter */
-  body {
-    padding-top: 90px; 
-  }
-  .navbar {
-    flex-direction: row; /* Align horizontal on desktop */
-    justify-content: space-between;
-    padding: 1rem 2rem;
-  }
-  
-  .navbar h1 {
-    text-align: left;
+@media screen and (max-width: 992px) {
+  .dashboard-core-wrapper {
+    flex-direction: column;
   }
 
-  .product-grid {
-    padding: 2rem;
-    gap: 2rem;
-  }
-
-  .footer-container {
-    /* Changes seamlessly to a 2-column layout on tablets */
-    grid-template-columns: repeat(2, 1fr); 
-  }
-  
-  .newsletter-form {
-    flex-direction: row;
-  }
-  
-  .newsletter-form input {
-    flex-grow: 1;
-  }
-}
-
-/* Large Screens (Screens wider than 1024px) */
-@media screen and (min-width: 1024px) {
-  .footer-container {
-    /* Shifts to a 4-column structure on modern desktop monitors */
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-  .cart-btn {
-    position: relative; /* Allows positioning context for the badge */
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.cart-badge {
-    background-color: #ff3333; /* Notification red */
-    color: white;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border-radius: 50%;
-    padding: 2px 6px;
-    min-width: 15px;
-    text-align: center;
-}
-
-.search-section{
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto;
+  .sidebar {
     position: relative;
-}
-
-#searchInput{
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-}
+    height: auto;
+    padding: 1.25rem 1.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
 
-#searchInput:focus{
-    border-color: #ff6600;
-}
+  .hamburger-label {
+    display: flex;
+  }
 
-#suggestions{
-    position: absolute;
+  .sidebar-nav,
+  .sidebar-footer {
+    display: none;
     width: 100%;
-    background: white;
-    border: 1px solid #ddd;
-    border-top: none;
-    max-height: 250px;
-    overflow-y: auto;
-    z-index: 1000;
+  }
+
+  .sidebar-nav {
+    margin: 1.5rem 0 1rem 0;
+    order: 2;
+  }
+
+  .sidebar-footer {
+    padding-top: 1rem;
+    order: 3;
+  }
+
+  /* CSS CHECKBOX ACTION SYSTEM MATRIX TRIGGER */
+  #menu-toggle:checked ~ .sidebar .sidebar-nav,
+  #menu-toggle:checked ~ .sidebar .sidebar-footer {
+    display: flex;
+  }
+
+  #menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  #menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .main-layout-content {
+    margin-left: 0;
+    padding: 1.25rem;
+  }
 }
 
-#suggestions div{
-    padding: 10px;
-    cursor: pointer;
-}
+@media screen and (max-width: 650px) {
+  .top-controls-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
 
-#suggestions div:hover{
-    background-color: #f5f5f5;
+  .search-section {
+    max-width: 100%;
+  }
+
+  .filter-section-wrapper {
+    width: 100%;
+  }
+
+  .filter-section-wrapper select {
+    flex: 1;
+  }
 }
