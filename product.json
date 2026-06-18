@@ -1,0 +1,132 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Ignition Coil",
+      "image": "assets/images/ignition-coil.png",
+      "rating": 4.0,
+      "price": 6000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 2,
+      "name": "Crankshaft",
+      "image": "assets/images/crankshaft.png",
+      "rating": 5.0,
+      "price": 30000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 3,
+      "name": "Bumper",
+      "image": "assets/images/bumper.png",
+      "rating": 5.0,
+      "price": 45000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 4,
+      "name": "Clutch Kit",
+      "image": "assets/images/clutch-kit.png",
+      "rating": 4.0,
+      "price": 25000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 5,
+      "name": "Alternator",
+      "image": "assets/images/alternator.png",
+      "rating": 4.0,
+      "price": 13000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 6,
+      "name": "Water Pump",
+      "image": "assets/images/water-pump.png",
+      "rating": 4.0,
+      "price": 10000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 7,
+      "name": "Oil Filter",
+      "image": "assets/images/oil-filter.png",
+      "rating": 4.0,
+      "price": 2000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 8,
+      "name": "Shock Absorber",
+      "image": "assets/images/shock-absorber.png",
+      "rating": 5.0,
+      "price": 10000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 9,
+      "name": "Radiator",
+      "image": "assets/images/radiator.png",
+      "rating": 4.0,
+      "price": 800,
+      "currency": "Ksh"
+    },
+    {
+      "id": 10,
+      "name": "Headlights",
+      "image": "assets/images/headlights.png",
+      "rating": 5.0,
+      "price": 12000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 11,
+      "name": "Coolant",
+      "image": "assets/images/coolant.png",
+      "rating": 4.0,
+      "price": 1500,
+      "currency": "Ksh"
+    },
+    {
+      "id": 12,
+      "name": "Battery",
+      "image": "assets/images/battery.png",
+      "rating": 5.0,
+      "price": 20000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 13,
+      "name": "Brake Pads",
+      "image": "assets/images/brake-pads.png",
+      "rating": 4.0,
+      "price": 2000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 14,
+      "name": "Spark Plug",
+      "image": "assets/images/spark-plug.png",
+      "rating": 4.0,
+      "price": 1800,
+      "currency": "Ksh"
+    },
+    {
+      "id": 15,
+      "name": "Brake Cylinder",
+      "image": "assets/images/brake-cylinder.png",
+      "rating": 4.0,
+      "price": 7000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 16,
+      "name": "Windshield Wipers",
+      "image": "assets/images/windshield-wipers.png",
+      "rating": 4.0,
+      "price": 800,
+      "currency": "Ksh"
+    }
+  ]
+}
