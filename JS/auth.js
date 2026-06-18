@@ -4,7 +4,6 @@
  */
 document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById("registerForm");
-    const adminRegisterForm = document.getElementById("adminRegisterForm");
     const loginForm = document.getElementById("loginForm");
     const logoutBtn = document.getElementById("logoutBtn");
 
@@ -24,41 +23,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const el = document.getElementById(id);
         if (!el) return;
         el.textContent = message;
-        el.className = el.className.replace(/\balert-success\b/, "");
         el.style.display = "block";
         setTimeout(() => { el.style.display = "none"; }, 4000);
     }
 
-    function showSuccess(id, message) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.textContent = message;
-        el.classList.add("alert-success");
-        el.style.display = "block";
-    }
-
     // ─────────────────────────────────────────────────────────────
-    // SEED DEFAULT ADMIN (runs once on fresh browser)
-    // Credentials: admin@grande.com / Grande2026!
+    // HARDCODED ADMIN ACCOUNT
+    // Only this one admin exists — registration is not supported.
     // ─────────────────────────────────────────────────────────────
-    (function seedDefaultAdmin() {
-        const users = getUsers();
-        if (!users.some(u => u.email === "admin@grande.com")) {
-            users.push({
-                name: "System Admin",
-                email: "admin@grande.com",
-                phone: "",
-                password: "Grande2026!",
-                isAdmin: true
-            });
-            saveUsers(users);
-        }
-    })();
+    const ADMIN = {
+        name: "Jason Macharia",
+        email: "jmash8805@gmail.com",
+        password: "JNM@123",
+        isAdmin: true
+    };
 
     // ─────────────────────────────────────────────────────────────
     // 1. CUSTOMER REGISTRATION  (register.html)
     // ─────────────────────────────────────────────────────────────
-    if (registerForm && !adminRegisterForm) {
+    if (registerForm) {
         registerForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
@@ -74,6 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             if (password.length < 6) {
                 showError("registerError", "Password must be at least 6 characters.");
+                return;
+            }
+
+            // Block anyone from registering with the admin email
+            if (email === ADMIN.email) {
+                showError("registerError", "This email address is not available.");
                 return;
             }
 
@@ -97,48 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 2. ADMIN REGISTRATION  (admin-register.html)
-    //    Uses id="adminRegisterForm" — no secret key needed,
-    //    simply saves with isAdmin: true into grande_users.
-    // ─────────────────────────────────────────────────────────────
-    if (adminRegisterForm) {
-        adminRegisterForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById("adminName").value.trim();
-            const email = document.getElementById("adminRegEmail").value.trim().toLowerCase();
-            const password = document.getElementById("adminRegPassword").value;
-            const confirmPassword = document.getElementById("adminConfirmPassword").value;
-            const alertBox = document.getElementById("alertBox");
-
-            if (password.length < 6) {
-                showError("alertBox", "Password must be at least 6 characters.");
-                return;
-            }
-            if (password !== confirmPassword) {
-                showError("alertBox", "Passwords do not match.");
-                return;
-            }
-
-            const users = getUsers();
-            if (users.find(u => u.email === email)) {
-                showError("alertBox", "An account with this email already exists.");
-                return;
-            }
-
-            const newAdmin = { name, email, phone: "", password, isAdmin: true };
-            users.push(newAdmin);
-            saveUsers(users);
-
-            showSuccess("alertBox", "Admin registered successfully! Redirecting...");
-            setTimeout(() => { window.location.href = "login.html"; }, 2000);
-        });
-    }
-
-    // ─────────────────────────────────────────────────────────────
-    // 3. UNIFIED LOGIN  (login.html)
-    //    Admin   → admin.html      (sets isAdminAuthenticated)
-    //    Customer → dashboard.html (sets isLoggedIn)
+    // 2. UNIFIED LOGIN  (login.html)
+    //    Admin    → admin.html      (sets isAdminAuthenticated)
+    //    Customer → dashboard.html  (sets isLoggedIn)
     // ─────────────────────────────────────────────────────────────
     if (loginForm) {
         loginForm.addEventListener("submit", (e) => {
@@ -147,34 +97,34 @@ document.addEventListener("DOMContentLoaded", () => {
             const emailInput = document.getElementById("loginEmail").value.trim().toLowerCase();
             const passwordInput = document.getElementById("loginPassword").value;
 
+            // ── Check hardcoded admin first ─────────────────────
+            if (emailInput === ADMIN.email && passwordInput === ADMIN.password) {
+                sessionStorage.setItem("isAdminAuthenticated", "true");
+                sessionStorage.setItem("adminEmail", ADMIN.email);
+                window.location.replace("admin.html");
+                return;
+            }
+
+            // ── Check registered customers ──────────────────────
             const users = getUsers();
             const matchedUser = users.find(u => u.email === emailInput && u.password === passwordInput);
 
             // Legacy hardcoded demo customer
             const isDemoAcct = emailInput === "jerome@example.com" && passwordInput === "password123";
 
-            if (!matchedUser && !isDemoAcct) {
-                showError("errorMessage", "Invalid email address or wrong password.");
+            if (matchedUser || isDemoAcct) {
+                sessionStorage.setItem("isLoggedIn", "true");
+                sessionStorage.setItem("activeUserEmail", emailInput);
+                window.location.href = "dashboard.html";
                 return;
             }
 
-            // ── ADMIN path ──────────────────────────────────────
-            if (matchedUser && matchedUser.isAdmin) {
-                sessionStorage.setItem("isAdminAuthenticated", "true");
-                sessionStorage.setItem("adminEmail", matchedUser.email);
-                window.location.replace("admin.html");
-                return;
-            }
-
-            // ── CUSTOMER path ───────────────────────────────────
-            sessionStorage.setItem("isLoggedIn", "true");
-            sessionStorage.setItem("activeUserEmail", emailInput);
-            window.location.href = "dashboard.html";
+            showError("errorMessage", "Invalid email address or wrong password.");
         });
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 4. DASHBOARD ACCESS GUARD  (dashboard.html)
+    // 3. DASHBOARD ACCESS GUARD  (dashboard.html)
     // ─────────────────────────────────────────────────────────────
     if (window.location.pathname.includes("dashboard.html")) {
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
@@ -208,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 5. REDIRECT ALREADY-AUTHENTICATED USERS AWAY FROM AUTH PAGES
+    // 4. REDIRECT ALREADY-AUTHENTICATED USERS AWAY FROM AUTH PAGES
     // ─────────────────────────────────────────────────────────────
     const path = window.location.pathname;
 
@@ -222,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 6. CUSTOMER LOGOUT
+    // 5. CUSTOMER LOGOUT
     // ─────────────────────────────────────────────────────────────
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
