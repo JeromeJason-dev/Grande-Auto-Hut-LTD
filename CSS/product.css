@@ -167,7 +167,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  min-height: 100vh;
+  min-height: auto;
 }
 
 .top-controls-container {
@@ -329,7 +329,10 @@ img {
   padding: 3rem 2rem 1.5rem 2rem;
   margin-top: auto;
   width: 100%;
-  border-radius: 10px;
+  position: relative;
+  padding-left: calc(280px + 2rem); 
+  z-index: 900;
+  box-sizing: border-box;
 }
 
 .footer-container {
@@ -337,7 +340,7 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 ;
 }
 
 .footer-section h2 {
@@ -433,6 +436,14 @@ img {
     flex-wrap: wrap;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .footer {
+    padding-left: 2rem; 
+  }
+  
+  .footer-container {
+    margin: 0 auto; /* Center alignment looks cleaner on smaller portable windows */
   }
 
   .hamburger-label {
