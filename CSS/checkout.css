@@ -1,78 +1,144 @@
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+/* ==========================================
+   1. REUSED GLOBAL & NAVBAR STYLES
+   ========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        line-height: 1.6;
-        background-color: #f9fafb;
-        color: #1f2937;
-        padding-top: 170px;
-    }
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  background-color: #f9fafb;
+  color: #1f2937;
+  padding-top:64px ; /* Prevents hero from slipping behind fixed header */
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: #1c3a70;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
-    /* ── Navbar ── */
-    .navbar {
-        display: flex;
-        flex-direction: column;
-        /* Stack components on mobile */
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-    }
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #f39c12;
+  letter-spacing: 0.5px;
+}
 
-    .navbar h1 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
+/* Hide the structural interaction checkbox */
+#home-menu-toggle {
+  display: none;
+}
 
-    .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        list-style: none;
-    }
+/* Responsive Hamburger Icon Styling */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 1010;
+}
 
+.hamburger-label span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #f39c12;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
-    .nav-links a {
-        text-decoration: none;
-        color: #4b5563;
-        font-weight: 500;
-        font-size: 0.95rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: color 0.2s ease;
-    }
+/* Mobile Nav Links Dropdown Default Tray Layout */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #1c3a70;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  gap: 1.25rem;
+  list-style: none;
+  
+  /* Slide out upward bounds when unselected */
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  z-index: 999;
+}
 
-    .nav-links a:hover {
-        color: #2563eb;
-    }
+.nav-links a {
+  text-decoration: none;
+  color: #f39c12;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
 
-    /* Supports both class variations used in your templates */
-    .cart-icon {
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        cursor: pointer;
-        color: #1f2937;
-        padding: 0.25rem;
-        transition: color 0.2s ease;
-    }
+.nav-links a:hover,
+.nav-links a.active {
+  color: #2563eb; 
+}
 
-    .cart-icon:hover {
-        color: #2563eb;
-    }
+.cart-icon {
+  background: none;
+  border: none;
+  font-size: 1.35rem;
+  cursor: pointer;
+  color: #f39c12;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+  z-index: 1010;
+}
 
+.cart-icon:hover {
+  color: #80540f;
+}
+
+/* ==========================================
+   PURE CSS INTERACTIVE MATRIX LOGIC
+   ========================================== */
+
+/* 1. Slide down menu container when targeted label is clicked */
+#home-menu-toggle:checked ~ .nav-links {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 2. Top line rotate transform */
+#home-menu-toggle:checked ~ .hamburger-label span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+/* 3. Middle line transparency morph */
+#home-menu-toggle:checked ~ .hamburger-label span:nth-child(2) {
+  opacity: 0;
+}
+
+/* 4. Bottom line inverse rotate transform */
+#home-menu-toggle:checked ~ .hamburger-label span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
     /* ── Progress bar ── */
     .progress-bar {
         background: #fff;
@@ -492,26 +558,57 @@
         font-size: 14px;
     }
 
-    @media (max-width: 700px) {
-        main {
-            grid-template-columns: 1fr;
-        }
+    /* ==========================================
+   4. RESPONSIVE BREAKPOINTS (Desktop Enhancements)
+   ========================================== */
+@media screen and (min-width: 920px) {
+  body {
+    padding-top: 85px;
+  }
 
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
+  .nav-brand {
+    font-size: 1.6rem;
+  }
 
-        .form-grid .full {
-            grid-column: 1;
-        }
+  /* Drop graphic checkbox trigger options for spacious monitors */
+  .hamburger-label {
+    display: none;
+  }
 
-        .navbar {
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 12px 16px;
-        }
+  /* Reset layout structure back to a uniform inline row footprint */
+  .nav-links {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    gap: 2rem;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-        .nav-links {
-            gap: 14px;
-        }
-    }
+  .nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+}
+
+@media screen and (min-width: 1020px) {
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Balanced 4 column desktop layout */
+    gap: 2rem;
+  }
+}
+
+/* Responsive Scaling Overrides for Testimonials */
+@media (max-width: 768px) {
+  .testimonials-header h2 {
+    font-size: 1.8rem;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
