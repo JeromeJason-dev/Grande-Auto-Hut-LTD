@@ -160,4 +160,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // --- 6. ADMIN STOCK AVAILABILITY ENFORCEMENT ---
+    function applyAdminStockStatus() {
+        // Grab the status registry arrays 
+        const inventoryStatus = JSON.parse(localStorage.getItem('grande_inventory_status'));
+        
+        // If the admin matrix hasn't been set up yet, stop execution safely
+        if (!inventoryStatus) return;
+
+        productCards.forEach(card => {
+            const productName = card.querySelector('h3').textContent.trim();
+            
+            // Find matched item status based on textual product keys
+            const matchedItem = inventoryStatus.find(item => item.name.toLowerCase() === productName.toLowerCase());
+            
+            if (matchedItem && !matchedItem.inStock) {
+                const addToCartBtn = card.querySelector('.add-to-cart-btn');
+                
+                // 1. Gray out and visually fade down card container opacity
+                card.style.opacity = "0.55";
+                card.style.transition = "all 0.3s ease";
+                
+                // 2. Safely lock down the button interaction controls
+                if (addToCartBtn) {
+                    addToCartBtn.textContent = "Out of Stock";
+                    addToCartBtn.disabled = true;
+                    addToCartBtn.style.backgroundColor = "#dc3545"; // Alert red status indication color
+                    addToCartBtn.style.cursor = "not-allowed";
+                }
+
+                // 3. Optional: Add a clean contextual visual label across the card
+                if (!card.querySelector('.stock-status-notice')) {
+                    const notice = document.createElement('div');
+                    notice.className = 'stock-status-notice';
+                    notice.innerHTML = `<span style="color: #721c24; background: #f8d7da; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; display: inline-block; margin-bottom: 10px;">Temporarily Unavailable</span>`;
+                    
+                    const infoDiv = card.querySelector('.product-info');
+                    infoDiv.insertBefore(notice, infoDiv.firstChild);
+                }
+            }
+        });
+    }
+
+    // Initialize checking process instantly on runtime access loop
+    applyAdminStockStatus();
 });
