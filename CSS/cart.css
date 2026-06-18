@@ -1,7 +1,7 @@
 /* ==========================================
-   1. SHARED GLOBAL & NAVBAR THEME STYLES
+   1. REUSED GLOBAL & NAVBAR STYLES
    ========================================== */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -9,19 +9,17 @@
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
+  line-height: 1.5;
   background-color: #f9fafb;
   color: #1f2937;
-  padding-top: 160px;
+  padding-top:64px ; /* Prevents hero from slipping behind fixed header */
 }
-
 .navbar {
   display: flex;
-  flex-direction: column; /* Stack components on mobile */
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #ffffff;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: #1c3a70;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   position: fixed;
   top: 0;
@@ -30,52 +28,117 @@ body {
   z-index: 1000;
 }
 
-/* Overriding Tailwind inline utility sizes safely across viewports */
-.navbar h1 {
-  font-size: 1.5rem; 
-  text-align: center;
-  color: #111827;
-  font:bolder;
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #f39c12;
+  letter-spacing: 0.5px;
 }
 
+/* Hide the structural interaction checkbox */
+#home-menu-toggle {
+  display: none;
+}
+
+/* Responsive Hamburger Icon Styling */
+.hamburger-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.hamburger-label span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #f39c12;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Mobile Nav Links Dropdown Default Tray Layout */
 .nav-links {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #1c3a70;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  gap: 1.25rem;
   list-style: none;
+  
+  /* Slide out upward bounds when unselected */
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  z-index: 999;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #4b5563;
-  font-weight: 500;
-  font-size: 0.95rem;
-  display: inline-flex;
+  color: #f39c12;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: #2563eb; 
 }
 
-
 .cart-icon {
- background: none;
+  background: none;
   border: none;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   cursor: pointer;
-  color: #1f2937;
+  color: #f39c12;
   padding: 0.25rem;
   transition: color 0.2s ease;
+  z-index: 1010;
 }
 
 .cart-icon:hover {
-  color: #2563eb;
+  color: #80540f;
 }
 
+/* ==========================================
+   PURE CSS INTERACTIVE MATRIX LOGIC
+   ========================================== */
+
+/* 1. Slide down menu container when targeted label is clicked */
+#home-menu-toggle:checked ~ .nav-links {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 2. Top line rotate transform */
+#home-menu-toggle:checked ~ .hamburger-label span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+/* 3. Middle line transparency morph */
+#home-menu-toggle:checked ~ .hamburger-label span:nth-child(2) {
+  opacity: 0;
+}
+
+/* 4. Bottom line inverse rotate transform */
+#home-menu-toggle:checked ~ .hamburger-label span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
 
 .cart-container {
     max-width: 1100px;
@@ -118,7 +181,7 @@ body {
 }
 
 .remove-btn {
-    background: #dc3545;
+    background: black;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -151,7 +214,7 @@ body {
 
 .checkout-btn {
     width: 100%;
-    background: #007bff;
+    background: #1c3a70;
     color: white;
     border: none;
     padding: 12px;
@@ -180,8 +243,8 @@ body {
 }
 
 #nav-cart-count {
-    background-color: #ff3333;
-    color: white;
+    background-color: #f39c12;
+    color: black;
     font-size: 0.75rem;
     font-weight: bold;
     border-radius: 50%;
@@ -197,7 +260,7 @@ body {
    3. SHARED FOOTER THEME STYLES
    ========================================== */
 .footer {
-  background-color: #111827;
+  background-color: #1c3a70;
   color: #9ca3af;
   padding: 3rem 1rem 1.5rem 1rem;
   margin-top: 4rem;
@@ -214,7 +277,7 @@ body {
 /* Fixing the inline 6xl text formatting for mobile compatibility */
 .footer-section h2 {
   font-size: 1.5rem !important; 
-  color: #ef4444 !important; /* Forces uniform corporate red styling */
+  color: #f39c12  !important; /* Forces uniform corporate red styling */
   margin-bottom: 1rem;
 }
 
@@ -265,7 +328,7 @@ body {
 }
 
 .newsletter-form button {
-  background-color: #ef4444;
+  background-color: #f39c12;
   color: white;
   border: none;
   padding: 0.75rem;
@@ -282,38 +345,58 @@ body {
   font-size: 0.875rem;
 }
 
+
 /* ==========================================
-   4. RESPONSIVE MEDIA QUERIES (Desktop Enhancements)
+   4. RESPONSIVE BREAKPOINTS (Desktop Enhancements)
    ========================================== */
-@media screen and (min-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-  }
-  
-  .navbar h1 {
-    font-size: 1.75rem !important;
-    text-align: left;
-  }
-
-  /* Adjusts the spacing since the desktop navbar is much shorter */
+@media screen and (min-width: 920px) {
   body {
-    padding-top: 90px;
+    padding-top: 85px;
   }
 
-  .about {
-    padding: 4rem 2rem;
+  .nav-brand {
+    font-size: 1.6rem;
   }
 
-  /* ... keep the rest of your media query styles exactly the same ... */
+  /* Drop graphic checkbox trigger options for spacious monitors */
+  .hamburger-label {
+    display: none;
+  }
+
+  /* Reset layout structure back to a uniform inline row footprint */
+  .nav-links {
+    position: static;
+    flex-direction: row;
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    gap: 2rem;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
 }
+
 @media screen and (min-width: 1020px) {
   .footer-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Balanced 4 column desktop layout */
+    gap: 2rem;
+  }
+}
+
+/* Responsive Scaling Overrides for Testimonials */
+@media (max-width: 768px) {
+  .testimonials-header h2 {
+    font-size: 1.8rem;
+  }
+  .testimonials-grid {
     grid-template-columns: 1fr;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
   }
 }
