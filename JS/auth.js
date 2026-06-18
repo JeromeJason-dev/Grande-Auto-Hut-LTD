@@ -4,38 +4,90 @@
  */
 document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById("registerForm");
+    const adminRegisterForm = document.getElementById("adminRegisterForm");
     const loginForm = document.getElementById("loginForm");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // --- 1. REGISTRATION LOGIC ---
-    if (registerForm) {
+    // ─────────────────────────────────────────────────────────────
+    // HELPERS
+    // ─────────────────────────────────────────────────────────────
+
+    function getUsers() {
+        return JSON.parse(localStorage.getItem("grande_users")) || [];
+    }
+
+    function saveUsers(users) {
+        localStorage.setItem("grande_users", JSON.stringify(users));
+    }
+
+    function showError(id, message) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = message;
+        el.className = el.className.replace(/\balert-success\b/, "");
+        el.style.display = "block";
+        setTimeout(() => { el.style.display = "none"; }, 4000);
+    }
+
+    function showSuccess(id, message) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = message;
+        el.classList.add("alert-success");
+        el.style.display = "block";
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // SEED DEFAULT ADMIN (runs once on fresh browser)
+    // Credentials: admin@grande.com / Grande2026!
+    // ─────────────────────────────────────────────────────────────
+    (function seedDefaultAdmin() {
+        const users = getUsers();
+        if (!users.some(u => u.email === "admin@grande.com")) {
+            users.push({
+                name: "System Admin",
+                email: "admin@grande.com",
+                phone: "",
+                password: "Grande2026!",
+                isAdmin: true
+            });
+            saveUsers(users);
+        }
+    })();
+
+    // ─────────────────────────────────────────────────────────────
+    // 1. CUSTOMER REGISTRATION  (register.html)
+    // ─────────────────────────────────────────────────────────────
+    if (registerForm && !adminRegisterForm) {
         registerForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
             const fullName = document.getElementById("fullName").value.trim();
-            const email = document.getElementById("email").value.trim();
+            const email = document.getElementById("email").value.trim().toLowerCase();
             const phone = document.getElementById("phone").value.trim();
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
-            const errorToast = document.getElementById("registerError");
 
             if (password !== confirmPassword) {
-                errorToast.textContent = "Passwords do not match.";
-                errorToast.style.display = "block";
+                showError("registerError", "Passwords do not match.");
                 return;
             }
-
             if (password.length < 6) {
-                errorToast.textContent = "Password must be at least 6 characters.";
-                errorToast.style.display = "block";
+                showError("registerError", "Password must be at least 6 characters.");
                 return;
             }
 
-            const newCustomer = { name: fullName, email, phone, password };
-            localStorage.setItem("savedUser", JSON.stringify(newCustomer));
-            errorToast.style.display = "none";
+            const users = getUsers();
+            if (users.find(u => u.email === email)) {
+                showError("registerError", "An account with this email already exists.");
+                return;
+            }
 
-            // Auto-login after registration
+            const newUser = { name: fullName, email, phone, password, isAdmin: false };
+            users.push(newUser);
+            saveUsers(users);
+            localStorage.setItem("savedUser", JSON.stringify(newUser));
+
             sessionStorage.setItem("isLoggedIn", "true");
             sessionStorage.setItem("activeUserEmail", email);
 
@@ -44,44 +96,90 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 2. LOGIN LOGIC ---
+    // ─────────────────────────────────────────────────────────────
+    // 2. ADMIN REGISTRATION  (admin-register.html)
+    //    Uses id="adminRegisterForm" — no secret key needed,
+    //    simply saves with isAdmin: true into grande_users.
+    // ─────────────────────────────────────────────────────────────
+    if (adminRegisterForm) {
+        adminRegisterForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("adminName").value.trim();
+            const email = document.getElementById("adminRegEmail").value.trim().toLowerCase();
+            const password = document.getElementById("adminRegPassword").value;
+            const confirmPassword = document.getElementById("adminConfirmPassword").value;
+            const alertBox = document.getElementById("alertBox");
+
+            if (password.length < 6) {
+                showError("alertBox", "Password must be at least 6 characters.");
+                return;
+            }
+            if (password !== confirmPassword) {
+                showError("alertBox", "Passwords do not match.");
+                return;
+            }
+
+            const users = getUsers();
+            if (users.find(u => u.email === email)) {
+                showError("alertBox", "An account with this email already exists.");
+                return;
+            }
+
+            const newAdmin = { name, email, phone: "", password, isAdmin: true };
+            users.push(newAdmin);
+            saveUsers(users);
+
+            showSuccess("alertBox", "Admin registered successfully! Redirecting...");
+            setTimeout(() => { window.location.href = "login.html"; }, 2000);
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 3. UNIFIED LOGIN  (login.html)
+    //    Admin   → admin.html      (sets isAdminAuthenticated)
+    //    Customer → dashboard.html (sets isLoggedIn)
+    // ─────────────────────────────────────────────────────────────
     if (loginForm) {
         loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            const emailInput = document.getElementById("loginEmail").value.trim();
+            const emailInput = document.getElementById("loginEmail").value.trim().toLowerCase();
             const passwordInput = document.getElementById("loginPassword").value;
-            const errorToast = document.getElementById("errorMessage");
 
-            const registeredUser = JSON.parse(localStorage.getItem("savedUser"));
-            let isVerified = false;
+            const users = getUsers();
+            const matchedUser = users.find(u => u.email === emailInput && u.password === passwordInput);
 
-            if (registeredUser && emailInput === registeredUser.email && passwordInput === registeredUser.password) {
-                isVerified = true;
-            } else if (emailInput === "jerome@example.com" && passwordInput === "password123") {
-                isVerified = true;
+            // Legacy hardcoded demo customer
+            const isDemoAcct = emailInput === "jerome@example.com" && passwordInput === "password123";
+
+            if (!matchedUser && !isDemoAcct) {
+                showError("errorMessage", "Invalid email address or wrong password.");
+                return;
             }
 
-            if (isVerified) {
-                sessionStorage.setItem("isLoggedIn", "true");
-                sessionStorage.setItem("activeUserEmail", emailInput);
-                errorToast.style.display = "none";
-                window.location.href = "dashboard.html";
-            } else {
-                errorToast.textContent = "Invalid email address or wrong password.";
-                errorToast.style.display = "block";
+            // ── ADMIN path ──────────────────────────────────────
+            if (matchedUser && matchedUser.isAdmin) {
+                sessionStorage.setItem("isAdminAuthenticated", "true");
+                sessionStorage.setItem("adminEmail", matchedUser.email);
+                window.location.replace("admin.html");
+                return;
             }
+
+            // ── CUSTOMER path ───────────────────────────────────
+            sessionStorage.setItem("isLoggedIn", "true");
+            sessionStorage.setItem("activeUserEmail", emailInput);
+            window.location.href = "dashboard.html";
         });
     }
 
-    // --- 3. DASHBOARD ACCESS GUARD ---
-    // Redirect unauthenticated visitors to register page
+    // ─────────────────────────────────────────────────────────────
+    // 4. DASHBOARD ACCESS GUARD  (dashboard.html)
+    // ─────────────────────────────────────────────────────────────
     if (window.location.pathname.includes("dashboard.html")) {
-        const loggedInStatus = sessionStorage.getItem("isLoggedIn");
-
-        if (loggedInStatus !== "true") {
-            window.location.href = "register.html";
-            return; // Stop further execution
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+            return;
         }
 
         const activeEmail = sessionStorage.getItem("activeUserEmail");
@@ -109,16 +207,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 4. REDIRECT LOGGED-IN USERS AWAY FROM AUTH PAGES ---
-    // If already logged in and visiting login/register, go straight to dashboard
-    const isOnAuthPage = window.location.pathname.includes("login.html") ||
-                         window.location.pathname.includes("register.html");
+    // ─────────────────────────────────────────────────────────────
+    // 5. REDIRECT ALREADY-AUTHENTICATED USERS AWAY FROM AUTH PAGES
+    // ─────────────────────────────────────────────────────────────
+    const path = window.location.pathname;
 
-    if (isOnAuthPage && sessionStorage.getItem("isLoggedIn") === "true") {
-        window.location.href = "dashboard.html";
+    if (path.includes("login.html") || path.includes("register.html")) {
+        if (sessionStorage.getItem("isLoggedIn") === "true") {
+            window.location.href = "dashboard.html";
+        }
+        if (sessionStorage.getItem("isAdminAuthenticated") === "true") {
+            window.location.replace("admin.html");
+        }
     }
 
-    // --- 5. LOGOUT ---
+    // ─────────────────────────────────────────────────────────────
+    // 6. CUSTOMER LOGOUT
+    // ─────────────────────────────────────────────────────────────
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
             sessionStorage.removeItem("isLoggedIn");
@@ -128,36 +233,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// --- GLOBAL MODAL CONTROLLERS FOR ORDER TRACKING ---
-window.openTracker = function(orderId, currentStatus) {
+// ─────────────────────────────────────────────────────────────────
+// GLOBAL MODAL CONTROLLERS FOR ORDER TRACKING
+// ─────────────────────────────────────────────────────────────────
+window.openTracker = function (orderId, currentStatus) {
     const modal = document.getElementById("trackingModal");
     const orderIdPlaceholder = document.getElementById("modalOrderId");
-
     if (!modal || !orderIdPlaceholder) return;
 
     orderIdPlaceholder.textContent = orderId;
 
-    const steps = ['processing', 'shipped', 'delivered'];
-    steps.forEach(status => {
-        document.getElementById(`step-${status}`).classList.remove('active');
-    });
+    const steps = ["processing", "shipped", "delivered"];
+    steps.forEach(s => document.getElementById(`step-${s}`)?.classList.remove("active"));
 
-    if (currentStatus === 'processing') {
-        document.getElementById('step-processing').classList.add('active');
-    } else if (currentStatus === 'shipped') {
-        document.getElementById('step-processing').classList.add('active');
-        document.getElementById('step-shipped').classList.add('active');
-    } else if (currentStatus === 'delivered') {
-        steps.forEach(status => document.getElementById(`step-${status}`).classList.add('active'));
+    if (currentStatus === "processing") {
+        document.getElementById("step-processing")?.classList.add("active");
+    } else if (currentStatus === "shipped") {
+        document.getElementById("step-processing")?.classList.add("active");
+        document.getElementById("step-shipped")?.classList.add("active");
+    } else if (currentStatus === "delivered") {
+        steps.forEach(s => document.getElementById(`step-${s}`)?.classList.add("active"));
     }
 
     modal.style.display = "flex";
-}
+};
 
-window.closeTracker = function() {
+window.closeTracker = function () {
     const modal = document.getElementById("trackingModal");
     if (modal) modal.style.display = "none";
-}
+};
 
 window.addEventListener("click", (e) => {
     const modal = document.getElementById("trackingModal");
