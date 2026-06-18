@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('logoutAction').addEventListener('click', (e) => {
                 e.preventDefault();
                 sessionStorage.removeItem('isAdminAuthenticated');
-                window.location.replace('admin-login.html');
+                window.location.replace('login.html');
             });
 
             renderAdminMatrix();
