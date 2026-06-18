@@ -1,135 +1,175 @@
-    /* ── Load cart from localStorage ── */
-    function loadCart() {
-        try { return JSON.parse(localStorage.getItem('cart')) || []; }
-        catch { return []; }
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const navCartCount = document.getElementById('nav-cart-count');
+    const summaryItemsContainer = document.getElementById('checkout-summary-items');
+    const subtotalElement = document.getElementById('checkout-subtotal');
+    const totalElement = document.getElementById('checkout-total');
 
-    function formatKsh(n) {
-        return 'Ksh ' + Number(n).toLocaleString('en-KE');
-    }
+    let cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
 
-    function renderSummary() {
-        const cart = loadCart();
-        const container = document.getElementById('checkout-summary-items');
-        const subtotalEl = document.getElementById('checkout-subtotal');
-        const totalEl = document.getElementById('checkout-total');
-        const navCount = document.getElementById('nav-cart-count');
+    // 1. Populate current items inside checkout panel box container matrix
+    function renderCheckoutSummary() {
+        if (!summaryItemsContainer) return;
+        summaryItemsContainer.innerHTML = '';
 
-        if (!cart.length) {
-            container.innerHTML = '<p class="empty-summary">No items in cart</p>';
-            subtotalEl.textContent = 'Ksh 0';
-            totalEl.textContent = 'Ksh 0';
-            if (navCount) navCount.textContent = '0';
+        let totalItemsCount = 0;
+        let totalPriceSum = 0;
+
+        if (cart.length === 0) {
+            summaryItemsContainer.innerHTML = '<p class="empty-summary" style="text-align:center; padding:15px; color:#888;">No items in cart</p>';
+            if (subtotalElement) subtotalElement.textContent = 'Ksh 0';
+            if (totalElement) totalElement.textContent = 'Ksh 0';
+            if (navCartCount) navCartCount.textContent = '0';
             return;
         }
 
-        let total = 0;
-        let countTotal = 0;
-        let html = '';
+        cart.forEach((item) => {
+            const itemQuantity = item.quantity || 1;
+            const itemTotal = item.price * itemQuantity;
 
-        cart.forEach(item => {
-            const qty = item.quantity || 1;
-            const price = parseFloat(item.price) || 0;
-            const lineTotal = price * qty;
-            total += lineTotal;
-            countTotal += qty;
+            totalItemsCount += itemQuantity;
+            totalPriceSum += itemTotal;
 
-            html += `
-                <div class="s-item">
-                    <img src="${item.image || ''}" alt="${item.name || 'Product'}" onerror="this.style.display='none'">
-                    <span class="s-item-name">${item.name || 'Item'}${qty > 1 ? ' &times;' + qty : ''}</span>
-                    <span class="s-item-price">${formatKsh(lineTotal)}</span>
-                </div>`;
+            const summaryRow = document.createElement('div');
+            summaryRow.style.display = 'flex';
+            summaryRow.style.justifyContent = 'space-between';
+            summaryRow.style.alignItems = 'center';
+            summaryRow.style.marginBottom = '12px';
+            summaryRow.style.fontSize = '14px';
+
+            summaryRow.innerHTML = `
+                <div style="flex: 1; padding-right: 10px;">
+                    <span style="font-weight: 500; color: #333;">${item.name}</span>
+                    <small style="display: block; color: #666;">Qty: ${itemQuantity} × Ksh ${item.price.toLocaleString()}</small>
+                </div>
+                <span style="font-weight: 600; color: #111;">Ksh ${itemTotal.toLocaleString()}</span>
+            `;
+            summaryItemsContainer.appendChild(summaryRow);
         });
 
-        container.innerHTML = html;
-        subtotalEl.textContent = formatKsh(total);
-        totalEl.textContent = formatKsh(total);
-        if (navCount) navCount.textContent = countTotal;
+        if (navCartCount) navCartCount.textContent = totalItemsCount;
+        if (subtotalElement) subtotalElement.textContent = `Ksh ${totalPriceSum.toLocaleString()}`;
+        if (totalElement) totalElement.textContent = `Ksh ${totalPriceSum.toLocaleString()}`;
     }
 
-    /* ── Payment tab switching ── */
-    const panels = ['mpesa', 'card', 'cod'];
-    function switchTab(tab) {
-        panels.forEach(p => {
-            document.getElementById('tab-' + p).classList.toggle('active', p === tab);
-            const el = document.getElementById('panel-' + p);
-            if (p === 'mpesa') { el.classList.toggle('visible', p === tab); if (p !== tab) el.classList.remove('visible'); }
-            else if (p === 'card') { el.classList.toggle('visible', p === tab); }
-            else { el.style.display = p === tab ? 'block' : 'none'; }
-        });
-        // ensure mpesa / card visibility correct
-        document.getElementById('panel-mpesa').style.display = tab === 'mpesa' ? 'block' : 'none';
-        document.getElementById('panel-card').style.display = tab === 'card' ? 'block' : 'none';
-        document.getElementById('panel-cod').style.display = tab === 'cod' ? 'block' : 'none';
-    }
-    // init
-    switchTab('mpesa');
+    renderCheckoutSummary();
+});
 
-    /* ── Card number formatting ── */
-    function formatCard(input) {
-        let v = input.value.replace(/\D/g, '').substring(0, 16);
-        input.value = v.replace(/(.{4})/g, '$1 ').trim();
-    }
-    function formatExpiry(input) {
-        let v = input.value.replace(/\D/g, '').substring(0, 4);
-        if (v.length >= 3) v = v.substring(0, 2) + ' / ' + v.substring(2);
-        input.value = v;
-    }
-
-    /* ── Validation ── */
-    function validate() {
-        const firstName = document.getElementById('first-name').value.trim();
-        const lastName = document.getElementById('last-name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const city = document.getElementById('city').value.trim();
-
-        if (!firstName || !lastName) { alert('Please enter your full name.'); return false; }
-        if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return false; }
-        if (!phone || !/^0[0-9]{9}$/.test(phone)) { alert('Please enter a valid phone number (e.g. 07XXXXXXXX).'); return false; }
-        if (!address) { alert('Please enter a delivery address.'); return false; }
-        if (!city) { alert('Please enter your city or town.'); return false; }
-
-        const activeTab = document.querySelector('.pay-tab.active').id;
-
-        if (activeTab === 'tab-mpesa') {
-            const mpesa = document.getElementById('mpesa-number').value.trim();
-            if (!mpesa || !/^0[0-9]{9}$/.test(mpesa)) { alert('Please enter a valid M-Pesa number.'); return false; }
+// 2. Tab switcher mechanics controller method logic pass
+function switchTab(mode) {
+    const tabs = ['mpesa', 'card', 'cod'];
+    
+    tabs.forEach(tab => {
+        const tabEl = document.getElementById(`tab-${tab}`);
+        const panelEl = document.getElementById(`panel-${tab}`);
+        
+        if (tab === mode) {
+            if (tabEl) tabEl.classList.add('active');
+            if (panelEl) {
+                panelEl.style.display = 'block';
+                panelEl.classList.add('visible');
+            }
+        } else {
+            if (tabEl) tabEl.classList.remove('active');
+            if (panelEl) {
+                panelEl.style.display = 'none';
+                panelEl.classList.remove('visible');
+            }
         }
+    });
+}
 
-        if (activeTab === 'tab-card') {
+// 3. Optional inline layout string parsers for Card styling UI fields helper attributes
+function formatCard(input) {
+    let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    let matches = value.match(/\d{4,16}/g);
+    let match = (matches && matches[0]) || '';
+    let parts = [];
+
+    for (let i = 0, len = match.length; i < len; i += 4) {
+        parts.push(match.substring(i, i + 4));
+    }
+
+    if (parts.length > 0) {
+        input.value = parts.join(' ');
+    } else {
+        input.value = value;
+    }
+
+    // Inline brand classification checking fallback toggler demo
+    const icon = document.getElementById('card-brand-icon');
+    if (icon) {
+        if (value.startsWith('4')) {
+            icon.className = 'fa-brands fa-cc-visa card-brand';
+        } else if (value.startsWith('5')) {
+            icon.className = 'fa-brands fa-cc-mastercard card-brand';
+        } else {
+            icon.className = 'fa-regular fa-credit-card card-brand';
+        }
+    }
+}
+
+function formatExpiry(input) {
+    let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    if (value.length >= 2) {
+        input.value = value.substring(0, 2) + ' / ' + value.substring(2, 4);
+    } else {
+        input.value = value;
+    }
+}
+
+// 4. Submission Validation and Final Complete Action Loop Pipeline Handler 
+function placeOrder() {
+    const cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
+    
+    if (cart.length === 0) {
+        alert('Your cart is completely empty! Add products to build active cart sessions before checkouts.');
+        return;
+    }
+
+    // Required fields verification validations arrays loops
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName = document.getElementById('last-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const county = document.getElementById('county').value;
+
+    if (!firstName || !lastName || !email || !phone || !address || !city || !county) {
+        alert('Please completely fill all relevant Delivery Details before finishing.');
+        return;
+    }
+
+    // Determine current active selected payments tab block 
+    const activeTab = document.querySelector('.pay-tab.active');
+    if (activeTab) {
+        if (activeTab.id === 'tab-mpesa') {
+            const mpesaNum = document.getElementById('mpesa-number').value.trim();
+            if (!mpesaNum) {
+                alert('Please supply an active M-Pesa contact payload number for the STK push.');
+                return;
+            }
+        } else if (activeTab.id === 'tab-card') {
             const cardName = document.getElementById('card-name').value.trim();
-            const cardNum = document.getElementById('card-number').value.replace(/\s/g, '');
-            const expiry = document.getElementById('card-expiry').value.trim();
-            const cvv = document.getElementById('card-cvv').value.trim();
-            if (!cardName) { alert('Please enter the cardholder name.'); return false; }
-            if (cardNum.length < 16) { alert('Please enter a valid 16-digit card number.'); return false; }
-            if (!expiry || expiry.length < 7) { alert('Please enter a valid expiry date.'); return false; }
-            if (!cvv || cvv.length < 3) { alert('Please enter a valid CVV.'); return false; }
+            const cardNum = document.getElementById('card-number').value.trim();
+            const cardExp = document.getElementById('card-expiry').value.trim();
+            const cardCvv = document.getElementById('card-cvv').value.trim();
+            if (!cardName || !cardNum || !cardExp || !cardCvv) {
+                alert('Please fully fill out your Credit Card configuration data entries.');
+                return;
+            }
         }
-
-        return true;
     }
 
-    /* ── Place order ── */
-    function placeOrder() {
-        const cart = loadCart();
-        if (!cart.length) { alert('Your cart is empty. Add products before placing an order.'); return; }
-        if (!validate()) return;
-
-        const name = document.getElementById('first-name').value.trim() + ' ' + document.getElementById('last-name').value.trim();
-        const activeTab = document.querySelector('.pay-tab.active').id;
-        let method = activeTab === 'tab-mpesa' ? 'M-Pesa' : activeTab === 'tab-card' ? 'Card' : 'Cash on Delivery';
-
-        document.getElementById('success-msg').textContent =
-            `Thank you, ${name}! Your order has been received and will be processed via ${method}. We'll contact you shortly to confirm.`;
-
-        // Clear cart
-        localStorage.removeItem('cart');
-
-        document.getElementById('success-overlay').classList.add('show');
+    // Everything is validated -> wipe cart data and launch completion window overlay modal
+    localStorage.removeItem('grande_cart');
+    
+    const successOverlay = document.getElementById('success-overlay');
+    if (successOverlay) {
+        successOverlay.style.display = 'flex';
+        successOverlay.style.opacity = '1';
+    } else {
+        alert('Order placed successfully via checkout verification paths! Thank you for buying from Grande Auto Hut Ltd.');
+        window.location.href = 'index.html';
     }
-
-    renderSummary();
+}
