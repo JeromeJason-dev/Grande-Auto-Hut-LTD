@@ -36,7 +36,7 @@ body {
 }
 
 .nav-brand {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: #f39c12;
   letter-spacing: 0.5px;
@@ -272,7 +272,7 @@ body {
   background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent),
         radial-gradient(circle at 20% 80%, rgba(38, 58, 112, 0.6) 0%, transparent),
         #0f172a;
-  transform: translateY(-2px); 
+  transform: scale(1.03);
 }
 
 .cta-btn a {
@@ -627,7 +627,7 @@ body {
   }
 
   .hero-content h2 {
-    font-size: 3.5rem; 
+    font-size: 3rem; 
   }
 
   .hero-content p {
