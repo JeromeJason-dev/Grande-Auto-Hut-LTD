@@ -10,240 +10,220 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
 
-            <!-- Hidden Checkbox Control Engine Matrix -->
-            <input type="checkbox" id="home-menu-toggle">
+    <!-- TOP NAVIGATION BAR (Brand Name & Cart Component) -->
+    <header class="top-navbar">
+        <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
+        
+        <!-- Toggle label positioned on top bar for small screens -->
+        <label for="home-menu-toggle" class="hamburger-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
 
-            <ul class="nav-links">
-                <li><a href="#" class="active"><i class="fa-solid fa-house"></i>Home</a></li>
-                <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i>Product</a></li>
-                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-address-book"></i>Contact</a></li>
-                <li><a href="login.html"><i class="fa-solid fa-user-gear"></i>Login</a></li>
-                <button class="cart-icon" onclick="location.href='cart.html'">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span>View Cart</span>
-                </button>
-            </ul>
-
-            <!-- Three-bar graphic interaction terminal, pinned to far right -->
-            <label for="home-menu-toggle" class="hamburger-label">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-        </nav>
+        <button class="top-cart-btn" onclick="location.href='cart.html'">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>View Cart</span>
+            <span class="cart-badge">0</span>
+        </button>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
+    <!-- CORE LAYOUT CONTAINER (Sidebar Engine & Main Workspace) -->
+    <div class="dashboard-core-wrapper">
+        
+        <!-- Hidden Checkbox Control Engine Matrix -->
+        <input type="checkbox" id="home-menu-toggle">
 
-        <div class="hero-content">
-            <!-- Added spans for highlighting words with your yellow accent corporate style -->
-            <h2>Genuine Parts. <span>Precise Fit.</span> Zero Guesswork</h2>
-            <p>We offer premium customer services where we sell genuine parts of top-grade retail pricing components
-                backed by expert advice from counter staff who actually know what is under the hood.</p>
-            <div class="hero-btn-row">
-                <button class="cta-btn"><a href="product.html"><b>Shop Now</b></a></button>
-                <button class="cta-btn cta-btn-secondary"><a href="register.html"><b>Register Now</b></a></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT US SUMMARY SECTION -->
-    <section class="about-summary">
-        <div class="about-summary-grid">
-            <div class="about-summary-text">
-                <span class="sub-title">WHO WE ARE</span>
-                <h2>10+ Years of Keeping Nairobi's Cars Running</h2>
-                <p>GRANDE AUTO HUT LTD has spent over a decade supplying Nairobi and drivers countrywide with
-                    genuine auto parts, hard-to-find components, and advice from staff who actually know what's
-                    under the hood. From routine essentials to specialized performance upgrades, every part we
-                    stock comes from trusted OEM and top-tier aftermarket brands.</p>
-                <a href="about.html" class="about-link">More About Us <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="about-summary-stats">
-                <div class="stat-card">
-                    <i class="fa-solid fa-warehouse"></i>
-                    <h3>Massive Inventory</h3>
-                    <p>Parts stocked for all major makes and models</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Guaranteed Quality</h3>
-                    <p>OEM &amp; top-tier aftermarket brands only</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-user-gear"></i>
-                    <h3>Expert Staff</h3>
-                    <p>Gear heads who help you find the exact fit</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fa-solid fa-truck-fast"></i>
-                    <h3>Fast Logistics</h3>
-                    <p>Sourced and delivered faster than the competition</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="testimonials-header">
-            <span class="sub-title">TRUSTED BY THOUSANDS</span>
-            <h2>What Our Customers Say</h2>
-            <p>Don't take our word for it. Here is what mechanics and car owners across Kenya think of our components.
-            </p>
-        </div>
-
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="card-top">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Mechanic</span>
-                </div>
-                <blockquote>
-                    "Finding a genuine crankshaft for a Nissan or Toyota engine without getting fake knockoffs can be
-                    tough. Grande Auto Hut delivered exactly what I ordered, and the fit was millimeter-perfect."
-                </blockquote>
-                <div class="reviewer-profile">
-                    <div class="avatar">JM</div>
-                    <div class="reviewer-meta">
-                        <h4>John Mwangi</h4>
-                        <p>Lead Engineer, AutoTech Nairobi</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="card-top">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
-                </div>
-                <blockquote>
-                    "The counter staff genuinely know their business. I came in looking for clutch kits and shock
-                    absorbers, and they helped me verify the part compatibility using my chassis number. Outstanding
-                    customer service!"
-                </blockquote>
-                <div class="reviewer-profile">
-                    <div class="avatar">AO</div>
-                    <div class="reviewer-meta">
-                        <h4>Amina Omar</h4>
-                        <p>Subaru Forester Owner</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="card-top">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
-                </div>
-                <blockquote>
-                    "Highly recommended for parts procurement. Ordered replacement headlights and an ignition coil. Fast
-                    delivery right to my shop floor and the pricing remains competitive with wholesale values."
-                </blockquote>
-                <div class="reviewer-profile">
-                    <div class="avatar">PK</div>
-                    <div class="reviewer-meta">
-                        <h4>Patrick Kamau</h4>
-                        <p>Fleet Maintenance Manager</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="footer-container">
-
-            <!-- BRAND SECTION -->
-            <div class="footer-section">
-                <h2 class="text-red-100 text-6xl">GRANDE AUTO HUT LTD</h2>
-
-                <p>
-                    Where our service to you is our top priority.
-                </p>
-
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i
-                            class="fa-brands fa-facebook"></i>Facebook</a> |
-                    <a href="https://www.instagram.com/grandeautohut" target="_blank"><i
-                            class="fa-brands fa-instagram"></i>Instagram</a> |
-                    <a href="https://www.tiktok.com/@grandeautohutltd" target="_blank"><i
-                            class="fa-brands fa-tiktok"></i>TikTok</a>
-                </div>
-            </div>
-            <!-- QUICK LINKS -->
-            <div class="footer-section">
-                <h3 class="text-white">QUICK LINKS</h3>
-
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="product.html">Products</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+        <!-- FIXED SIDEBAR PANELS -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav-links">
+                    <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i> Product</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-address-book"></i> Contact</a></li>
+                    <li><a href="login.html"><i class="fa-solid fa-user-gear"></i> Login</a></li>
                 </ul>
-            </div>
-            <!-- NEWSLETTER -->
-            <div class="footer-section">
-                <h3 class="text-white">STAY UPDATED</h3>
+            </nav>
+        </aside>
 
-                <p>
-                    Get updates on exclusive deals and new arrivals.
-                </p>
+        <!-- MAIN LAYOUT WRAPPER (Scrollable Content Engine) -->
+        <div class="main-layout-content">
+            
+            <!-- HERO SECTION -->
+            <section class="hero">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h2>Genuine Parts. <span>Precise Fit.</span> Zero Guesswork</h2>
+                    <p>We offer premium customer services where we sell genuine parts of top-grade retail pricing components backed by expert advice from counter staff who actually know what is under the hood.</p>
+                    <div class="hero-btn-row">
+                        <button class="cta-btn"><a href="product.html"><b>Shop Now</b></a></button>
+                        <button class="cta-btn cta-btn-secondary"><a href="register.html"><b>Register Now</b></a></button>
+                    </div>
+                </div>
+            </section>
 
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email">
+            <!-- ABOUT US SUMMARY SECTION -->
+            <section class="about-summary">
+                <div class="about-summary-grid">
+                    <div class="about-summary-text">
+                        <span class="sub-title">WHO WE ARE</span>
+                        <h2>10+ Years of Keeping Nairobi's Cars Running</h2>
+                        <p>GRANDE AUTO HUT LTD has spent over a decade supplying Nairobi and drivers countrywide with genuine auto parts, hard-to-find components, and advice from staff who actually know what's under the hood.</p>
+                        <a href="about.html" class="about-link">More About Us <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="about-summary-stats">
+                        <div class="stat-card">
+                            <i class="fa-solid fa-warehouse"></i>
+                            <h3>Massive Inventory</h3>
+                            <p>Parts stocked for all major makes and models</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <h3>Guaranteed Quality</h3>
+                            <p>OEM &amp; top-tier aftermarket brands only</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <h3>Expert Staff</h3>
+                            <p>Gear heads who help you find the exact fit</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-truck-fast"></i>
+                            <h3>Fast Logistics</h3>
+                            <p>Sourced and delivered faster than the competition</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                    <button type="submit">
-                        Subscribe
-                    </button>
-                </form>
-            </div>
+            <!-- TESTIMONIALS SECTION -->
+            <section class="testimonials">
+                <div class="testimonials-header">
+                    <span class="sub-title">TRUSTED BY THOUSANDS</span>
+                    <h2>What Our Customers Say</h2>
+                    <p>Don't take our word for it. Here is what mechanics and car owners across Kenya think of our components.</p>
+                </div>
 
-            <!-- CUSTOMER SERVICE -->
-            <div class="footer-section">
-                <h3 class="text-white">CUSTOMER SERVICE</h3>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="card-top">
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Mechanic</span>
+                        </div>
+                        <blockquote>
+                            "Finding a genuine crankshaft for a Nissan or Toyota engine without getting fake knockoffs can be tough. Grande Auto Hut delivered exactly what I ordered, and the fit was millimeter-perfect."
+                        </blockquote>
+                        <div class="reviewer-profile">
+                            <div class="avatar">JM</div>
+                            <div class="reviewer-meta">
+                                <h4>John Mwangi</h4>
+                                <p>Lead Engineer, AutoTech Nairobi</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <ul>
-                    <li><a href="#">Shipping Policy</a></li>
-                    <li><a href="#">Returns & Refunds</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Track Order</a></li>
-                </ul>
-            </div>
+                    <div class="testimonial-card">
+                        <div class="card-top">
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
+                        </div>
+                        <blockquote>
+                            "The counter staff genuinely know their business. I came in looking for clutch kits and shock absorbers, and they helped me verify the part compatibility using my chassis number. Outstanding customer service!"
+                        </blockquote>
+                        <div class="reviewer-profile">
+                            <div class="avatar">AO</div>
+                            <div class="reviewer-meta">
+                                <h4>Amina Omar</h4>
+                                <p>Subaru Forester Owner</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="card-top">
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                            <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
+                        </div>
+                        <blockquote>
+                            "Highly recommended for parts procurement. Ordered replacement headlights and an ignition coil. Fast delivery right to my shop floor and the pricing remains competitive with wholesale values."
+                        </blockquote>
+                        <div class="reviewer-profile">
+                            <div class="avatar">PK</div>
+                            <div class="reviewer-meta">
+                                <h4>Patrick Kamau</h4>
+                                <p>Fleet Maintenance Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <div class="footer-container">
+                    <div class="footer-section">
+                        <h2>GRANDE AUTO HUT LTD</h2>
+                        <p>Where our service to you is our top priority.</p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a> |
+                            <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a> |
+                            <a href="https://www.tiktok.com/@grandeautohutltd" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>QUICK LINKS</h3>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="product.html">Products</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>STAY UPDATED</h3>
+                        <p>Get updates on exclusive deals and new arrivals.</p>
+                        <form class="newsletter-form" onsubmit="event.preventDefault();">
+                            <input type="email" placeholder="Enter your email" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                    <div class="footer-section">
+                        <h3>CUSTOMER SERVICE</h3>
+                        <ul>
+                            <li><a href="#">Shipping Policy</a></li>
+                            <li><a href="#">Returns & Refunds</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Track Order</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.</p>
+                </div>
+            </footer>
 
         </div>
-        <!-- FOOTER BOTTOM -->
-        <div class="footer-bottom">
-            <p>
-                &copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.
-            </p>
-        </div>
-    </footer>
+    </div>
+
 </body>
-
 </html>
