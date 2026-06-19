@@ -11,116 +11,135 @@
 
 <body>
 
-  <header>
-        <nav class="navbar">
-            <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
-
-            <!-- Hidden Checkbox Control Engine Matrix -->
-            <input type="checkbox" id="home-menu-toggle">
-
-            <ul class="nav-links">
-                <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
-                <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i>Product</a></li>
-                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
-                <li><a href="#" class="active"><i class="fa-solid fa-address-book"></i>Contact</a></li>
-                <button class="cart-icon" onclick="location.href='cart.html'">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                        <span>View Cart</span>
-                </button>
-            </ul>
-
-            <!-- Three-bar graphic interaction terminal, pinned to far right -->
-            <label for="home-menu-toggle" class="hamburger-label">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-        </nav>
+    <!-- TOP NAVIGATION BAR (Brand Name) -->
+    <header class="top-navbar">
+        <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
     </header>
 
-    <main>
-        <section class="contact-wrapper">
+    <!-- CORE LAYOUT CONTAINER (Sidebar Engine & Main Workspace) -->
+    <div class="dashboard-core-wrapper">
 
-            <!-- Contact Form -->
-            <div class="contact-form-card">
-                <h2>Contact Us</h2>
-                <form action="#">
-                    <input type="text" name="name" placeholder="Your name" required autocomplete="off">
-                    <input type="email" name="email" placeholder="Your Email" required autocomplete="off">
-                    <input type="tel" id="phone" name="phone" placeholder="07XXXXXXXX" required
-                        pattern="[0]{1}[0-9]{9}" autocomplete="off">
-                    <textarea name="message" rows="5" placeholder="Enter message"></textarea>
-                    <button class="submit-btn" type="submit">Submit</button>
-                </form>
+        <!-- Hidden Checkbox Control Engine Matrix -->
+        <input type="checkbox" id="home-menu-toggle">
+
+        <!-- FIXED SIDEBAR PANELS -->
+        <aside class="sidebar">
+            <div class="sidebar-header-wrapper">
+                <label for="home-menu-toggle" class="hamburger-label">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
             </div>
 
-            <!-- Info Card -->
-            <div class="contact-info-card">
-                <h2>Get in Touch</h2>
-                <p class="info-subtitle">We're here to help you find the right vehicle.</p>
+            <nav class="sidebar-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i> Product</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                    <li><a href="#" class="active"><i class="fa-solid fa-address-book"></i> Contact</a></li>
+                    <li><a href="login.html"><i class="fa-solid fa-user-gear"></i> Login</a></li>
+                </ul>
+            </nav>
 
-                <div class="info-row">
-                    <div class="icon-wrap">
-                        <i class="fa-solid fa-map-pin"></i>
-                    </div>
-                    <div>
-                        <p class="info-label">Location</p>
-                        <p class="info-value">South B, Industrial Area, Nairobi, Kenya</p>
-                    </div>
-                </div>
-
-                <div class="info-row">
-                    <div class="icon-wrap">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <div>
-                        <p class="info-label">Phone</p>
-                        <p class="info-value"><a href="tel:+254723113311">+254 723 113311</a></p>
-                    </div>
-                </div>
-
-                <div class="info-row">
-                    <div class="icon-wrap">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <div>
-                        <p class="info-label">Email</p>
-                        <p class="info-value"><a href="mailto:grandeautohut@gmail.com">grandeautohut@gmail.com</a></p>
-                    </div>
-                </div>
-
-                <div class="info-row">
-                    <div class="icon-wrap">
-                        <i class="fa-solid fa-clock"></i>
-                    </div>
-                    <div>
-                        <p class="info-label">Working Hours</p>
-                        <table class="hours-table">
-                            <tr>
-                                <td>Mon – Fri</td>
-                                <td>8:00 AM – 6:00 PM</td>
-                            </tr>
-                            <tr>
-                                <td>Saturday</td>
-                                <td>9:00 AM – 3:30 PM</td>
-                            </tr>
-                            <tr>
-                                <td>Sunday</td>
-                                <td>Closed</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
+            <div class="sidebar-footer">
+                <button class="cart-icon" onclick="location.href='cart.html'">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>View Cart</span>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
             </div>
+        </aside>
 
-        </section>
+        <!-- MAIN LAYOUT WRAPPER (Scrollable Content Engine) -->
+        <div class="main-layout-content">
 
-        <div class="back-link">
-            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <main>
+                <section class="contact-wrapper">
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-card">
+                        <h2>Contact Us</h2>
+                        <form action="#">
+                            <input type="text" name="name" placeholder="Your name" required autocomplete="off">
+                            <input type="email" name="email" placeholder="Your Email" required autocomplete="off">
+                            <input type="tel" id="phone" name="phone" placeholder="07XXXXXXXX" required
+                                pattern="[0]{1}[0-9]{9}" autocomplete="off">
+                            <textarea name="message" rows="5" placeholder="Enter message"></textarea>
+                            <button class="submit-btn" type="submit">Submit</button>
+                        </form>
+                    </div>
+
+                    <!-- Info Card -->
+                    <div class="contact-info-card">
+                        <h2>Get in Touch</h2>
+                        <p class="info-subtitle">We're here to help you find the right vehicle.</p>
+
+                        <div class="info-row">
+                            <div class="icon-wrap">
+                                <i class="fa-solid fa-map-pin"></i>
+                            </div>
+                            <div>
+                                <p class="info-label">Location</p>
+                                <p class="info-value">South B, Industrial Area, Nairobi, Kenya</p>
+                            </div>
+                        </div>
+
+                        <div class="info-row">
+                            <div class="icon-wrap">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="info-label">Phone</p>
+                                <p class="info-value"><a href="tel:+254723113311">+254 723 113311</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-row">
+                            <div class="icon-wrap">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="info-label">Email</p>
+                                <p class="info-value"><a href="mailto:grandeautohut@gmail.com">grandeautohut@gmail.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-row">
+                            <div class="icon-wrap">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <p class="info-label">Working Hours</p>
+                                <table class="hours-table">
+                                    <tr>
+                                        <td>Mon – Fri</td>
+                                        <td>8:00 AM – 6:00 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Saturday</td>
+                                        <td>9:00 AM – 3:30 PM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sunday</td>
+                                        <td>Closed</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <div class="back-link">
+                    <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+                </div>
+            </main>
+
         </div>
-    </main>
-
+    </div>
+    <script src="JS/product.js"></script>
 </body>
 
 </html>
