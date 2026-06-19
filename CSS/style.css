@@ -162,11 +162,10 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  min-height: 85vh; /* Occupies 80% of the screen height */
+  min-height: 85vh; 
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Use your asset photo directly as a background skin */
   background-image: url('../assets/images/grandeshop.jpg');
   background-size: cover;
   background-position: center;
@@ -175,49 +174,64 @@ body {
   overflow: hidden;
 }
 
-/* Semi-transparent dark curtain mask protecting text contrast */
+/* Updated Overlay: Lighter tint so the crisp image details show under the glass blur */
 .hero-overlay {
-  position:absolute;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.3));
+  background: rgba(15, 23, 42, 0.4); 
   z-index: 1;
 }
 
+/* Glassmorphism Card Container */
 .hero-content {
   position: relative;
-  z-index: 2; /* Forces text to layer cleanly on top of the overlay tint */
+  z-index: 2; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  max-width: 800px; /* Restricts line lengths for desktop reading ease */
+  gap: 1.2rem;
+  max-width: 750px; 
   width: 100%;
+  
+  /* Glassmorphism Specs */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .hero-content h2 {
-  font-size: 2.5rem;
-  color: #ffffff; /* Bright white text contrasts against dark overlay */
-  line-height: 1.25;
+  font-size: 2.2rem;
+  color: #ffffff; 
+  line-height: 1.3;
   text-align: center;
   font-weight: 800;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Soft lift shadow */
+  letter-spacing: -0.5px;
+}
+
+/* Highlights the yellow accented focal words */
+.hero-content h2 span {
+  color: #f39c12;
 }
 
 .hero-content p {
-  font-size: 1.2rem;
-  color: #feffff; /* Soft silver gray for micro-prose text readability */
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.9); 
   line-height: 1.6;
-  max-width: 650px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 600px;
 }
 
-/* Shop Now Button styling */
+/* Shop Now Button styling (Upgraded for Glass alignment) */
 .cta-btn {
-  background-color: #2359bd;
+  background-color: #2359bd; /* Swapped to corporate brand gold for immediate visual contrast */
   border: none;
   border-radius: 0.375rem;
   padding: 0.9rem 2.5rem;
@@ -225,22 +239,54 @@ body {
   transition: transform 0.2s ease, background-color 0.2s ease;
   width: auto;
   min-width: 180px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
 }
 
 .cta-btn:hover {
-  background-color: #1744a4;
-  transform: scale(1.03); /* Subtle interactive zoom bounce */
+  background-color: #0e3487;
+  transform: translateY(-2px); 
 }
 
 .cta-btn a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   display: block;
   letter-spacing: 0.5px;
 }
 
+/* Outlined Glass Secondary Button */
+.cta-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+  backdrop-filter: blur(4px);
+}
+
+.cta-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    min-height: 85vh;
+    padding: 0 2rem;
+  }
+  
+  .hero-content {
+    padding: 4rem 3rem;
+  }
+
+  .hero-content h2 {
+    font-size: 3.2rem; 
+  }
+
+  .hero-content p {
+    font-size: 1.15rem;
+  }
+}
 /* Row that holds both hero CTAs side by side, centered, wraps on small screens */
 .hero-btn-row {
   display: flex;
@@ -255,11 +301,11 @@ body {
 .cta-btn-secondary {
   background-color: #2359bd;
   border: none;
-  box-shadow: none;
+  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
 }
 
 .cta-btn-secondary:hover {
-  background-color: #1744a4;
+  background-color: #0e3487;
   transform: scale(1.03);
 }
 
