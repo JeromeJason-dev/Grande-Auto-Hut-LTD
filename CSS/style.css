@@ -241,6 +241,28 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Row that holds both hero CTAs side by side, centered, wraps on small screens */
+.hero-btn-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Secondary CTA — outlined so it reads as the lower-priority action next to Shop Now */
+.cta-btn-secondary {
+  background-color: #2359bd;
+  border: none;
+  box-shadow: none;
+}
+
+.cta-btn-secondary:hover {
+  background-color: #1744a4;
+  transform: scale(1.03);
+}
+
 /* Remove old desktop-split overrides inside your media queries */
 @media screen and (min-width: 768px) {
   .hero {
