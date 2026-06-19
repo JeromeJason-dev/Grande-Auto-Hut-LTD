@@ -49,8 +49,9 @@ body {
     font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #d4d2d2;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-style: italic;
 }
 
 .brand p {
@@ -91,13 +92,34 @@ body {
 }
 
 /* ==========================================
-   4. FORM INPUTS & FIXES
+   4. FORM INPUTS & LABELS
    ========================================== */
 .field-group {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
     margin-bottom: 1.75rem;
+}
+
+.input-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Spaces the label cleanly right above the input box */
+    width: 100%;
+}
+
+.field-label {
+    color: #b2b3b4; /* Crisp light slate color for premium contrast */
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase; /* Clean professional aesthetic */
+    transition: color 0.2s ease;
+}
+
+/* Subtle UX highlight: Glow the label color when the child input is focused */
+.input-unit:focus-within .field-label {
+    color: #f39c12; /* Brand orange highlight on focus */
 }
 
 .input-wrap {
@@ -150,7 +172,7 @@ input::placeholder {
    ========================================== */
 .submit-btn {
     width: 100%;
-    background: #f39c12;
+    background: #df9215;
     color: #111827;
     font-size: 1rem;
     font-weight: 700;
@@ -164,7 +186,7 @@ input::placeholder {
 }
 
 .submit-btn:hover {
-    background: #e67e22;
+    background: #b46723;
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
 }

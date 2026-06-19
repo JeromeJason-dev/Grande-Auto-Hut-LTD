@@ -19,7 +19,9 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.5rem;
-  background-color: #1c3a70;
+  background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+        #0f172a;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   position: fixed;
   top: 0;
@@ -69,7 +71,9 @@ body {
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: #1c3a70;
+  background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+        #0f172a;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   gap: 1.25rem;
@@ -259,7 +263,9 @@ body {
    3. SHARED FOOTER THEME STYLES
    ========================================== */
 .footer {
-  background-color: #1c3a70;
+ background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+        #0f172a;
   color: #9ca3af;
   padding: 3rem 1rem 1.5rem 1rem;
   margin-top: 4rem;

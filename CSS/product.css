@@ -40,7 +40,9 @@ img {
 .sidebar {
   width: 280px;
   height: 100vh;
-  background-color: #1c3a70;
+  background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+        #0f172a;
   color: #ffffff;
   position: fixed;
   top: 0;
@@ -324,7 +326,9 @@ img {
    5. FOOTER COMPONENT
    ========================================== */
 .footer {
-  background-color: #1c3a70;
+  background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+        #0f172a;
   color: #9ca3af;
   padding: 3rem 2rem 1.5rem 2rem;
   margin-top: auto;
