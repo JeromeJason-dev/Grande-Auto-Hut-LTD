@@ -8,57 +8,79 @@
     <link rel="stylesheet" href="CSS/register.css">
 </head>
 <body>
-    <div class="auth-container">
-        <div class="brand">
-            <h1>Grande Auto Hut Ltd</h1>
-            <p>Where our service to you is our top priority</p>
-        </div>
 
-        <div class="auth-card">
-            <h2>Create an account</h2>
-            <p class="subtitle">Join us to start shopping for auto parts.</p>
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="brand">
+                <h1>Grande Auto Hut Ltd</h1>
+                <p>Where our service to you is our top priority</p>
+            </div>
 
-            <div id="registerError" class="error-toast"></div>
+            <div class="auth-card">
+                <h2>Create an account</h2>
+                <p class="subtitle">Join us to start shopping for auto parts.</p>
 
-            <form id="registerForm">
-                <div class="field-group">
-                    <div class="input-wrap">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" id="fullName" placeholder="Full Name" required>
-                    </div>
-                    <div class="input-wrap">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-wrap">
-                        <i class="fa-solid fa-phone"></i>
-                        <input type="tel" id="phone" placeholder="Phone Number" required>
-                    </div>
-                    <div>
-                        <div class="input-wrap">
-                            <i class="fa-solid fa-lock"></i>
-                            <input type="password" id="password" placeholder="Password" required>
+                <div id="registerError" class="error-toast"></div>
+
+                <form id="registerForm">
+                    <div class="field-group">
+                        
+                        <div class="input-unit">
+                            <i class="fa-solid fa-user"></i>
+                            <label for="fullName" class="field-label">Full Name</label>
+                            <div class="input-wrap">
+                                <input type="text" id="fullName" placeholder="John Doe" required>
+                            </div>
                         </div>
-                        <div id="passwordStrength"><div id="strengthBar"></div></div>
-                        <div id="strengthLabel"></div>
+
+                        <div class="input-unit">
+                            <i class="fa-solid fa-envelope"></i>
+                            <label for="email" class="field-label">Email Address</label>
+                            <div class="input-wrap">  
+                                <input type="email" id="email" placeholder="example@mail.com" required>
+                            </div>
+                        </div>
+
+                        <div class="input-unit">
+                            <i class="fa-solid fa-phone"></i>
+                            <label for="phone" class="field-label">Phone Number</label>
+                            <div class="input-wrap">  
+                                <input type="tel" id="phone" placeholder="e.g., +254 700 000000" required>
+                            </div>
+                        </div>
+
+                        <div class="input-unit">
+                            <i class="fa-solid fa-lock"></i>
+                            <label for="password" class="field-label">Password</label>
+                            <div class="input-wrap">  
+                                <input type="password" id="password" placeholder="••••••••" required>
+                            </div>
+                            <div id="passwordStrength"><div id="strengthBar"></div></div>
+                            <div id="strengthLabel"></div>
+                        </div>
+
+                        <div class="input-unit">
+                            <i class="fa-solid fa-lock"></i>
+                            <label for="confirmPassword" class="field-label">Confirm Password</label>
+                            <div class="input-wrap">  
+                                <input type="password" id="confirmPassword" placeholder="••••••••" required>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="input-wrap">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                    </div>
-                </div>
 
-                <label class="terms-label">
-                    <input type="checkbox" id="termsCheck" required>
-                    I agree to the <a href="#">Terms and Conditions</a>
-                </label>
+                    <label class="terms-label">
+                        <input type="checkbox" id="termsCheck" required>
+                        <span>I agree to the <a href="#">Terms and Conditions</a></span>
+                    </label>
 
-                <button type="submit" class="submit-btn">Register</button>
+                    <button type="submit" class="submit-btn">Register</button>
 
-                <p class="redirect-text">
-                    Already have an account? <a href="login.html">Login</a>
-                </p>
-            </form>
+                    <p class="redirect-text">
+                        Already have an account? <a href="login.html">Login</a>
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -76,11 +98,11 @@
             if (/[^A-Za-z0-9]/.test(val)) score++;
 
             const levels = [
-                { w: '0%', color: '#2a2d3a', text: '' },
-                { w: '30%', color: '#c0392b', text: 'Weak' },
-                { w: '55%', color: '#e8a020', text: 'Fair' },
-                { w: '80%', color: '#2980b9', text: 'Good' },
-                { w: '100%', color: '#27ae60', text: 'Strong' },
+                { w: '0%', color: 'transparent', text: '' },
+                { w: '30%', color: '#ef4444', text: 'Weak Password' },
+                { w: '55%', color: '#f39c12', text: 'Fair Password' },
+                { w: '80%', color: '#3b82f6', text: 'Good Password' },
+                { w: '100%', color: '#10b981', text: 'Strong Secure Password' },
             ];
 
             const lvl = val.length === 0 ? levels[0] : levels[Math.max(1, score)];

@@ -1,179 +1,292 @@
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ==========================================
+   1. RESET & PREMIUM BACKGROUND SYSTEM
+   ========================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 1rem;
-        }
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+        #0f172a;
+    overflow-x: hidden;
+    padding: 2rem 1rem;
+}
 
-        .auth-container {
-            width: 100%;
-            max-width: 460px;
-        }
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .brand {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+.auth-container {
+    width: 100%;
+    max-width: 460px; /* Slightly wider block wrapper variant for clean multi-field distribution */
+    perspective: 1000px;
+}
 
-        .brand h1 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
+/* ==========================================
+   2. TYPOGRAPHY & BRANDING
+   ========================================== */
+.brand {
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
-        .brand p {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.25rem;
-            letter-spacing: 0.04em;
-        }
+.brand h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #d4d2d2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-style: italic;
+}
 
-        .auth-card {
-            background: white;
-            border: 1px solid #2a2d3a;
-            border-radius: 14px;
-            padding: 2.25rem 2rem;
-        }
+.brand p {
+    font-size: 1rem;
+    color: #f39c12;
+    margin-top: 0.5rem;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+}
 
-        .auth-card h2 {
-            font-size: 1.35rem;
-            font-weight: 600;
-            margin-bottom: 0.35rem;
-        }
+/* ==========================================
+   3. GLASSMORPHISM FORM CARD
+   ========================================== */
+.auth-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 3rem 2.25rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
 
-        .auth-card .subtitle {
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 1.75rem;
-        }
+.auth-card h2 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
 
-        .error-toast {
-            background: #2d1414;
-            border: 1px solid #7a2020;
-            color: #f08080;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            margin-bottom: 1.25rem;
-            display: none;
-        }
+.auth-card .subtitle {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+}
 
-        .field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-            margin-bottom: 1rem;
-        }
+/* ==========================================
+   4. FORM INPUTS & LABELS
+   ========================================== */
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
 
-        .input-wrap {
-            position: relative;
-        }
+.input-unit {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
 
-        .input-wrap, i {
-            padding-top: 0.8rem;
-            transform: translateY(-30%);
-            color: #7c7c7a;
-            font-size: 0.9rem;
-            
-        }
+.field-label {
+    color: #b2b3b4;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="password"] {
-            width: 100%;
-            
-            border: 1px solid #2a2d3a;
-            border-radius: 8px;
-            padding: 0.7rem 0.9rem 0.7rem 2.5rem;
-            font-size: 0.9rem;
-            
-            outline: none;
-            transition: border-color 0.2s;
-        }
+.input-unit:focus-within .field-label {
+    color: #f39c12;
+}
 
-        input:focus {
-            border-color: black;
-        }
+.input-wrap {
+    position: relative;
+    width: 100%;
+}
 
-        input::placeholder { color: #555; }
+.input-wrap i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
 
-        #passwordStrength {
-            margin-top: 0.4rem;
-            height: 3px;
-            border-radius: 3px;
-            background: #2a2d3a;
-            overflow: hidden;
-        }
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
+    font-size: 0.95rem;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.25s ease;
+}
 
-        #strengthBar {
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s, background 0.3s;
-            border-radius: 3px;
-        }
+input:focus {
+    border-color: #f39c12;
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.2);
+}
 
-        #strengthLabel {
-            font-size: 0.75rem;
-            color: #888;
-            margin-top: 0.3rem;
-            display: none;
-        }
+input:focus + i {
+    color: #f39c12;
+}
 
-        .terms-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            font-size: 0.82rem;
-            color: #888;
-            cursor: pointer;
-            margin-bottom: 1.25rem;
-            margin-top: 0.5rem;
-        }
+input::placeholder {
+    color: #64748b;
+}
 
-        .terms-label input[type="checkbox"] {
-            margin-top: 2px;
-            accent-color: rgb(47, 46, 46);
-            flex-shrink: 0;
-        }
+/* ==========================================
+   5. PASSWORD STRENGTH INTERFACE TRACKS
+   ========================================== */
+#passwordStrength {
+    margin-top: 0.25rem;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    width: 100%;
+}
 
-        .terms-label a {
-            color: blue;
-            text-decoration: none;
-        }
+#strengthBar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease, background 0.4s ease;
+    border-radius: 4px;
+}
 
-        .submit-btn {
-            width: 100%;
-            background: black;
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            border: none;
-            border-radius: 8px;
-            padding: 0.8rem;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
+#strengthLabel {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.3rem;
+    display: none;
+}
 
-        .submit-btn:hover { background: rgb(76, 74, 74); }
-        .submit-btn:active { transform: scale(0.98); }
+/* ==========================================
+   6. TERMS CHECKBOX COMPONENT
+   ========================================== */
+.terms-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: #94a3b8;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    user-select: none;
+}
 
-        .redirect-text {
-            text-align: center;
-            margin-top: 1.25rem;
-            font-size: 0.85rem;
-            color: #666;
-        }
+.terms-label input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: #f39c12;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
 
-        .redirect-text a {
-            color: blue;
-            text-decoration: none;
-            font-weight: 600;
-        }
+.terms-label a {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.terms-label a:hover {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   7. BUTTONS & NAVIGATION FOOTER
+   ========================================== */
+.submit-btn {
+    width: 100%;
+    background: #df9215;
+    color: #111827;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 10px;
+    padding: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+}
+
+.submit-btn:hover {
+    background: #b46723;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+}
+
+.redirect-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.redirect-text a {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+    margin-left: 0.25rem;
+}
+
+.redirect-text a:hover {
+    color: #e67e22;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   8. ERROR TOAST STATE
+   ========================================== */
+.error-toast {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
