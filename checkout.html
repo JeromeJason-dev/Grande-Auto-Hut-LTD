@@ -7,17 +7,18 @@
     <title>Checkout - Grande Auto Hut Ltd</title>
     <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="CSS/checkout.css">
-   
+
 </head>
+
 <body>
 
-<header>
-     <nav class="navbar">
+    <header>
+        <nav class="navbar">
             <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
-            
+
             <!-- Hidden Checkbox Control Engine Matrix -->
             <input type="checkbox" id="home-menu-toggle">
-            
+
             <!-- Three-bar graphic interaction terminal -->
             <label for="home-menu-toggle" class="hamburger-label">
                 <span></span>
@@ -30,184 +31,196 @@
                 <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i>Product</a></li>
                 <li><a href="about.html"><i class="fa-solid fa-circle-info"></i>About</a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-address-book"></i>Contact</a></li>
-               
+                <button class="cart-icon" onclick="location.href='cart.html'">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="nav-cart-count">0</span>
+                </button>
             </ul>
-        <button class="cart-icon" onclick="location.href='cart.html'">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span id="nav-cart-count">0</span>
-        </button>
-    </nav>
-</header>
 
-<!-- Progress bar -->
-<div class="progress-bar">
-    <div class="progress-steps">
-        <div class="step done">
-            <div class="step-circle"><i class="fa-solid fa-check" style="font-size:11px"></i></div>
-            <span class="step-label">Cart</span>
-        </div>
-        <div class="step active">
-            <div class="step-circle">2</div>
-            <span class="step-label">Checkout</span>
-        </div>
-        <div class="step">
-            <div class="step-circle">3</div>
-            <span class="step-label">Confirmation</span>
+        </nav>
+    </header>
+
+    <!-- Progress bar -->
+    <div class="progress-bar">
+        <div class="progress-steps">
+            <div class="step done">
+                <div class="step-circle"><i class="fa-solid fa-check" style="font-size:11px"></i></div>
+                <span class="step-label">Cart</span>
+            </div>
+            <div class="step active">
+                <div class="step-circle">2</div>
+                <span class="step-label">Checkout</span>
+            </div>
+            <div class="step">
+                <div class="step-circle">3</div>
+                <span class="step-label">Confirmation</span>
+            </div>
         </div>
     </div>
-</div>
 
-<main>
+    <main>
 
-    <!-- LEFT: Forms -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- LEFT: Forms -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
 
-        <!-- Delivery details -->
-        <div class="checkout-card">
-            <h3><i class="fa-solid fa-truck"></i> Delivery Details</h3>
-            <div class="form-grid">
-                <div class="field">
-                    <label>First Name</label>
-                    <input type="text" id="first-name" placeholder="John" autocomplete="given-name">
-                </div>
-                <div class="field">
-                    <label>Last Name</label>
-                    <input type="text" id="last-name" placeholder="Doe" autocomplete="family-name">
-                </div>
-                <div class="field full">
-                    <label>Email Address</label>
-                    <input type="email" id="email" placeholder="john@example.com" autocomplete="email">
-                </div>
-                <div class="field full">
-                    <label>Phone Number</label>
-                    <input type="tel" id="phone" placeholder="07XXXXXXXX" autocomplete="tel">
-                </div>
-                <div class="field full">
-                    <label>Delivery Address</label>
-                    <input type="text" id="address" placeholder="Street / Estate / Building" autocomplete="street-address">
-                </div>
-                <div class="field">
-                    <label>City / Town</label>
-                    <input type="text" id="city" placeholder="Nairobi" autocomplete="address-level2">
-                </div>
-                <div class="field">
-                    <label>County</label>
-                    <select id="county">
-                        <option value="">Select county</option>
-                        <option>Nairobi</option><option>Mombasa</option><option>Kisumu</option>
-                        <option>Nakuru</option><option>Eldoret</option><option>Thika</option>
-                        <option>Kiambu</option><option>Machakos</option><option>Nyeri</option>
-                        <option>Meru</option><option>Other</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment method -->
-        <div class="checkout-card">
-            <h3><i class="fa-solid fa-credit-card"></i> Payment Method</h3>
-
-            <div class="pay-tabs">
-                <div class="pay-tab active" id="tab-mpesa" onclick="switchTab('mpesa')">
-                    <i class="fa-solid fa-mobile-screen"></i> M-Pesa
-                </div>
-                <div class="pay-tab" id="tab-card" onclick="switchTab('card')">
-                    <i class="fa-solid fa-credit-card"></i> Card
-                </div>
-                <div class="pay-tab" id="tab-cod" onclick="switchTab('cod')">
-                    <i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery
-                </div>
-            </div>
-
-            <!-- M-Pesa -->
-            <div class="mpesa-panel visible" id="panel-mpesa">
-                <div class="mpesa-logo">
-                    <span class="mpesa-badge">M-PESA</span>
-                    <span style="font-size:13px; color:#555;">Safaricom mobile money</span>
-                </div>
-                <div class="mpesa-info">
-                    <strong>How to pay via M-Pesa STK Push</strong>
-                    Enter your M-Pesa number below and click <em>Place Order</em>. You will receive a prompt on your phone to enter your M-Pesa PIN to complete the payment.
-                </div>
-                <div class="field">
-                    <label>M-Pesa Phone Number</label>
-                    <input type="tel" id="mpesa-number" placeholder="07XXXXXXXX">
-                </div>
-            </div>
-
-            <!-- Card -->
-            <div class="card-panel" id="panel-card">
+            <!-- Delivery details -->
+            <div class="checkout-card">
+                <h3><i class="fa-solid fa-truck"></i> Delivery Details</h3>
                 <div class="form-grid">
-                    <div class="field full">
-                        <label>Cardholder Name</label>
-                        <input type="text" id="card-name" placeholder="As printed on card">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" id="first-name" placeholder="John" autocomplete="given-name">
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input type="text" id="last-name" placeholder="Doe" autocomplete="family-name">
                     </div>
                     <div class="field full">
-                        <label>Card Number</label>
-                        <div class="card-input-wrap">
-                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
-                            <i class="fa-regular fa-credit-card card-brand" id="card-brand-icon"></i>
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" autocomplete="email">
+                    </div>
+                    <div class="field full">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone" placeholder="07XXXXXXXX" autocomplete="tel">
+                    </div>
+                    <div class="field full">
+                        <label>Delivery Address</label>
+                        <input type="text" id="address" placeholder="Street / Estate / Building"
+                            autocomplete="street-address">
+                    </div>
+                    <div class="field">
+                        <label>City / Town</label>
+                        <input type="text" id="city" placeholder="Nairobi" autocomplete="address-level2">
+                    </div>
+                    <div class="field">
+                        <label>County</label>
+                        <select id="county">
+                            <option value="">Select county</option>
+                            <option>Nairobi</option>
+                            <option>Mombasa</option>
+                            <option>Kisumu</option>
+                            <option>Nakuru</option>
+                            <option>Eldoret</option>
+                            <option>Thika</option>
+                            <option>Kiambu</option>
+                            <option>Machakos</option>
+                            <option>Nyeri</option>
+                            <option>Meru</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment method -->
+            <div class="checkout-card">
+                <h3><i class="fa-solid fa-credit-card"></i> Payment Method</h3>
+
+                <div class="pay-tabs">
+                    <div class="pay-tab active" id="tab-mpesa" onclick="switchTab('mpesa')">
+                        <i class="fa-solid fa-mobile-screen"></i> M-Pesa
+                    </div>
+                    <div class="pay-tab" id="tab-card" onclick="switchTab('card')">
+                        <i class="fa-solid fa-credit-card"></i> Card
+                    </div>
+                    <div class="pay-tab" id="tab-cod" onclick="switchTab('cod')">
+                        <i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery
+                    </div>
+                </div>
+
+                <!-- M-Pesa -->
+                <div class="mpesa-panel visible" id="panel-mpesa">
+                    <div class="mpesa-logo">
+                        <span class="mpesa-badge">M-PESA</span>
+                        <span style="font-size:13px; color:#555;">Safaricom mobile money</span>
+                    </div>
+                    <div class="mpesa-info">
+                        <strong>How to pay via M-Pesa STK Push</strong>
+                        Enter your M-Pesa number below and click <em>Place Order</em>. You will receive a prompt on your
+                        phone to enter your M-Pesa PIN to complete the payment.
+                    </div>
+                    <div class="field">
+                        <label>M-Pesa Phone Number</label>
+                        <input type="tel" id="mpesa-number" placeholder="07XXXXXXXX">
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div class="card-panel" id="panel-card">
+                    <div class="form-grid">
+                        <div class="field full">
+                            <label>Cardholder Name</label>
+                            <input type="text" id="card-name" placeholder="As printed on card">
+                        </div>
+                        <div class="field full">
+                            <label>Card Number</label>
+                            <div class="card-input-wrap">
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19"
+                                    oninput="formatCard(this)">
+                                <i class="fa-regular fa-credit-card card-brand" id="card-brand-icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Expiry Date</label>
+                            <input type="text" id="card-expiry" placeholder="MM / YY" maxlength="7"
+                                oninput="formatExpiry(this)">
+                        </div>
+                        <div class="field">
+                            <label>CVV</label>
+                            <input type="password" id="card-cvv" placeholder="•••" maxlength="4">
                         </div>
                     </div>
-                    <div class="field">
-                        <label>Expiry Date</label>
-                        <input type="text" id="card-expiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
-                    </div>
-                    <div class="field">
-                        <label>CVV</label>
-                        <input type="password" id="card-cvv" placeholder="•••" maxlength="4">
+                </div>
+
+                <!-- Cash on Delivery -->
+                <div id="panel-cod" style="display:none;">
+                    <div class="mpesa-info" style="background:#fff8e1; border-color:#ffe082; color:#7a5c00;">
+                        <strong>Cash on Delivery</strong>
+                        Pay with cash when your order arrives. Our delivery agent will collect payment at your door.
                     </div>
                 </div>
             </div>
 
-            <!-- Cash on Delivery -->
-            <div id="panel-cod" style="display:none;">
-                <div class="mpesa-info" style="background:#fff8e1; border-color:#ffe082; color:#7a5c00;">
-                    <strong>Cash on Delivery</strong>
-                    Pay with cash when your order arrives. Our delivery agent will collect payment at your door.
-                </div>
+        </div>
+
+        <!-- RIGHT: Order summary -->
+        <div class="checkout-card" style="position: sticky; top: 20px;">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Order Summary</h3>
+            <div class="summary-items" id="checkout-summary-items">
+                <p class="empty-summary">No items in cart</p>
             </div>
+            <hr class="section-divider">
+            <div class="s-row">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal">Ksh 0</span>
+            </div>
+            <div class="s-row">
+                <span>Delivery</span>
+                <span class="free">FREE</span>
+            </div>
+            <div class="s-row total">
+                <span>Total</span>
+                <span id="checkout-total">Ksh 0</span>
+            </div>
+            <button class="place-order-btn" onclick="placeOrder()">
+                <i class="fa-solid fa-lock"></i> Place Order
+            </button>
+            <p class="secure-note"><i class="fa-solid fa-shield-halved"></i> Secure &amp; encrypted checkout</p>
         </div>
 
+    </main>
+
+    <!-- Success overlay -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-box">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Order Placed!</h2>
+            <p id="success-msg">Thank you for your order. We'll reach out shortly to confirm delivery details.</p>
+            <a href="index.html">Back to Home</a>
+        </div>
     </div>
-
-    <!-- RIGHT: Order summary -->
-    <div class="checkout-card" style="position: sticky; top: 20px;">
-        <h3><i class="fa-solid fa-bag-shopping"></i> Order Summary</h3>
-        <div class="summary-items" id="checkout-summary-items">
-            <p class="empty-summary">No items in cart</p>
-        </div>
-        <hr class="section-divider">
-        <div class="s-row">
-            <span>Subtotal</span>
-            <span id="checkout-subtotal">Ksh 0</span>
-        </div>
-        <div class="s-row">
-            <span>Delivery</span>
-            <span class="free">FREE</span>
-        </div>
-        <div class="s-row total">
-            <span>Total</span>
-            <span id="checkout-total">Ksh 0</span>
-        </div>
-        <button class="place-order-btn" onclick="placeOrder()">
-            <i class="fa-solid fa-lock"></i> Place Order
-        </button>
-        <p class="secure-note"><i class="fa-solid fa-shield-halved"></i> Secure &amp; encrypted checkout</p>
-    </div>
-
-</main>
-
-<!-- Success overlay -->
-<div class="success-overlay" id="success-overlay">
-    <div class="success-box">
-        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
-        <h2>Order Placed!</h2>
-        <p id="success-msg">Thank you for your order. We'll reach out shortly to confirm delivery details.</p>
-        <a href="index.html">Back to Home</a>
-    </div>
-</div>
-<script src="JS/checkout.js"></script>
+    <script src="JS/checkout.js"></script>
 
 </body>
-</html>   
+
+</html>
