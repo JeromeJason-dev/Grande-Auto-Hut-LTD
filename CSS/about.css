@@ -1,5 +1,5 @@
 /* ==========================================
-   1. REUSED GLOBAL & NAVBAR STYLES
+   1. GLOBAL RESET & BASE STYLES
    ========================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -12,20 +12,25 @@ body {
   line-height: 1.5;
   background-color: #f9fafb;
   color: #1f2937;
-  padding-top:64px ; /* Prevents hero from slipping behind fixed header */
+  overflow-x: hidden;
 }
-.navbar {
+
+/* ==========================================
+   2. TOP NAVIGATION BAR (kept, brand only)
+   ========================================== */
+.top-navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.5rem;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
   background-color: #1c3a70;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  height: 70px;
+  z-index: 1050;
 }
 
 .nav-brand {
@@ -35,19 +40,52 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Hide the structural interaction checkbox */
+/* DASHBOARD LAYOUT GRID WRAPPER */
+.dashboard-core-wrapper {
+  display: flex;
+  width: 100%;
+  margin-top: 70px; /* sits below the fixed top navbar */
+  position: relative;
+  min-height: calc(100vh - 70px);
+}
+
 #home-menu-toggle {
   display: none;
 }
 
-/* Responsive Hamburger Icon Styling */
-.hamburger-label {
+/* ==========================================
+   3. SIDEBAR STRUCTURE (matches home page)
+   ========================================== */
+.sidebar {
+  width: 280px;
+  height: calc(100vh - 70px);
+  background-color: #1c3a70;
+  color: #ffffff;
+  position: fixed;
+  top: 70px;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 26px;
-  height: 18px;
+  padding: 2rem 1.5rem;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.hamburger-label {
+  display: none;
   cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  width: 30px;
   z-index: 1010;
 }
 
@@ -57,46 +95,44 @@ body {
   height: 3px;
   background-color: #f39c12;
   border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Mobile Nav Links Dropdown Default Tray Layout */
-.nav-links {
+.sidebar-nav {
+  margin: 3rem 0 auto 0;
+  width: 100%;
+}
+
+.sidebar-nav .nav-links {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: #1c3a70;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
-  gap: 1.25rem;
-  list-style: none;
-  
-  /* Slide out upward bounds when unselected */
-  transform: translateY(-120%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
-  z-index: 999;
+  gap: 1rem;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: #f39c12;
-  font-weight: 600;
-  font-size: 1.05rem;
+.sidebar-nav .nav-links li a {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-  transition: color 0.2s ease;
+  gap: 12px;
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  font-weight: 500;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: #2563eb; 
+.sidebar-nav .nav-links li a:hover,
+.sidebar-nav .nav-links li a.active {
+  background-color: #34495e;
+  color: #f39c12;
+}
+
+.sidebar-footer {
+  border-top: 1px solid #34495e;
+  padding-top: 1.5rem;
+  width: 100%;
 }
 
 .cart-icon {
@@ -119,40 +155,32 @@ body {
   background-color: #e67e22;
 }
 
-/* ==========================================
-   PURE CSS INTERACTIVE MATRIX LOGIC
-   ========================================== */
-
-/* 1. Slide down menu container when targeted label is clicked */
-#home-menu-toggle:checked ~ .nav-links {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
+.cart-badge {
+  background-color: #2c3e50;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
 }
 
-/* 2. Top line rotate transform */
-#home-menu-toggle:checked ~ .hamburger-label span:nth-child(1) {
-  transform: translateY(7.5px) rotate(45deg);
+/* MAIN CONTENT BLOCK SPECIFICATIONS */
+.main-layout-content {
+  margin-left: 280px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
-
-/* 3. Middle line transparency morph */
-#home-menu-toggle:checked ~ .hamburger-label span:nth-child(2) {
-  opacity: 0;
-}
-
-/* 4. Bottom line inverse rotate transform */
-#home-menu-toggle:checked ~ .hamburger-label span:nth-child(3) {
-  transform: translateY(-7.5px) rotate(-45deg);
-}
-
 
 /* ==========================================
-   2. ABOUT CONTENT SECTION (Mobile-First)
+   4. ABOUT CONTENT SECTION
    ========================================== */
 .about {
-  padding: 2rem 1rem;
+  padding: 3rem 1.5rem;
   max-width: 800px; /* Limits reading length on desktop for better readability */
   margin: 0 auto;
+  width: 100%;
 }
 
 .about .title {
@@ -163,18 +191,17 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Red accent indicator matching the brand's footer text colors */
+/* Accent indicator matching the brand's footer text colors */
 .about .title::after {
   content: '';
   display: block;
   width: 50px;
   height: 4px;
-  background-color: #ef4444;
+  background-color: #f39c12;
   margin: 0.5rem auto 0 auto;
   border-radius: 2px;
 }
 
-/* Structural replacement for legacy <br> tags */
 .about article {
   background-color: #ffffff;
   padding: 1.5rem;
@@ -197,7 +224,7 @@ body {
 }
 
 /* ==========================================
-   3. SHARED FOOTER THEME STYLES
+   5. SHARED FOOTER THEME STYLES
    ========================================== */
 .footer {
   background-color: #1c3a70;
@@ -214,10 +241,9 @@ body {
   margin: 0 auto;
 }
 
-/* Fixing the inline 6xl text formatting for mobile compatibility */
 .footer-section h2 {
-  font-size: 1.5rem !important; 
-  color: #f39c12  !important; /* Forces uniform corporate red styling */
+  font-size: 1.5rem !important;
+  color: #f39c12 !important;
   margin-bottom: 1rem;
 }
 
@@ -286,56 +312,75 @@ body {
 }
 
 /* ==========================================
-   4. RESPONSIVE BREAKPOINTS (Desktop Enhancements)
+   6. RESPONSIVE BREAKPOINTS & MEDIA QUERIES
    ========================================== */
-@media screen and (min-width: 920px) {
-  body {
-    padding-top: 85px;
-  }
-
-  .nav-brand {
-    font-size: 1.6rem;
-  }
-
-  /* Drop graphic checkbox trigger options for spacious monitors */
-  .hamburger-label {
-    display: none;
-  }
-
-  /* Reset layout structure back to a uniform inline row footprint */
-  .nav-links {
-    position: static;
-    flex-direction: row;
-    width: auto;
-    background-color: transparent;
-    box-shadow: none;
-    padding: 0;
-    gap: 2rem;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .nav-links a {
-    font-size: 0.95rem;
-    font-weight: 500;
-  }
-}
 
 @media screen and (min-width: 1020px) {
   .footer-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Balanced 4 column desktop layout */
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
 }
 
-/* Responsive Scaling Overrides for Testimonials */
-@media (max-width: 768px) {
-  .testimonials-header h2 {
-    font-size: 1.8rem;
+/* Mobile sidebar collapse, matching home page behavior */
+@media screen and (max-width: 992px) {
+  .dashboard-core-wrapper {
+    flex-direction: column;
   }
-  .testimonials-grid {
-    grid-template-columns: 1fr;
+
+  .sidebar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding: 1.25rem 1.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .hamburger-label {
+    display: flex;
+  }
+
+  .sidebar-nav,
+  .sidebar-footer {
+    display: none;
+    width: 100%;
+  }
+
+  .sidebar-nav {
+    margin: 1.5rem 0 1rem 0;
+    order: 2;
+  }
+
+  .sidebar-footer {
+    padding-top: 1rem;
+    order: 3;
+  }
+
+  /* CSS CHECKBOX ACTION SYSTEM MATRIX TRIGGER */
+  #home-menu-toggle:checked ~ .sidebar .sidebar-nav,
+  #home-menu-toggle:checked ~ .sidebar .sidebar-footer {
+    display: flex;
+  }
+
+  #home-menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  #home-menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #home-menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .main-layout-content {
+    margin-left: 0;
+    width: 100%;
   }
 }
