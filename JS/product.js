@@ -12,14 +12,34 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentProducts = [];
   let cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
 
-  // --- 1. INITIALIZATION DATA PIPELINE RUNNERS ---
+// --- 1. INITIALIZATION DATA PIPELINE RUNNERS ---
   async function initializeProductCatalogue() {
     try {
       const response = await fetch('product.json');
       if (!response.ok) throw new Error('Failed to acquire API products data ledger.');
       
       const data = await response.json();
-      allProducts = data.products;
+      
+      // Pull live admin dashboard updates from localStorage
+      const adminInventory = JSON.parse(localStorage.getItem('grande_inventory_status')) || [];
+
+      // Map across json file products and cross-reference state with admin adjustments
+      allProducts = data.products.map(product => {
+        // Match by product name
+        const liveAdminUpdate = adminInventory.find(item => item.name.toLowerCase() === product.name.toLowerCase());
+        
+        if (liveAdminUpdate) {
+          // Sync stock status and quantity attributes dynamically
+          product.inStock = liveAdminUpdate.inStock;
+          product.quantity = liveAdminUpdate.quantity;
+        } else {
+          // Default fallbacks if the item hasn't been handled by admin script yet
+          product.inStock = true;
+          product.quantity = 10;
+        }
+        return product;
+      });
+
       currentProducts = [...allProducts];
       
       renderGrid(currentProducts);
@@ -52,20 +72,26 @@ document.addEventListener('DOMContentLoaded', () => {
           : `<i class="fa-regular fa-star"></i>`;
       }
 
+      // Check live status
+      const isAvailable = product.inStock && product.quantity > 0;
+
       const card = document.createElement('article');
-      card.className = 'product-card';
+      card.className = `product-card ${!isAvailable ? 'out-of-stock-card' : ''}`;
       card.innerHTML = `
         <img src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/250x200?text=${encodeURIComponent(product.name)}'">
         <div class="product-info">
           <h3>${product.name}</h3>
           <div class="rating">${starsHTML}</div>
           <p class="price">${product.currency} ${product.price.toLocaleString()}</p>
-          <button class="add-to-cart-btn" data-id="${product.id}">Add to cart</button>
+          ${isAvailable 
+            ? `<button class="add-to-cart-btn" data-id="${product.id}">Add to cart</button>` 
+            : `<button class="add-to-cart-btn disabled-btn" disabled style="background-color: #9ca3af; cursor: not-allowed;">Out of Stock</button>`
+          }
         </div>
       `;
 
-      // Interactive Add-To-Cart Execution 
-      const actionButton = card.querySelector('.add-to-cart-btn');
+      // Interactive Add-To-Cart Execution (only bind if available)
+      const actionButton = card.querySelector('.add-to-cart-btn:not(.disabled-btn)');
       if (actionButton) {
         actionButton.addEventListener('click', (e) => {
           e.preventDefault();
