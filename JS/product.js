@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function setupProductApp() {
   // --- DOM CACHE DECK REGISTER ---
   const productGrid = document.querySelector('.product-grid');
   const sortSelect = document.getElementById('sortSelect');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentProducts = [];
   let cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
 
-// --- 1. INITIALIZATION DATA PIPELINE RUNNERS ---
+  // --- 1. INITIALIZATION DATA PIPELINE RUNNERS ---
   async function initializeProductCatalogue() {
     try {
       const response = await fetch('product.json');
@@ -77,8 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const card = document.createElement('article');
       card.className = `product-card ${!isAvailable ? 'out-of-stock-card' : ''}`;
+      
+      // FIX: Render base layout block without string-broken inline onerror attributes
       card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://placehold.co/250x200?text=${encodeURIComponent(product.name)}'">
+        <div class="product-image-container"></div>
         <div class="product-info">
           <h3>${product.name}</h3>
           <div class="rating">${starsHTML}</div>
@@ -90,21 +92,42 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
+      // FIX: Dynamic standalone image handling node injection to prevent layout-shattering XSS vulnerabilities
+      const imgElement = document.createElement('img');
+      imgElement.src = product.image;
+      imgElement.alt = product.name;
+      imgElement.addEventListener('error', () => {
+        imgElement.src = `https://placehold.co/250x200?text=${encodeURIComponent(product.name)}`;
+      });
+      card.querySelector('.product-image-container').appendChild(imgElement);
+
       // Interactive Add-To-Cart Execution (only bind if available)
       const actionButton = card.querySelector('.add-to-cart-btn:not(.disabled-btn)');
       if (actionButton) {
         actionButton.addEventListener('click', (e) => {
           e.preventDefault();
           
-          const cartItemPayload = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            currency: product.currency,
-            image: product.image
-          };
+          // Re-sync local container array reference state before evaluation pass
+          cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
 
-          cart.push(cartItemPayload);
+          // FIX: Check if product structural model already exists inside tracking data array
+          const existingCartItem = cart.find(item => item.id === product.id);
+
+          if (existingCartItem) {
+            // Increment existing item parameter safely
+            existingCartItem.quantity = (existingCartItem.quantity || 1) + 1;
+          } else {
+            // Push complete payload object with assigned explicit quantifiers
+            cart.push({
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              currency: product.currency,
+              image: product.image,
+              quantity: 1
+            });
+          }
+
           localStorage.setItem('grande_cart', JSON.stringify(cart));
           refreshCartCountUI();
 
@@ -191,10 +214,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- 5. COMPONENT UI PERSISTENCE MANAGEMENT UPDATER ---
+  // FIX: Helper logic algorithm to map totals accurately using .reduce cumulative reduction loops
+  function getGlobalCartItemCount() {
+    const currentStorage = JSON.parse(localStorage.getItem('grande_cart')) || [];
+    return currentStorage.reduce((total, item) => total + (item.quantity || 1), 0);
+  }
+
   function refreshCartCountUI() {
     if (!cartCountElement) return;
-    const trackingCartData = JSON.parse(localStorage.getItem('grande_cart')) || [];
-    cartCountElement.textContent = trackingCartData.length;
+    // Apply aggregate sum straight into DOM container node text elements
+    cartCountElement.textContent = getGlobalCartItemCount();
   }
 
   // --- 6. EVENT BINDING SUITE LISTENERS ---
@@ -211,4 +240,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Ignition Loop Trigger
   initializeProductCatalogue();
+
+  // Expose internals for testing purposes only (no effect on browser behavior)
+  return {
+    initializeProductCatalogue,
+    renderGrid,
+    applyCombinedFiltersAndSorting,
+    handleSearchAutocompleteUI,
+    getGlobalCartItemCount,
+    refreshCartCountUI,
+    getAllProducts: () => allProducts,
+    getCurrentProducts: () => currentProducts,
+  };
+}
+
+// Real browser behavior: run exactly as before, on DOMContentLoaded.
+document.addEventListener('DOMContentLoaded', () => {
+  setupProductApp();
 });
+
+// Test-only hook: lets Jest/Node call setupProductApp() directly against
+// a jsdom document that already has the required elements in place.
+// This block is a no-op in real browsers (module is undefined there).
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { setupProductApp };
+}
