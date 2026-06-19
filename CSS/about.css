@@ -100,18 +100,23 @@ body {
 }
 
 .cart-icon {
-  background: none;
+  width: 100%;
+  background-color: #f39c12;
   border: none;
-  font-size: 1.35rem;
+  padding: 0.9rem;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   cursor: pointer;
-  color: #f39c12;
-  padding: 0.25rem;
-  transition: color 0.2s ease;
-  z-index: 1010;
+  transition: background-color 0.2s;
 }
 
 .cart-icon:hover {
-  color: #2563eb;
+  background-color: #e67e22;
 }
 
 /* ==========================================
