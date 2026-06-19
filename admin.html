@@ -19,12 +19,23 @@
 <body>
     <header>
         <nav class="navbar">
-            <h1>GRANDE AUTO HUT LTD (ADMIN PANEL)</h1>
+            <h1 class="nav-brand">GRANDE AUTO HUT LTD (ADMIN PANEL)</h1>
+
+            <!-- Hidden Checkbox Control Engine Matrix -->
+            <input type="checkbox" id="home-menu-toggle">
+
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="product.html"><i class="fa-solid fa-cart-shopping"></i> Shop View</a></li>
                 <li><a href="#" id="logoutAction" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
             </ul>
+
+            <!-- Three-bar graphic interaction terminal, pinned to far right -->
+            <label for="home-menu-toggle" class="hamburger-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
         </nav>
     </header>
 
