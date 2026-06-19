@@ -258,6 +258,114 @@ body {
 }
 
 /* ==========================================
+   ABOUT US SUMMARY SECTION
+   ========================================== */
+.about-summary {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.about-summary-text .sub-title {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+.about-summary-text h2 {
+    font-size: 2rem;
+    color: #1e293b;
+    margin: 8px 0 16px;
+    line-height: 1.25;
+}
+
+.about-summary-text p {
+    color: #475569;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+}
+
+.about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #1c3a70;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.98rem;
+    border-bottom: 2px solid #f39c12;
+    padding-bottom: 4px;
+    transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.about-link:hover {
+    color: #2563eb;
+    gap: 12px;
+}
+
+.about-summary-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.stat-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.06);
+    border-color: #f39c12;
+}
+
+.stat-card i {
+    font-size: 1.4rem;
+    color: #f39c12;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.stat-card h3 {
+    font-size: 1rem;
+    color: #1e293b;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.stat-card p {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+@media screen and (min-width: 860px) {
+    .about-summary-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+    }
+
+    .about-summary-text h2 {
+        font-size: 2.3rem;
+    }
+}
+
+/* ==========================================
    REVIEWS & TESTIMONIALS SECTION
    ========================================== */
 .testimonials {
