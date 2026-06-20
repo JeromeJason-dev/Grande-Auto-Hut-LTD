@@ -1,223 +1,228 @@
 /* ==========================================================================
-   1. Base Reset & Page Layout
+   Profile Page — layered on top of checkout.css (shared sidebar/card/form/
+   modal styles). Only profile-specific additions live here.
    ========================================================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
-body {
-    background-color: #f4f6f9;
-    color: #333333;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-}
-
-.profile-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.profile-card {
-    background-color: #ffffff;
-    width: 100%;
-    max-width: 520px;
-    padding: 40px 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-/* ==========================================================================
-   2. Header Navigation & Typography
-   ========================================================================== */
-.card-header-nav {
+.profile-page-header {
     margin-bottom: 20px;
 }
 
-.back-dash-link {
-    font-size: 0.85rem;
+.profile-page-header h2 {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.profile-page-header p {
     color: #6c757d;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s ease;
+    font-size: 0.92rem;
 }
 
-.back-dash-link:hover {
-    color: #007bff;
-}
-
-.profile-card h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #f0f2f5;
-    padding-bottom: 10px;
-}
-
-.form-section-title {
+/* ---------------- Tabs ---------------- */
+.profile-tabs {
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
-.form-section-title h3 {
-    font-size: 1.1rem;
-    color: #1a1a1a;
-    font-weight: 600;
+.profile-tab {
     display: flex;
     align-items: center;
     gap: 8px;
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    color: #555;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
 }
 
-.form-section-title h3 i {
+.profile-tab:hover {
+    border-color: #007bff;
     color: #007bff;
 }
 
-.form-section-title p {
-    font-size: 0.85rem;
-    color: #777777;
-    margin-top: 2px;
+.profile-tab.active {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
 }
 
-.section-divider {
-    border: 0;
-    height: 1px;
-    background-color: #eef1f6;
-    margin: 35px 0;
+.profile-panel {
+    display: none;
 }
 
-/* ==========================================================================
-   3. Interactive Profile Picture Section
-   ========================================================================== */
-.avatar-upload-wrapper {
+.profile-panel.active {
+    display: block;
+}
+
+.panel-subtext {
+    color: #6c757d;
+    font-size: 0.88rem;
+    margin: -6px 0 18px 0;
+}
+
+/* ---------------- Order list cards (shared by tracking / reviews / issues) ---------------- */
+.orders-list {
     display: flex;
     flex-direction: column;
+    gap: 14px;
+}
+
+.order-list-item {
+    border: 1px solid #eef1f6;
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
-    background-color: #fafbfc;
-    padding: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.order-list-item-info h4 {
+    font-size: 0.98rem;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.order-list-item-info p {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin: 2px 0;
+}
+
+.order-list-item-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.empty-state-msg {
+    text-align: center;
+    padding: 30px 10px;
+    color: #888;
+    font-size: 0.92rem;
+}
+
+.empty-state-msg a {
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Reused status badge colors (mirrors dashboard.css) */
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.status-badge.processing { background-color: #e2f0fd; color: #0266cc; }
+.status-badge.shipped { background-color: #fff3cd; color: #856404; }
+.status-badge.delivered { background-color: #d4edda; color: #155724; }
+
+/* ---------------- Existing review display ---------------- */
+.existing-review {
+    background-color: #f8f9fa;
     border-radius: 8px;
-    border: 1px dashed #e2e8f0;
+    padding: 12px 14px;
+    margin-top: 8px;
 }
 
-.avatar-preview-box {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #e9ecef;
-    border: 3px solid #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    margin-bottom: 12px;
+.existing-review .stars-display {
+    color: #ffc107;
+    margin-bottom: 6px;
 }
 
-.avatar-preview-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.existing-review p {
+    font-size: 0.88rem;
+    color: #444;
+    margin: 0;
 }
 
-.custom-file-upload {
+/* ---------------- Star rating input (review modal) ---------------- */
+.star-rating-input {
+    font-size: 1.8rem;
+    color: #ffc107;
+    display: flex;
+    gap: 6px;
+}
+
+.star-rating-input i {
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.star-rating-input i:hover {
+    transform: scale(1.15);
+}
+
+/* ---------------- Small action buttons reused across tabs ---------------- */
+.btn-small {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 16px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #007bff;
-    background-color: #e6f0ff;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
 }
 
-.custom-file-upload:hover {
+.btn-small.btn-track {
     background-color: #007bff;
     color: #ffffff;
 }
+.btn-small.btn-track:hover { background-color: #0056b3; }
 
-#fileInput {
-    display: none; /* Keep browser raw element completely hidden */
+.btn-small.btn-review {
+    background-color: #fff3cd;
+    color: #856404;
+}
+.btn-small.btn-review:hover { background-color: #ffe69c; }
+
+.btn-small.btn-disabled {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    cursor: not-allowed;
 }
 
-/* ==========================================================================
-   4. Structured Input Form Blocks
-   ========================================================================== */
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 18px;
-}
-
-.field-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #4a5568;
-}
-
-#profileForm input,
-#passwordChangeForm input {
+textarea {
     width: 100%;
-    padding: 11px 14px;
-    border: 1px solid #cbd5e1;
+    padding: 10px 12px;
+    border: 1px solid #dde2e8;
     border-radius: 6px;
-    font-size: 0.95rem;
-    color: #333333;
-    background-color: #ffffff;
-    transition: all 0.2s ease-in-out;
-    outline: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
 }
 
-#profileForm input:focus,
-#passwordChangeForm input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
-}
-
-#passwordStrength {
-    font-size: 0.8rem;
-    margin-top: -12px;
-    margin-bottom: 14px;
-    font-weight: 500;
-    padding-left: 2px;
-}
-
-/* ==========================================================================
-   5. Form Submit Action Buttons
-   ========================================================================== */
-.save-btn {
+select#issueOrderSelect,
+select#issueType {
     width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
+    padding: 10px 12px;
+    border: 1px solid #dde2e8;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background-color: #fff;
+}
+
+.issue-status-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
     font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    margin-top: 5px;
-}
-
-.save-btn:hover {
-    background-color: #0056b3;
-}
-
-.save-btn:active {
-    transform: scale(0.99);
-}
-
-/* Secondary alternate version for structural variety */
-.save-btn.secondary-btn {
-    background-color: #212529;
-}
-
-.save-btn.secondary-btn:hover {
-    background-color: #000000;
+    background-color: #fff3cd;
+    color: #856404;
 }

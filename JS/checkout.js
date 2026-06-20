@@ -117,6 +117,14 @@ function formatExpiry(input) {
     }
 }
 
+// ─────────────────────────────────────────────────────────────────
+// Order ID generator: G-XXXXX, matching the existing "#G-98421" style
+// ─────────────────────────────────────────────────────────────────
+function generateOrderId() {
+    const random5digit = Math.floor(10000 + Math.random() * 90000);
+    return `G-${random5digit}`;
+}
+
 // 4. Submission Validation and Final Complete Action Loop Pipeline Handler 
 function placeOrder() {
     const cart = JSON.parse(localStorage.getItem('grande_cart')) || [];
@@ -141,15 +149,18 @@ function placeOrder() {
     }
 
     // Determine current active selected payments tab block 
+    let paymentMethod = 'cod';
     const activeTab = document.querySelector('.pay-tab.active');
     if (activeTab) {
         if (activeTab.id === 'tab-mpesa') {
+            paymentMethod = 'mpesa';
             const mpesaNum = document.getElementById('mpesa-number').value.trim();
             if (!mpesaNum) {
                 alert('Please supply an active M-Pesa contact payload number for the STK push.');
                 return;
             }
         } else if (activeTab.id === 'tab-card') {
+            paymentMethod = 'card';
             const cardName = document.getElementById('card-name').value.trim();
             const cardNum = document.getElementById('card-number').value.trim();
             const cardExp = document.getElementById('card-expiry').value.trim();
@@ -158,18 +169,63 @@ function placeOrder() {
                 alert('Please fully fill out your Credit Card configuration data entries.');
                 return;
             }
+        } else if (activeTab.id === 'tab-cod') {
+            paymentMethod = 'cod';
         }
     }
 
-    // Everything is validated -> wipe cart data and launch completion window overlay modal
+    // ─────────────────────────────────────────────────────────
+    // Build and persist the order record BEFORE clearing the cart.
+    // This is what dashboard.html / profile.html read for order
+    // history and tracking. Items keep their own id so each line
+    // item can later be tied to a per-order review.
+    // ─────────────────────────────────────────────────────────
+    const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+
+    const newOrder = {
+        id: generateOrderId(),
+        date: new Date().toISOString(),
+        status: 'processing', // processing -> shipped -> delivered
+        total: total,
+        items: cart.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity || 1,
+            image: item.image || item.img || null
+        })),
+        delivery: {
+            firstName, lastName, email, phone, address, city, county
+        },
+        paymentMethod: paymentMethod,
+        // Filled in later when the customer leaves feedback on this order (profile.html)
+        review: null,
+        // Filled in later if the customer reports a problem with this order (profile.html)
+        issues: []
+    };
+
+    let orders = [];
+    try {
+        orders = JSON.parse(localStorage.getItem('grande_orders')) || [];
+    } catch (e) {
+        orders = [];
+    }
+    orders.push(newOrder);
+    localStorage.setItem('grande_orders', JSON.stringify(orders));
+
+    // Everything is validated and saved -> wipe cart data and launch completion window overlay modal
     localStorage.removeItem('grande_cart');
-    
+
     const successOverlay = document.getElementById('success-overlay');
+    const successMsg = document.getElementById('success-msg');
+    if (successMsg) {
+        successMsg.textContent = `Thank you for your order #${newOrder.id}. We'll reach out shortly to confirm delivery details.`;
+    }
     if (successOverlay) {
         successOverlay.style.display = 'flex';
         successOverlay.style.opacity = '1';
     } else {
-        alert('Order placed successfully via checkout verification paths! Thank you for buying from Grande Auto Hut Ltd.');
+        alert(`Order #${newOrder.id} placed successfully! Thank you for buying from Grande Auto Hut Ltd.`);
         window.location.href = 'index.html';
     }
 }

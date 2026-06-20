@@ -1,87 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>My Profile - Grande Auto Hut Ltd</title>
+    <script src="https://kit.fontawesome.com/576b15dc95.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="CSS/checkout.css">
     <link rel="stylesheet" href="CSS/profile.css">
 </head>
+
 <body>
 
-    <div class="profile-container">
-        <div class="profile-card">
-            
-            <div class="card-header-nav">
-                <a href="dashboard.html" class="back-dash-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+    <!-- TOP NAVIGATION BAR (Brand Name) -->
+    <header class="top-navbar">
+        <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
+    </header>
+
+    <!-- CORE LAYOUT CONTAINER (Sidebar Engine & Main Workspace) -->
+    <div class="dashboard-core-wrapper">
+
+        <!-- Hidden Checkbox Control Engine Matrix -->
+        <input type="checkbox" id="home-menu-toggle">
+
+        <!-- FIXED SIDEBAR PANELS -->
+        <aside class="sidebar">
+            <div class="sidebar-header-wrapper">
+                <label for="home-menu-toggle" class="hamburger-label">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
             </div>
 
-            <h2>Account Settings</h2>
-            
-            <form id="profileForm">
-                <div class="form-section-title">
-                    <h3><i class="fa-solid fa-user"></i> Public Profile</h3>
-                    <p>Update your personal info and identification media.</p>
-                </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-links">
+                    <li><a href="product.html"><i class="fa-brands fa-product-hunt"></i> Product</a></li>
+                    <li><a href="editProfile.html"><i class="fa-solid fa-user-gear"></i> Edit Profile</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-address-book"></i> Contact</a></li>
+                </ul>
+            </nav>
 
-                <div class="avatar-upload-wrapper">
-                    <div class="avatar-preview-box">
-                        <img id="profilePreview" src="assets/images/default-avatar.png" alt="Profile Preview">
+            <div class="sidebar-footer">
+                <button class="cart-icon" onclick="location.href='cart.html'">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>View Cart</span>
+                    <span id="nav-cart-count" class="cart-badge">0</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN LAYOUT WRAPPER (Scrollable Content Engine) -->
+        <div class="main-layout-content">
+
+            <div class="profile-page-header">
+                <h2><i class="fa-solid fa-user-circle"></i> My Account</h2>
+                <p>Track deliveries, leave reviews, and report any issues with your orders.</p>
+            </div>
+
+            <!-- Section tabs -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="tracking"><i class="fa-solid fa-truck-fast"></i> Track Orders</button>
+                <button class="profile-tab" data-tab="reviews"><i class="fa-solid fa-star"></i> Reviews & Ratings</button>
+                <button class="profile-tab" data-tab="issues"><i class="fa-solid fa-triangle-exclamation"></i> Report an Issue</button>
+            </div>
+
+            <!-- ===================== TRACK ORDERS ===================== -->
+            <section class="profile-panel active" id="panel-tab-tracking">
+                <div class="checkout-card">
+                    <h3><i class="fa-solid fa-clock-history"></i> Your Orders</h3>
+                    <div id="trackingOrdersList" class="orders-list">
+                        <!-- Rendered by profile.js -->
                     </div>
-                    <label for="fileInput" class="custom-file-upload">
-                        <i class="fa-solid fa-camera"></i> Change Photo
-                    </label>
-                    <input type="file" id="fileInput" accept="image/*">
                 </div>
+            </section>
 
-                <div class="input-group">
-                    <label class="field-label">Full Name</label>
-                    <input type="text" id="profileName" value="Jerome Jason" required>
+            <!-- ===================== REVIEWS & RATINGS ===================== -->
+            <section class="profile-panel" id="panel-tab-reviews">
+                <div class="checkout-card">
+                    <h3><i class="fa-solid fa-star"></i> Review Your Orders</h3>
+                    <p class="panel-subtext">Reviews are tied to a specific order. Delivered orders can be reviewed below.</p>
+                    <div id="reviewOrdersList" class="orders-list">
+                        <!-- Rendered by profile.js -->
+                    </div>
                 </div>
+            </section>
 
-                <div class="input-group">
-                    <label class="field-label">Email Address</label>
-                    <input type="email" id="profileEmail" value="jerome@example.com" required>
+            <!-- ===================== REPORT AN ISSUE ===================== -->
+            <section class="profile-panel" id="panel-tab-issues">
+                <div class="checkout-card">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Report an Issue</h3>
+                    <p class="panel-subtext">Let us know if something went wrong with one of your orders.</p>
+
+                    <div class="form-grid" style="margin-bottom: 16px;">
+                        <div class="field full">
+                            <label>Select Order</label>
+                            <select id="issueOrderSelect">
+                                <option value="">Choose an order…</option>
+                            </select>
+                        </div>
+                        <div class="field full">
+                            <label>Issue Type</label>
+                            <select id="issueType">
+                                <option value="damaged">Item arrived damaged</option>
+                                <option value="wrong_item">Wrong item received</option>
+                                <option value="missing_item">Item missing from order</option>
+                                <option value="late_delivery">Delivery delayed / late</option>
+                                <option value="quality">Part quality concern</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="field full">
+                            <label>Describe the Issue</label>
+                            <textarea id="issueDescription" rows="4" placeholder="Tell us what happened..."></textarea>
+                        </div>
+                    </div>
+
+                    <button class="place-order-btn" id="submitIssueBtn" type="button">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Report
+                    </button>
+
+                    <hr class="section-divider" style="margin-top: 28px;">
+
+                    <h3 style="margin-bottom: 14px;"><i class="fa-solid fa-list-check"></i> Your Reported Issues</h3>
+                    <div id="issuesHistoryList" class="orders-list">
+                        <!-- Rendered by profile.js -->
+                    </div>
                 </div>
-
-                <div class="input-group">
-                    <label class="field-label">Phone Number</label>
-                    <input type="tel" id="profilePhone" value="+254 700 000000" required>
-                </div>
-
-                <button type="submit" class="save-btn">Save Personal Info</button>
-            </form>
-
-            <hr class="section-divider">
-
-            <form id="passwordChangeForm">
-                <div class="form-section-title">
-                    <h3><i class="fa-solid fa-shield-halved"></i> Security Configuration</h3>
-                    <p>Ensure your account is using a secure, robust access password.</p>
-                </div>
-
-                <div class="input-group">
-                    <label class="field-label">Current Password</label>
-                    <input type="password" id="currentPassword" placeholder="••••••••" required>
-                </div>
-
-                <div class="input-group">
-                    <label class="field-label">New Password</label>
-                    <input type="password" id="newPassword" placeholder="Minimum 8 characters" required>
-                </div>
-                
-                <div id="passwordStrength"></div>
-
-                <div class="input-group">
-                    <label class="field-label">Confirm New Password</label>
-                    <input type="password" id="confirmNewPassword" placeholder="Match new password exactly" required>
-                </div>
-
-                <button type="submit" class="save-btn secondary-btn">Update Password</button>
-            </form>
+            </section>
 
         </div>
     </div>
 
+    <!-- Order Tracking Modal (same structure/IDs as dashboard.html, reuses auth.js's openTracker/closeTracker) -->
+    <div id="trackingModal" class="tracking-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tracking Details Summary (<span id="modalOrderId"></span>)</h3>
+                <span class="close-modal" onclick="closeTracker()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="tracking-stepper">
+                    <div class="step" id="step-processing">
+                        <div class="step-icon"><i class="fa-solid fa-warehouse"></i></div>
+                        <p>Order Confirmed</p>
+                    </div>
+                    <div class="step" id="step-shipped">
+                        <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                        <p>In Transit</p>
+                    </div>
+                    <div class="step" id="step-delivered">
+                        <div class="step-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+                        <p>Delivered</p>
+                    </div>
+                </div>
+                <div class="tracking-meta-info">
+                    <p><strong>Carrier Logistics Provider:</strong> Wells Fargo / G4S Courier Services</p>
+                    <p><strong>Estimated Arrival Window:</strong> Next working day by 4:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="tracking-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Review Order (<span id="reviewModalOrderId"></span>)</h3>
+                <span class="close-modal" onclick="closeReviewModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="field full" style="margin-bottom: 16px;">
+                    <label>Your Rating</label>
+                    <div id="starRatingInput" class="star-rating-input">
+                        <i class="fa-regular fa-star" data-value="1"></i>
+                        <i class="fa-regular fa-star" data-value="2"></i>
+                        <i class="fa-regular fa-star" data-value="3"></i>
+                        <i class="fa-regular fa-star" data-value="4"></i>
+                        <i class="fa-regular fa-star" data-value="5"></i>
+                    </div>
+                </div>
+                <div class="field full">
+                    <label>Your Review</label>
+                    <textarea id="reviewText" rows="4" placeholder="How were the parts and the service?"></textarea>
+                </div>
+                <button class="place-order-btn" id="submitReviewBtn" type="button" style="margin-top: 16px;">
+                    <i class="fa-solid fa-paper-plane"></i> Submit Review
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/auth.js"></script>
+    <script src="JS/profile.js"></script>
 </body>
+
 </html>
