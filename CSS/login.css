@@ -231,3 +231,12 @@ input::placeholder {
     align-items: center;
     gap: 8px;
 }
+
+.back-link, a {
+    color: rgb(240, 236, 236);
+    margin-top: 1rem;
+}
+.back-link, a:hover {
+    color: rgb(180, 179, 179);
+    margin-top: 1rem;
+}
