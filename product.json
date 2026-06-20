@@ -127,6 +127,22 @@
       "rating": 4.0,
       "price": 800,
       "currency": "Ksh"
+    },
+    {
+      "id": 17,
+      "name": "Brake Discs",
+      "image": "assets/images/brake-discs.png",
+      "rating": 5.0,
+      "price": 12000,
+      "currency": "Ksh"
+    },
+    {
+      "id": 18,
+      "name": "Wheel Bearings",
+      "image": "assets/images/wheel-bearings.png",
+      "rating": 4.5,
+      "price": 4500,
+      "currency": "Ksh"
     }
   ]
 }
