@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ─────────────────────────────────────────────────────────────
     // 1. CUSTOMER REGISTRATION  (register.html)
+    //    Now lands on profile.html instead of dashboard.html
     // ─────────────────────────────────────────────────────────────
     if (registerForm) {
         registerForm.addEventListener("submit", (e) => {
@@ -81,14 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
             sessionStorage.setItem("activeUserEmail", email);
 
             alert("Registration successful! Welcome to Grande Auto Hut.");
-            window.location.href = "dashboard.html";
+            window.location.href = "profile.html";
         });
     }
 
     // ─────────────────────────────────────────────────────────────
     // 2. UNIFIED LOGIN  (login.html)
     //    Admin    → admin.html      (sets isAdminAuthenticated)
-    //    Customer → dashboard.html  (sets isLoggedIn)
+    //    Customer → profile.html    (sets isLoggedIn)
     // ─────────────────────────────────────────────────────────────
     if (loginForm) {
         loginForm.addEventListener("submit", (e) => {
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (matchedUser || isDemoAcct) {
                 sessionStorage.setItem("isLoggedIn", "true");
                 sessionStorage.setItem("activeUserEmail", emailInput);
-                window.location.href = "dashboard.html";
+                window.location.href = "profile.html";
                 return;
             }
 
@@ -124,32 +125,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 3. DASHBOARD ACCESS GUARD  (dashboard.html)
+    // 3. PROFILE PAGE ACCESS GUARD  (profile.html)
+    //    profile.html is now the post-login landing page, so the
+    //    guard that used to protect dashboard.html lives here instead.
+    //    Populates user-info elements if profile.html includes them;
+    //    harmless no-ops (the null checks) if it doesn't.
     // ─────────────────────────────────────────────────────────────
-    if (window.location.pathname.includes("dashboard.html")) {
+    if (window.location.pathname.includes("profile.html")) {
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
             window.location.href = "login.html";
             return;
         }
 
         const activeEmail = sessionStorage.getItem("activeUserEmail");
-        const registeredUser = JSON.parse(localStorage.getItem("savedUser"));
+        const users = getUsers();
+        let registeredUser = users.find(u => u.email === activeEmail) || null;
+
+        // Fallback to savedUser (covers the most-recently-registered account
+        // in case grande_users lookup ever misses)
+        if (!registeredUser) {
+            const saved = JSON.parse(localStorage.getItem("savedUser"));
+            if (saved && saved.email === activeEmail) registeredUser = saved;
+        }
 
         const nameNode = document.getElementById("dashUserName");
         const emailNode = document.getElementById("dashUserEmail");
         const phoneNode = document.getElementById("dashUserPhone");
         const welcomeNode = document.getElementById("welcomeName");
-        const totalOrdersNode = document.querySelector(".metric-card:nth-child(1) .metric-number");
-        const transitOrdersNode = document.querySelector(".metric-card:nth-child(2) .metric-number");
 
-        if (registeredUser && activeEmail === registeredUser.email) {
+        if (registeredUser) {
             if (nameNode) nameNode.textContent = registeredUser.name;
             if (emailNode) emailNode.textContent = registeredUser.email;
             if (phoneNode) phoneNode.textContent = registeredUser.phone;
             if (welcomeNode) welcomeNode.textContent = registeredUser.name.split(" ")[0];
-            if (totalOrdersNode) totalOrdersNode.textContent = "0";
-            if (transitOrdersNode) transitOrdersNode.textContent = "0";
-        } else {
+        } else if (activeEmail === "jerome@example.com") {
+            // Legacy hardcoded demo customer
             if (nameNode) nameNode.textContent = "Jerome Jason";
             if (emailNode) emailNode.textContent = "jerome@example.com";
             if (phoneNode) phoneNode.textContent = "+254 700 000000";
@@ -164,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (path.includes("login.html") || path.includes("register.html")) {
         if (sessionStorage.getItem("isLoggedIn") === "true") {
-            window.location.href = "dashboard.html";
+            window.location.href = "profile.html";
         }
         if (sessionStorage.getItem("isAdminAuthenticated") === "true") {
             window.location.replace("admin.html");
