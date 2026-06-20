@@ -179,11 +179,20 @@ function placeOrder() {
     // This is what dashboard.html / profile.html read for order
     // history and tracking. Items keep their own id so each line
     // item can later be tied to a per-order review.
+    //
+    // ownerEmail is the SESSION identity (sessionStorage.activeUserEmail,
+    // set by auth.js at login/register) — not the "email" field typed into
+    // the delivery form above, which is just shipping contact info and
+    // could differ from the logged-in account (e.g. ordering for someone
+    // else) or be mistyped. ownerEmail is what profile.js filters on so
+    // each account only ever sees its own orders.
     // ─────────────────────────────────────────────────────────
     const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    const ownerEmail = sessionStorage.getItem('activeUserEmail') || null;
 
     const newOrder = {
         id: generateOrderId(),
+        ownerEmail: ownerEmail,
         date: new Date().toISOString(),
         status: 'processing', // processing -> shipped -> delivered
         total: total,

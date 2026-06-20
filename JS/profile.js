@@ -5,23 +5,57 @@ document.addEventListener('DOMContentLoaded', () => {
        itself (order.review, order.issues[]) since reviews here are per-order,
        not per-product — matching the project's existing localStorage pattern
        of one source-of-truth array per feature.
+
+       OWNERSHIP: grande_orders is one shared array across all accounts (every
+       order placed on this browser lives in the same list). getOrders() below
+       filters that list down to only orders whose ownerEmail matches the
+       CURRENT logged-in session (sessionStorage.activeUserEmail, set by
+       auth.js), so a freshly registered account — or any account — only ever
+       sees and acts on its own orders. Older orders saved before this field
+       existed have ownerEmail === undefined and are excluded for everyone
+       once a session is active, rather than being attributed to whoever
+       happens to view the page next.
        ========================================================================== */
     const ORDERS_KEY = 'grande_orders';
+    const CART_KEY = 'grande_cart';
 
     let activeOrderIdForReview = null;
     let selectedStarRating = 0;
 
     // ---------------- Helpers ----------------
-    function getOrders() {
-        try {
-            return JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
-        } catch (e) {
-            return [];
-        }
+    function getActiveUserEmail() {
+        return sessionStorage.getItem('activeUserEmail') || null;
     }
 
-    function saveOrders(orders) {
-        localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+    function getOrders() {
+        let allOrders = [];
+        try {
+            allOrders = JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+        } catch (e) {
+            allOrders = [];
+        }
+
+        const activeEmail = getActiveUserEmail();
+        if (!activeEmail) return []; // no session -> no orders, never fall back to "show everything"
+
+        return allOrders.filter((order) => order.ownerEmail === activeEmail);
+    }
+
+    // Saves a single updated order back into the FULL shared array (not just
+    // the filtered subset), so editing one user's order never overwrites or
+    // drops other users' orders sitting in the same localStorage array.
+    function saveOrder(updatedOrder) {
+        let allOrders = [];
+        try {
+            allOrders = JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+        } catch (e) {
+            allOrders = [];
+        }
+        const index = allOrders.findIndex((o) => o.id === updatedOrder.id);
+        if (index !== -1) {
+            allOrders[index] = updatedOrder;
+            localStorage.setItem(ORDERS_KEY, JSON.stringify(allOrders));
+        }
     }
 
     function formatDate(dateStr) {
@@ -48,6 +82,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return html;
     }
+
+    // ---------------- Cart count (nav-cart-count badge) ----------------
+    // Mirrors the same total-quantity calculation cart.js uses (sum of each
+    // item's quantity, not just the number of distinct line items), so the
+    // badge shown here always matches what the cart page itself would show.
+    function renderCartCount() {
+        const navCartCount = document.getElementById('nav-cart-count');
+        if (!navCartCount) return;
+
+        let cart = [];
+        try {
+            cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+        } catch (e) {
+            cart = [];
+        }
+
+        const totalItemsCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        navCartCount.textContent = totalItemsCount;
+    }
+
+    // Cross-tab live updates: the 'storage' event fires on OTHER tabs/windows
+    // when localStorage changes here — not on the tab that made the change —
+    // so this won't double-fire against cart.js's own same-tab DOM updates.
+    window.addEventListener('storage', (e) => {
+        if (e.key === CART_KEY) {
+            renderCartCount();
+        }
+    });
 
     // ---------------- Tabs ----------------
     const tabButtons = document.querySelectorAll('.profile-tab');
@@ -186,6 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // getOrders() is already scoped to the current session, so this
+            // lookup can never resolve to another account's order.
             const orders = getOrders();
             const order = orders.find((o) => o.id === activeOrderIdForReview);
             if (!order) {
@@ -199,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: new Date().toISOString()
             };
 
-            saveOrders(orders);
+            saveOrder(order);
             closeReviewModal();
             renderReviews();
         });
@@ -272,6 +336,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // getOrders() is already scoped to the current session, so this
+            // lookup can never resolve to another account's order.
             const orders = getOrders();
             const order = orders.find((o) => o.id === orderId);
             if (!order) {
@@ -287,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 status: 'Submitted'
             });
 
-            saveOrders(orders);
+            saveOrder(order);
 
             document.getElementById('issueDescription').value = '';
             document.getElementById('issueOrderSelect').value = '';
@@ -298,6 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------------- Init ----------------
+    renderCartCount();
     renderTracking();
     renderReviews();
     populateIssueOrderSelect();
