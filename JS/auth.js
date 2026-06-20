@@ -39,6 +39,44 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ─────────────────────────────────────────────────────────────
+    // 0. NAV LOGIN/PROFILE LINK SWAP (runs on every page that has
+    //    auth.js loaded). Finds any nav link pointing at login.html
+    //    and, if the visitor is logged in, swaps it to point at
+    //    profile.html with a profile icon/label instead. Uses
+    //    a[href="login.html"] as the selector since that's the one
+    //    thing every page's markup actually shares — no assumption
+    //    about list structure, classes, or page layout.
+    // ─────────────────────────────────────────────────────────────
+    (function syncNavAuthLink() {
+        const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+        if (!isLoggedIn) return; // leave "Login" links as-is for guests
+
+        const loginLinks = document.querySelectorAll('a[href="login.html"]');
+        loginLinks.forEach((link) => {
+            link.setAttribute("href", "profile.html");
+
+            const icon = link.querySelector("i");
+            if (icon) {
+                icon.className = "fa-solid fa-user-circle";
+            }
+
+            // Replace only the trailing text node so the icon element itself
+            // (and its classes) are left untouched; falls back to resetting
+            // textContent if the link has no separate text node (e.g. icon-only links).
+            let replaced = false;
+            link.childNodes.forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                    node.textContent = " My Account";
+                    replaced = true;
+                }
+            });
+            if (!replaced) {
+                link.append(" My Account");
+            }
+        });
+    })();
+
+    // ─────────────────────────────────────────────────────────────
     // 1. CUSTOMER REGISTRATION  (register.html)
     //    Now lands on profile.html instead of dashboard.html
     // ─────────────────────────────────────────────────────────────
