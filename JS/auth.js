@@ -92,22 +92,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (password !== confirmPassword) {
                 showError("registerError", "Passwords do not match.");
+                registerForm.reset();
                 return;
             }
             if (password.length < 6) {
                 showError("registerError", "Password must be at least 6 characters.");
+                registerForm.reset();
                 return;
             }
 
             // Block anyone from registering with the admin email
             if (email === ADMIN.email) {
                 showError("registerError", "This email address is not available.");
+                registerForm.reset();
                 return;
             }
 
             const users = getUsers();
             if (users.find(u => u.email === email)) {
                 showError("registerError", "An account with this email already exists.");
+                registerForm.reset();
                 return;
             }
 
@@ -118,6 +122,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             sessionStorage.setItem("isLoggedIn", "true");
             sessionStorage.setItem("activeUserEmail", email);
+
+            // Clear the form fields now that registration succeeded, so if the
+            // user (or the next user on a shared machine) lands back on this
+            // page later, the inputs are empty rather than showing old data.
+            registerForm.reset();
 
             alert("Registration successful! Welcome to Grande Auto Hut.");
             window.location.href = "profile.html";
@@ -140,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (emailInput === ADMIN.email && passwordInput === ADMIN.password) {
                 sessionStorage.setItem("isAdminAuthenticated", "true");
                 sessionStorage.setItem("adminEmail", ADMIN.email);
+                loginForm.reset();
                 window.location.replace("admin.html");
                 return;
             }
@@ -154,11 +164,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (matchedUser || isDemoAcct) {
                 sessionStorage.setItem("isLoggedIn", "true");
                 sessionStorage.setItem("activeUserEmail", emailInput);
+                loginForm.reset();
                 window.location.href = "profile.html";
                 return;
             }
 
+            // Wrong credentials: clear the password field (and, for safety,
+            // the whole form) so the next attempt starts from a clean slate
+            // instead of leaving a stale/incorrect password sitting in the box.
             showError("errorMessage", "Invalid email address or wrong password.");
+            loginForm.reset();
         });
     }
 
@@ -226,6 +241,12 @@ document.addEventListener("DOMContentLoaded", () => {
         logoutBtn.addEventListener("click", () => {
             sessionStorage.removeItem("isLoggedIn");
             sessionStorage.removeItem("activeUserEmail");
+
+            // Also clear any leftover values in the login form in case the
+            // browser restores them from cache/back-forward navigation, so
+            // the next person to log in on this device sees blank fields.
+            if (loginForm) loginForm.reset();
+
             window.location.href = "login.html";
         });
     }

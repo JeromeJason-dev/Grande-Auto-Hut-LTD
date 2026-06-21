@@ -380,6 +380,21 @@ body {
     cursor: not-allowed;
 }
 
+.place-order-btn {
+  padding: 10px;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.place-order-btn:hover {
+  background: #105cad;
+  cursor: pointer;
+  transition: ease 0.4s;
+  transform:translateY(-3px);
+}
+
 textarea {
     width: 100%;
     padding: 10px 12px;
