@@ -210,13 +210,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (nameNode) nameNode.textContent = registeredUser.name;
             if (emailNode) emailNode.textContent = registeredUser.email;
             if (phoneNode) phoneNode.textContent = registeredUser.phone;
-            if (welcomeNode) welcomeNode.textContent = registeredUser.name.split(" ")[0];
+            if (welcomeNode) welcomeNode.textContent = registeredUser.name;
         } else if (activeEmail === "jerome@example.com") {
             // Legacy hardcoded demo customer
             if (nameNode) nameNode.textContent = "Jerome Jason";
             if (emailNode) emailNode.textContent = "jerome@example.com";
             if (phoneNode) phoneNode.textContent = "+254 700 000000";
-            if (welcomeNode) welcomeNode.textContent = "Jerome";
+            if (welcomeNode) welcomeNode.textContent = "Jerome Jason";
         }
     }
 
