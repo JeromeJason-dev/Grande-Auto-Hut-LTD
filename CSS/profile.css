@@ -16,7 +16,7 @@ body {
 }
 
 /* ==========================================
-   2. TOP NAVIGATION BAR (kept, brand only)
+   2. TOP NAVIGATION BAR
    ========================================== */
 .top-navbar {
   display: flex;
@@ -42,11 +42,13 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* DASHBOARD LAYOUT GRID WRAPPER */
+/* ==========================================
+   DASHBOARD LAYOUT GRID WRAPPER
+   ========================================== */
 .dashboard-core-wrapper {
   display: flex;
   width: 100%;
-  margin-top: 70px; /* sits below the fixed top navbar */
+  margin-top: 70px;
   position: relative;
   min-height: calc(100vh - 70px);
 }
@@ -56,7 +58,7 @@ body {
 }
 
 /* ==========================================
-   3. SIDEBAR STRUCTURE (matches contact/about/home page)
+   3. SIDEBAR
    ========================================== */
 .sidebar {
   width: 280px;
@@ -170,300 +172,549 @@ body {
 
 /* ==========================================
    3b. MAIN CONTENT AREA
-   Sits beside the fixed-position sidebar on desktop. Without this,
-   .main-layout-content has no left offset and renders underneath the
-   280px-wide fixed sidebar, making the page content (and any forms in
-   it) unreachable/unusable on larger screens.
    ========================================== */
 .main-layout-content {
   margin-left: 280px;
   width: calc(100% - 280px);
   padding: 2rem;
-  min-width: 0; /* prevents flex/grid children from overflowing the column */
+  min-width: 0;
 }
 
-/* ==========================================================================
-   Profile Page — layered on top of checkout.css (shared sidebar/card/form/
-   modal styles). Only profile-specific additions live here.
-   ========================================================================== */
-
+/* ==========================================
+   4. PROFILE PAGE HEADER
+   ========================================== */
 .profile-page-header {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .profile-page-header h2 {
-    font-size: 1.4rem;
-    color: #1a1a1a;
-    margin-bottom: 6px;
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  margin-bottom: 6px;
 }
 
 .profile-page-header p {
-    color: #6c757d;
-    font-size: 0.92rem;
+  color: #6c757d;
+  font-size: 0.92rem;
 }
 
-/* ---------------- Tabs ---------------- */
+/* ==========================================
+   5. CHECKOUT CARD  (content wrapper for each panel)
+   ========================================== */
+.checkout-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+}
+
+.checkout-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==========================================
+   6. TABS
+   ========================================== */
 .profile-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .profile-tab {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #ffffff;
-    border: 1px solid #e9ecef;
-    color: #555;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  color: #555;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 
 .profile-tab:hover {
-    border-color: #007bff;
-    color: #007bff;
+  border-color: #007bff;
+  color: #007bff;
 }
 
 .profile-tab.active {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #ffffff;
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #ffffff;
 }
 
 .profile-panel {
-    display: none;
+  display: none;
 }
 
 .profile-panel.active {
-    display: block;
+  display: block;
 }
 
 .panel-subtext {
-    color: #6c757d;
-    font-size: 0.88rem;
-    margin: -6px 0 18px 0;
+  color: #6c757d;
+  font-size: 0.88rem;
+  margin: -6px 0 18px 0;
 }
 
-/* ---------------- Order list cards (shared by tracking / reviews / issues) ---------------- */
+/* ==========================================
+   7. ORDER LIST CARDS
+   ========================================== */
 .orders-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .order-list-item {
-    border: 1px solid #eef1f6;
-    border-radius: 10px;
-    padding: 16px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
+  border: 1px solid #eef1f6;
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .order-list-item-info h4 {
-    font-size: 0.98rem;
-    color: #1a1a1a;
-    margin-bottom: 4px;
+  font-size: 0.98rem;
+  color: #1a1a1a;
+  margin-bottom: 4px;
 }
 
 .order-list-item-info p {
-    font-size: 0.85rem;
-    color: #6c757d;
-    margin: 2px 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 2px 0;
 }
 
 .order-list-item-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .empty-state-msg {
-    text-align: center;
-    padding: 30px 10px;
-    color: #888;
-    font-size: 0.92rem;
+  text-align: center;
+  padding: 30px 10px;
+  color: #888;
+  font-size: 0.92rem;
 }
 
 .empty-state-msg a {
-    color: #007bff;
-    font-weight: 600;
-    text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-/* Reused status badge colors (mirrors dashboard.css) */
+/* ==========================================
+   8. STATUS BADGES
+   ========================================== */
 .status-badge {
-    display: inline-block;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 0.78rem;
-    font-weight: 600;
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .status-badge.processing { background-color: #e2f0fd; color: #0266cc; }
-.status-badge.shipped { background-color: #fff3cd; color: #856404; }
-.status-badge.delivered { background-color: #d4edda; color: #155724; }
+.status-badge.shipped    { background-color: #fff3cd; color: #856404; }
+.status-badge.delivered  { background-color: #d4edda; color: #155724; }
 
-/* ---------------- Existing review display ---------------- */
+/* ==========================================
+   9. EXISTING REVIEW BLOCK
+   ========================================== */
 .existing-review {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-top: 8px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 8px;
 }
 
 .existing-review .stars-display {
-    color: #ffc107;
-    margin-bottom: 6px;
+  color: #ffc107;
+  margin-bottom: 6px;
 }
 
 .existing-review p {
-    font-size: 0.88rem;
-    color: #444;
-    margin: 0;
+  font-size: 0.88rem;
+  color: #444;
+  margin: 0;
 }
 
-/* ---------------- Star rating input (review modal) ---------------- */
+/* ==========================================
+   10. STAR RATING INPUT
+   ========================================== */
 .star-rating-input {
-    font-size: 1.8rem;
-    color: #ffc107;
-    display: flex;
-    gap: 6px;
+  font-size: 1.8rem;
+  color: #ffc107;
+  display: flex;
+  gap: 6px;
 }
 
 .star-rating-input i {
-    cursor: pointer;
-    transition: transform 0.1s ease;
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
 
 .star-rating-input i:hover {
-    transform: scale(1.15);
+  transform: scale(1.15);
 }
 
-/* ---------------- Small action buttons reused across tabs ---------------- */
+/* ==========================================
+   11. SMALL ACTION BUTTONS
+   ========================================== */
 .btn-small {
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.btn-small.btn-track {
-    background-color: #007bff;
-    color: #ffffff;
-}
+.btn-small.btn-track   { background-color: #007bff; color: #ffffff; }
 .btn-small.btn-track:hover { background-color: #0056b3; }
 
-.btn-small.btn-review {
-    background-color: #fff3cd;
-    color: #856404;
-}
+.btn-small.btn-review  { background-color: #fff3cd; color: #856404; }
 .btn-small.btn-review:hover { background-color: #ffe69c; }
 
 .btn-small.btn-disabled {
-    background-color: #e9ecef;
-    color: #adb5bd;
-    cursor: not-allowed;
+  background-color: #e9ecef;
+  color: #adb5bd;
+  cursor: not-allowed;
 }
 
+/* ==========================================
+   12. PRIMARY BUTTON
+   ========================================== */
 .place-order-btn {
-  padding: 10px;
+  padding: 10px 20px;
+  border: none;
   border-radius: 6px;
   background: #007bff;
   color: white;
-  box-shadow: rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .place-order-btn:hover {
-  background: #105cad;
-  cursor: pointer;
-  transition: ease 0.4s;
-  transform:translateY(-3px);
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   13. ISSUE FORM — GRID, FIELDS, INPUTS
+   ========================================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
 }
 
 textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #dde2e8;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 0.9rem;
-    resize: vertical;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dde2e8;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
 }
 
 select#issueOrderSelect,
 select#issueType {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #dde2e8;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 0.9rem;
-    background-color: #fff;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dde2e8;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+
+select#issueOrderSelect:focus,
+select#issueType:focus {
+  outline: none;
+  border-color: #007bff;
 }
 
 .issue-status-pill {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-/* ---------------- Logout button (sidebar footer) ----------------
-   Mirrors .logout-sidebar-btn from dashboard.css, duplicated here
-   since profile.html doesn't load dashboard.css. */
-.logout-sidebar-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 0.9rem;
-    background-color: #fff5f5;
-    color: #e53e3e;
-    border: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 12px;
-    transition: all 0.2s ease-in-out;
-}
-
-.logout-sidebar-btn:hover {
-    background-color: #e53e3e;
-    color: #ffffff;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #fff3cd;
+  color: #856404;
 }
 
 /* ==========================================
-   6. RESPONSIVE BREAKPOINTS & MEDIA QUERIES
+   14. SECTION DIVIDER
+   ========================================== */
+.section-divider {
+  border: none;
+  border-top: 1px solid #e9ecef;
+  margin: 24px 0;
+}
+
+/* ==========================================
+   15. LOGOUT BUTTON
+   ========================================== */
+.logout-sidebar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-sidebar-btn:hover {
+  background-color: #e53e3e;
+  color: #ffffff;
+}
+
+/* ==========================================
+   16. ORDER TRACKING MODAL
    ========================================== */
 
-/* Two-column checkout layout once there's room beside the fixed sidebar */
+/* ── Backdrop overlay ── */
+.tracking-modal {
+  position: fixed;
+  inset: 0;                         /* covers the full viewport */
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 2000;                    /* above sidebar (1000) and navbar (1050) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ── Modal box ── */
+.modal-content {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: modalSlideIn 0.22s ease;
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(-16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);    }
+}
+
+/* ── Header strip ── */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f39c12;
+  margin: 0;
+}
+
+.close-modal {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: color 0.15s;
+  user-select: none;
+}
+
+.close-modal:hover {
+  color: #f39c12;
+}
+
+/* ── Body padding ── */
+.modal-body {
+  padding: 28px 24px 24px;
+}
+
+/* ── Stepper track ── */
+.tracking-stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 28px;
+}
+
+/* Connector line drawn between the three step icons */
+.tracking-stepper::before {
+  content: "";
+  position: absolute;
+  top: 22px;                        /* vertically centered on the 44px icons */
+  left: calc(44px / 2);            /* starts at centre of first icon */
+  right: calc(44px / 2);           /* ends   at centre of last  icon */
+  height: 3px;
+  background-color: #e2e8f0;       /* grey by default */
+  z-index: 0;
+}
+
+/* ── Individual step ── */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.step p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Step icon circle ── */
+.step-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 3px solid #e2e8f0;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* ── Active step (set via auth.js's openTracker) ── */
+.step.active .step-icon {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #ffffff;
+}
+
+.step.active p {
+  color: #007bff;
+}
+
+/* ── Meta info block below the stepper ── */
+.tracking-meta-info {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tracking-meta-info p {
+  font-size: 0.87rem;
+  color: #475569;
+  margin: 0;
+}
+
+.tracking-meta-info p strong {
+  color: #1e293b;
+}
+
+/* ==========================================
+   17. REVIEW MODAL  (inherits .tracking-modal
+       backdrop and .modal-content box above)
+   ========================================== */
+#reviewModal .modal-header h3 {
+  color: #f39c12;
+}
+
+#reviewModal .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#reviewModal .field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ==========================================
+   18. RESPONSIVE BREAKPOINTS
+   ========================================== */
 @media screen and (min-width: 1280px) {
   main {
     grid-template-columns: 3fr 2fr;
   }
 }
 
-/* Mobile sidebar collapse, matching contact/about/home page behavior */
 @media screen and (max-width: 992px) {
   .dashboard-core-wrapper {
     flex-direction: column;
@@ -486,9 +737,8 @@ select#issueType {
   }
 
   .cart-icon {
-    width: 45%; 
+    width: 45%;
     padding: 0.9rem;
-    
   }
 
   .logout-sidebar-btn {
@@ -516,7 +766,6 @@ select#issueType {
     order: 3;
   }
 
-  /* CSS CHECKBOX ACTION SYSTEM MATRIX TRIGGER */
   #home-menu-toggle:checked ~ .sidebar .sidebar-nav,
   #home-menu-toggle:checked ~ .sidebar .sidebar-footer {
     display: flex;
@@ -538,6 +787,12 @@ select#issueType {
     margin-left: 0;
     width: 100%;
   }
+
+  /* Modal takes up more screen width on smaller devices */
+  .modal-content {
+    max-width: 100%;
+    margin: 0 8px;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -547,5 +802,23 @@ select#issueType {
 
   .pay-tabs {
     flex-direction: column;
+  }
+
+  .tracking-stepper {
+    gap: 4px;
+  }
+
+  .step p {
+    font-size: 0.72rem;
+  }
+
+  .step-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .tracking-stepper::before {
+    top: 19px;
   }
 }

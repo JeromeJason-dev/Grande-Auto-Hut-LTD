@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //    profile.html with a profile icon/label instead. Uses
     //    a[href="login.html"] as the selector since that's the one
     //    thing every page's markup actually shares — no assumption
+    //   sessionStorage is like a built in web browser API that stores data in the browser as long as the browser tab is open.
     //    about list structure, classes, or page layout.
     // ─────────────────────────────────────────────────────────────
     (function syncNavAuthLink() {
@@ -181,8 +182,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. PROFILE PAGE ACCESS GUARD  (profile.html)
     //    profile.html is now the post-login landing page, so the
     //    guard that used to protect dashboard.html lives here instead.
-    //    Populates user-info elements if profile.html includes them;
-    //    harmless no-ops (the null checks) if it doesn't.
+    //    Populates the welcome name if profile.html includes it;
+    //    harmless no-op (the null check) if it doesn't.
+    //
+    //    NOTE: this used to also populate dashUserName/dashUserEmail/
+    //    dashUserPhone for a dashboard.html page that no longer exists.
+    //    Those lookups were removed since profile.html has no matching
+    //    elements — re-add them here (and to profile.html / editProfile.html)
+    //    if a page ever needs to display full account details again.
     // ─────────────────────────────────────────────────────────────
     if (window.location.pathname.includes("profile.html")) {
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
@@ -201,21 +208,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (saved && saved.email === activeEmail) registeredUser = saved;
         }
 
-        const nameNode = document.getElementById("dashUserName");
-        const emailNode = document.getElementById("dashUserEmail");
-        const phoneNode = document.getElementById("dashUserPhone");
         const welcomeNode = document.getElementById("welcomeName");
 
         if (registeredUser) {
-            if (nameNode) nameNode.textContent = registeredUser.name;
-            if (emailNode) emailNode.textContent = registeredUser.email;
-            if (phoneNode) phoneNode.textContent = registeredUser.phone;
             if (welcomeNode) welcomeNode.textContent = registeredUser.name;
         } else if (activeEmail === "jerome@example.com") {
             // Legacy hardcoded demo customer
-            if (nameNode) nameNode.textContent = "Jerome Jason";
-            if (emailNode) emailNode.textContent = "jerome@example.com";
-            if (phoneNode) phoneNode.textContent = "+254 700 000000";
             if (welcomeNode) welcomeNode.textContent = "Jerome Jason";
         }
     }
@@ -242,6 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
             sessionStorage.removeItem("isLoggedIn");
             sessionStorage.removeItem("activeUserEmail");
 
+            // It strips out the authentication tokens from sessionStorage
             // Also clear any leftover values in the login form in case the
             // browser restores them from cache/back-forward navigation, so
             // the next person to log in on this device sees blank fields.
