@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
             products = data.products || [];
-        } catch (err) {
-            matrixBody.innerHTML = `<tr><td colspan="4">Failed to load products from ${PRODUCTS_URL}: ${err.message}</td></tr>`;
+        } catch (error) {
+            matrixBody.innerHTML = `<tr><td colspan="4">Failed to load products from ${PRODUCTS_URL}: ${error.message}</td></tr>`;
             return;
         }
 

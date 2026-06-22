@@ -40,7 +40,7 @@ function setupProductApp() {
         return product;
       });
 
-      currentProducts = [...allProducts];
+      currentProducts = [...allProducts];// keeps product catalogue well organized
       
       renderGrid(currentProducts);
       refreshCartCountUI();
@@ -78,7 +78,7 @@ function setupProductApp() {
       const card = document.createElement('article');
       card.className = `product-card ${!isAvailable ? 'out-of-stock-card' : ''}`;
       
-      // FIX: Render base layout block without string-broken inline onerror attributes
+      // Render base layout block without string-broken inline onerror attributes
       card.innerHTML = `
         <div class="product-image-container"></div>
         <div class="product-info">

@@ -5,16 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
        itself (order.review, order.issues[]) since reviews here are per-order,
        not per-product — matching the project's existing localStorage pattern
        of one source-of-truth array per feature.
-
-       OWNERSHIP: grande_orders is one shared array across all accounts (every
-       order placed on this browser lives in the same list). getOrders() below
-       filters that list down to only orders whose ownerEmail matches the
-       CURRENT logged-in session (sessionStorage.activeUserEmail, set by
-       auth.js), so a freshly registered account — or any account — only ever
-       sees and acts on its own orders. Older orders saved before this field
-       existed have ownerEmail === undefined and are excluded for everyone
-       once a session is active, rather than being attributed to whoever
-       happens to view the page next.
        ========================================================================== */
     const ORDERS_KEY = 'grande_orders';
     const CART_KEY = 'grande_cart';

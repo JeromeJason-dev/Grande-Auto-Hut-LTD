@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // ─────────────────────────────────────────────────────────────
+    // ===================
     // HELPERS
-    // ─────────────────────────────────────────────────────────────
+    // ===================
 
     function getUsers() {
         return JSON.parse(localStorage.getItem("grande_users")) || [];
@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => { el.style.display = "none"; }, 4000);
     }
 
-    // ─────────────────────────────────────────────────────────────
+    // ==============================================================
     // HARDCODED ADMIN ACCOUNT
     // Only this one admin exists — registration is not supported.
-    // ─────────────────────────────────────────────────────────────
+    // ==============================================================
     const ADMIN = {
         name: "Jason Macharia",
         email: "jmash8805@gmail.com",
@@ -38,16 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
         isAdmin: true
     };
 
-    // ─────────────────────────────────────────────────────────────
-    // 0. NAV LOGIN/PROFILE LINK SWAP (runs on every page that has
+    // ===========================================================
+    //  NAV LOGIN/PROFILE LINK SWAP (runs on every page that has
     //    auth.js loaded). Finds any nav link pointing at login.html
-    //    and, if the visitor is logged in, swaps it to point at
-    //    profile.html with a profile icon/label instead. Uses
-    //    a[href="login.html"] as the selector since that's the one
-    //    thing every page's markup actually shares — no assumption
+    //    and swaps it to point at profile.html with a profile icon/label instead. 
     //   sessionStorage is like a built in web browser API that stores data in the browser as long as the browser tab is open.
-    //    about list structure, classes, or page layout.
-    // ─────────────────────────────────────────────────────────────
+    // ========================================================
+
     (function syncNavAuthLink() {
         const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
         if (!isLoggedIn) return; // leave "Login" links as-is for guests
@@ -77,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     })();
 
-    // ─────────────────────────────────────────────────────────────
+    // ====================================================
     // 1. CUSTOMER REGISTRATION  (register.html)
     //    Now lands on profile.html instead of dashboard.html
-    // ─────────────────────────────────────────────────────────────
+    // ====================================================
+
     if (registerForm) {
         registerForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -134,11 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ─────────────────────────────────────────────────────────────
+    // ============================================================
     // 2. UNIFIED LOGIN  (login.html)
     //    Admin    → admin.html      (sets isAdminAuthenticated)
     //    Customer → profile.html    (sets isLoggedIn)
-    // ─────────────────────────────────────────────────────────────
+    // ============================================================
+
     if (loginForm) {
         loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -155,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // ── Check registered customers ──────────────────────
+            // Check registered customers 
             const users = getUsers();
             const matchedUser = users.find(u => u.email === emailInput && u.password === passwordInput);
 
@@ -178,19 +177,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ─────────────────────────────────────────────────────────────
+    // ================================================================
     // 3. PROFILE PAGE ACCESS GUARD  (profile.html)
-    //    profile.html is now the post-login landing page, so the
-    //    guard that used to protect dashboard.html lives here instead.
-    //    Populates the welcome name if profile.html includes it;
-    //    harmless no-op (the null check) if it doesn't.
-    //
-    //    NOTE: this used to also populate dashUserName/dashUserEmail/
-    //    dashUserPhone for a dashboard.html page that no longer exists.
-    //    Those lookups were removed since profile.html has no matching
-    //    elements — re-add them here (and to profile.html / editProfile.html)
-    //    if a page ever needs to display full account details again.
-    // ─────────────────────────────────────────────────────────────
+    // ================================================================
+
     if (window.location.pathname.includes("profile.html")) {
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
             window.location.href = "login.html";
@@ -218,9 +208,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────
+    // =============================================================
     // 4. REDIRECT ALREADY-AUTHENTICATED USERS AWAY FROM AUTH PAGES
-    // ─────────────────────────────────────────────────────────────
+    // =============================================================
+
     const path = window.location.pathname;
 
     if (path.includes("login.html") || path.includes("register.html")) {
@@ -232,9 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ─────────────────────────────────────────────────────────────
+    // ===============================================================
     // 5. CUSTOMER LOGOUT
-    // ─────────────────────────────────────────────────────────────
+    // ===============================================================
+
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
             sessionStorage.removeItem("isLoggedIn");
@@ -251,9 +243,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ─────────────────────────────────────────────────────────────────
+// ==============================================
 // GLOBAL MODAL CONTROLLERS FOR ORDER TRACKING
-// ─────────────────────────────────────────────────────────────────
+// =============================================
 window.openTracker = function (orderId, currentStatus) {
     const modal = document.getElementById("trackingModal");
     const orderIdPlaceholder = document.getElementById("modalOrderId");
