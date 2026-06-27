@@ -11,18 +11,18 @@
 
 <body>
 
-    <!-- TOP NAVIGATION BAR (Brand Name) -->
+    <!-- TOP NAVIGATION BAR -->
     <header class="top-navbar">
         <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
     </header>
 
-    <!-- CORE LAYOUT CONTAINER (Sidebar Engine & Main Workspace) -->
+    <!-- CORE LAYOUT CONTAINER (Middle Section Only) -->
     <div class="dashboard-core-wrapper">
 
         <!-- Hidden Checkbox Control Engine Matrix -->
         <input type="checkbox" id="home-menu-toggle">
 
-        <!-- FIXED SIDEBAR PANELS -->
+        <!-- SIDEBAR PANEL -->
         <aside class="sidebar">
             <div class="sidebar-header-wrapper">
                 <label for="home-menu-toggle" class="hamburger-label">
@@ -51,9 +51,8 @@
             </div>
         </aside>
 
-        <!-- MAIN LAYOUT WRAPPER (Scrollable Content Engine) -->
+        <!-- MAIN LAYOUT WORKSPACE -->
         <div class="main-layout-content">
-
             <section class="about">
                 <h2 class="title">About Us</h2>
 
@@ -66,14 +65,14 @@
                     <h3><b>Advantages of shopping with us</b></h3>
                     <p>Finding the exact part should not be a guessing game. Here is why drivers and professionals choose us:
 
-           Massive Inventory: From routine maintenance essentials like brake pads, filters, and spark plugs to hard-to-find engine components and specialized performance upgrades, we stock parts for all major makes and models.
+                    Massive Inventory: From routine maintenance essentials like brake pads, filters, and spark plugs to hard-to-find engine components and specialized performance upgrades, we stock parts for all major makes and models.
 
-           Guaranteed Quality: We partner exclusively with trusted OEM (Original Equipment Manufacturer) and top-tier aftermarket brands. Every part on our shelves meets strict industry standards durability and performance.
+                    Guaranteed Quality: We partner exclusively with trusted OEM (Original Equipment Manufacturer) and top-tier aftermarket brands. Every part on our shelves meets strict industry standards durability and performance.
 
-           Expert Counter Staff: We aren't just order-takers; we are gear heads. Our knowledgeable understands automotive plumbing, electrical systems and mechanical logic to help you find the exact fitment for your vehicle.
+                    Expert Counter Staff: We aren't just order-takers; we are gear heads. Our knowledgeable understands automotive plumbing, electrical systems and mechanical logic to help you find the exact fitment for your vehicle.
 
-           Fast & Reliable Logistics: Need something we don't have on the shelf? With our robust supplier network, we can source and deliver specialized parts faster than the competition.
-        </p>
+                    Fast & Reliable Logistics: Need something we don't have on the shelf? With our robust supplier network, we can source and deliver specialized parts faster than the competition.
+                    </p>
                 </article>
 
                 <article>
@@ -86,81 +85,59 @@
                     <p>Do not risk your safety or your vehicle's performance on subpar components. Visit our store today to speak with a parts specialist, or browse our digital inventory online to find exactly what your vehicle demands.</p>
                 </article>
             </section>
-
-            <!-- FOOTER -->
-            <footer class="footer">
-
-                <div class="footer-container">
-
-                    <!-- BRAND SECTION -->
-                    <div class="footer-section">
-                        <h2>GRANDE AUTO HUT LTD</h2>
-
-                        <p>
-                            Where our service to you is our top priority.
-                        </p>
-
-                        <div class="social-icons">
-                            <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i
-                                    class="fa-brands fa-facebook"></i> Facebook</a> |
-                            <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a> |
-                            <a href="https://www.tiktok.com/grandeautohutltd" target="_blank"><i
-                                    class="fa-brands fa-tiktok"></i> TikTok</a>
-                        </div>
-                    </div>
-                    <!-- QUICK LINKS -->
-                    <div class="footer-section">
-                        <h3>QUICK LINKS</h3>
-
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="product.html">Products</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <!-- NEWSLETTER -->
-                    <div class="footer-section">
-                        <h3>STAY UPDATED</h3>
-
-                        <p>
-                            Get updates on exclusive deals and new arrivals.
-                        </p>
-
-                        <form class="newsletter-form" onsubmit="event.preventDefault();">
-                            <input type="email" placeholder="Enter your email" required>
-
-                            <button type="submit">
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- CUSTOMER SERVICE -->
-                    <div class="footer-section">
-                        <h3>CUSTOMER SERVICE</h3>
-
-                        <ul>
-                            <li><a href="#">Shipping Policy</a></li>
-                            <li><a href="#">Returns & Refunds</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Track Order</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <!-- FOOTER BOTTOM -->
-                <div class="footer-bottom">
-                    <p>
-                        &copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.
-                    </p>
-                </div>
-            </footer>
-
         </div>
-    </div>
+    </div> <!-- END OF DASHBOARD CORE WRAPPER -->
+
+    <!-- GLOBAL FOOTER (Moved here to span 100% width) -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- BRAND SECTION -->
+            <div class="footer-section">
+                <h2>GRANDE AUTO HUT LTD</h2>
+                <p>Where our service to you is our top priority.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a> |
+                    <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a> |
+                    <a href="https://www.tiktok.com/grandeautohutltd" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+            <!-- QUICK LINKS -->
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <!-- NEWSLETTER -->
+            <div class="footer-section">
+                <h3>STAY UPDATED</h3>
+                <p>Get updates on exclusive deals and new arrivals.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <!-- CUSTOMER SERVICE -->
+            <div class="footer-section">
+                <h3>CUSTOMER SERVICE</h3>
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- FOOTER BOTTOM -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="JS/auth.js"></script>
     <script src="JS/product.js"></script>
 </body>
-
 </html>

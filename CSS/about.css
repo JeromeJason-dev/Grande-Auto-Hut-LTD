@@ -60,14 +60,15 @@ body {
    ========================================== */
 .sidebar {
   width: 280px;
+  /* Changed from fixed to sticky so it stays inside .dashboard-core-wrapper */
+  position: sticky; 
+  top: 70px;
+  left: 0;
   height: calc(100vh - 70px);
   background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
         #0f172a;
-  color: #ffffff;
-  position: fixed;
-  top: 70px;
-  left: 0;
+  color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -170,7 +171,7 @@ body {
 
 /* MAIN CONTENT BLOCK SPECIFICATIONS */
 .main-layout-content {
-  margin-left: 280px;
+  margin-left: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -232,11 +233,14 @@ body {
    ========================================== */
 .footer {
   background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
-        #0f172a;
+              radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
+              #0f172a;
   color: #9ca3af;
   padding: 3rem 1rem 1.5rem 1rem;
-  margin-top: 4rem;
+  margin-top: 5rem; /* Let it snap directly underneath the layout wrapper */
+  width: 100%;
+  position: relative;
+  z-index: 1060; /* Ensures it layers neatly over side transitions if any */
 }
 
 .footer-container {

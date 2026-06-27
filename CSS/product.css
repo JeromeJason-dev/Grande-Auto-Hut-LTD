@@ -44,7 +44,7 @@ img {
         radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
         #0f172a;
   color: #ffffff;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   display: flex;
@@ -163,7 +163,7 @@ img {
    3. MAIN CONTENT ENGINE LAYOUT WRAPPER
    ========================================== */
 .main-layout-content {
-  margin-left: 280px;
+  margin-left: 0;
   flex: 1;
   padding: 2rem;
   display: flex;
@@ -326,38 +326,33 @@ img {
    5. FOOTER COMPONENT
    ========================================== */
 .footer {
+  margin-top: 0;
   background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
         #0f172a;
   color: #9ca3af;
-  padding: 3rem 2rem 1.5rem 2rem;
-  margin-top: auto;
-  width: 100%;
-  position: relative;
-  padding-left: calc(280px + 2rem); 
-  z-index: 900;
-  box-sizing: border-box;
+  padding: 2.5rem ;
+  margin-top: 4rem;
 }
 
 .footer-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: 4rem;
   max-width: 1200px;
-  margin: 0 ;
+  margin: 0 auto;
 }
 
 .footer-section h2 {
-  color: #f39c12;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem !important; 
+  color: #f39c12 !important; 
+  margin-bottom: 1rem;
 }
 
 .footer-section h3 {
   color: #ffffff;
   margin-bottom: 1rem;
   font-size: 1.1rem;
-  letter-spacing: 0.5px;
 }
 
 .footer-section ul {
@@ -382,6 +377,7 @@ img {
 
 .social-icons {
   margin-top: 1rem;
+  line-height: 2;
 }
 
 .newsletter-form {
@@ -397,7 +393,6 @@ img {
   border: 1px solid #374151;
   background-color: #1f2937;
   color: white;
-  outline: none;
 }
 
 .newsletter-form button {
@@ -408,11 +403,6 @@ img {
   border-radius: 0.375rem;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.2s;
-}
-
-.newsletter-form button:hover {
-  background-color: #e67e22;
 }
 
 .footer-bottom {
@@ -423,9 +413,28 @@ img {
   font-size: 0.875rem;
 }
 
+
 /* ==========================================
    6. RESPONSIVE BREAKPOINTS
    ========================================== */
+
+/* Tablet & Large Mobile Adjustments */
+@media screen and (min-width: 650px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* Desktop Layout Transitions */
+@media screen and (min-width: 1024px) {
+  .footer-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Mobile & Tablet Sidebar / Controls Collapse */
 @media screen and (max-width: 992px) {
   .dashboard-core-wrapper {
     flex-direction: column;
@@ -440,14 +449,6 @@ img {
     flex-wrap: wrap;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  }
-
-  .footer {
-    padding-left: 2rem; 
-  }
-  
-  .footer-container {
-    margin: 0 auto; /* Center alignment looks cleaner on smaller portable windows */
   }
 
   .hamburger-label {
@@ -485,7 +486,7 @@ img {
   }
 
   #menu-toggle:checked ~ .sidebar .hamburger-label span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-4-5deg);
   }
 
   .main-layout-content {
@@ -494,6 +495,7 @@ img {
   }
 }
 
+/* Tight Mobile Layout for Top Controls */
 @media screen and (max-width: 650px) {
   .top-controls-container {
     flex-direction: column;

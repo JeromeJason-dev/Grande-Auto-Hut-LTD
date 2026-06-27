@@ -46,9 +46,9 @@ body {
 .dashboard-core-wrapper {
   display: flex;
   width: 100%;
-  margin-top: 70px; /* sits below the fixed top navbar */
+  margin-top: 0; 
   position: relative;
-  min-height: calc(100vh - 70px);
+ 
 }
 
 #home-menu-toggle {
@@ -64,10 +64,13 @@ body {
   background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
         #0f172a;
-  color: #ffffff;
-  position: fixed;
-  top: 70px;
+  color: black;
+  
+  /* Layout Fixes */
+  position: sticky; /* Changed from fixed */
+  top: 70px;        /* Sticks cleanly below fixed top-navbar */
   left: 0;
+  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -170,7 +173,7 @@ body {
 
 /* MAIN CONTENT BLOCK SPECIFICATIONS */
 .main-layout-content {
-  margin-left: 280px;
+  margin-left: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -181,6 +184,7 @@ body {
    4. HERO SECTION (Full-Width Overlay Layout)
    ========================================== */
 .hero {
+  margin-top: 70px; /* Added to push hero right below top navbar */
   position: relative;
   width: 100%;
   min-height: 85vh; 
@@ -345,14 +349,15 @@ body {
   font-weight: 700;
   text-decoration: none;
   font-size: 0.98rem;
-  border-bottom: 2px solid #f39c12;
   padding-bottom: 4px;
-  transition: color 0.2s ease, gap 0.2s ease;
+  
 }
 
 .about-link:hover {
   color: #2563eb;
   gap: 12px;
+  border-bottom: 2px solid #f39c12;
+  transition: color 0.2s ease-in, gap 0.2s ease-in;
 }
 
 .about-summary-stats {
@@ -525,6 +530,7 @@ body {
    7. SHARED FOOTER THEME STYLES
    ========================================== */
 .footer {
+  margin-top: 0;
   background: radial-gradient(circle at 80% 20%, rgba(243, 156, 18, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 20% 80%, rgba(28, 58, 112, 0.6) 0%, transparent 60%),
         #0f172a;

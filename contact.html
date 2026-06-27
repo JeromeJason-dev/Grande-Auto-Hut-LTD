@@ -53,10 +53,8 @@
 
         <!-- MAIN LAYOUT WRAPPER (Scrollable Content Engine) -->
         <div class="main-layout-content">
-
             <main>
                 <section class="contact-wrapper">
-
                     <!-- Contact Form -->
                     <div class="contact-form-card">
                         <h2>Contact Us</h2>
@@ -101,7 +99,8 @@
                             </div>
                             <div>
                                 <p class="info-label">Email</p>
-                                <p class="info-value"><a href="mailto:grandeautohut@gmail.com">grandeautohut@gmail.com</a></p>
+                                <p class="info-value"><a
+                                        href="mailto:grandeautohut@gmail.com">grandeautohut@gmail.com</a></p>
                             </div>
                         </div>
 
@@ -127,18 +126,63 @@
                                 </table>
                             </div>
                         </div>
-
                     </div>
-
                 </section>
-
-                <div class="back-link">
-                    <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-                </div>
             </main>
-
         </div>
     </div>
+    <!-- FOOTER INSIDE THE CONTENT AREA TO PREVENT SIDEBAR OVERLAP -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- BRAND SECTION -->
+            <div class="footer-section">
+                <h2>GRANDE AUTO HUT LTD</h2>
+                <p>Where our service to you is our top priority.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i
+                            class="fa-brands fa-facebook"></i> Facebook</a> |
+                    <a href="https://www.instagram.com/grandeautohut" target="_blank"><i
+                            class="fa-brands fa-instagram"></i> Instagram</a> |
+                    <a href="https://www.tiktok.com/grandeautohutltd" target="_blank"><i
+                            class="fa-brands fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+            <!-- QUICK LINKS -->
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <!-- NEWSLETTER -->
+            <div class="footer-section">
+                <h3>STAY UPDATED</h3>
+                <p>Get updates on exclusive deals and new arrivals.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <!-- CUSTOMER SERVICE -->
+            <div class="footer-section">
+                <h3>CUSTOMER SERVICE</h3>
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- FOOTER BOTTOM -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="JS/auth.js"></script>
     <script src="JS/product.js"></script>
 </body>

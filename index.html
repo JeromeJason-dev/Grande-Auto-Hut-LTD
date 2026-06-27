@@ -16,13 +16,26 @@
         <h1 class="nav-brand">GRANDE AUTO HUT LTD</h1>
     </header>
 
-    <!-- CORE LAYOUT CONTAINER (Sidebar Engine & Main Workspace) -->
+    <!-- HERO SECTION (Now independent and full width) -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Genuine Parts. <span>Precise Fit.</span> Zero Guesswork</h2>
+            <p>We offer premium customer services where we sell genuine parts of top-grade retail pricing components backed by expert advice from counter staff who actually know what is under the hood.</p>
+            <div class="hero-btn-row">
+                <button class="cta-btn"><a href="product.html"><b>Shop Now</b></a></button>
+                <button class="cta-btn cta-btn-secondary"><a href="register.html"><b>Register Now</b></a></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE LAYOUT CONTAINER (Now ONLY contains the sidebar and inner workspace) -->
     <div class="dashboard-core-wrapper">
 
         <!-- Hidden Checkbox Control Engine Matrix -->
         <input type="checkbox" id="home-menu-toggle">
 
-        <!-- FIXED SIDEBAR PANELS -->
+        <!-- STICKY SIDEBAR PANEL -->
         <aside class="sidebar">
             <div class="sidebar-header-wrapper">
                 <label for="home-menu-toggle" class="hamburger-label">
@@ -53,20 +66,6 @@
 
         <!-- MAIN LAYOUT WRAPPER (Scrollable Content Engine) -->
         <div class="main-layout-content">
-
-            <!-- HERO SECTION -->
-            <section class="hero">
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <h2>Genuine Parts. <span>Precise Fit.</span> Zero Guesswork</h2>
-                    <p>We offer premium customer services where we sell genuine parts of top-grade retail pricing components backed by expert advice from counter staff who actually know what is under the hood.</p>
-                    <div class="hero-btn-row">
-                        <button class="cta-btn"><a href="product.html"><b>Shop Now</b></a></button>
-                        <button class="cta-btn cta-btn-secondary"><a href="register.html"><b>Register Now</b></a></button>
-                    </div>
-                </div>
-            </section>
-
             <!-- ABOUT US SUMMARY SECTION -->
             <section class="about-summary">
                 <div class="about-summary-grid">
@@ -180,53 +179,53 @@
                     </div>
                 </div>
             </section>
-
-            <!-- FOOTER -->
-            <footer class="footer">
-                <div class="footer-container">
-                    <div class="footer-section">
-                        <h2>GRANDE AUTO HUT LTD</h2>
-                        <p>Where our service to you is our top priority.</p>
-                        <div class="social-icons">
-                            <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a> |
-                            <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a> |
-                            <a href="https://www.tiktok.com/@grandeautohutltd" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-                        </div>
-                    </div>
-                    <div class="footer-section">
-                        <h3>QUICK LINKS</h3>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="product.html">Products</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>STAY UPDATED</h3>
-                        <p>Get updates on exclusive deals and new arrivals.</p>
-                        <form class="newsletter-form" onsubmit="event.preventDefault();">
-                            <input type="email" placeholder="Enter your email" required>
-                            <button type="submit">Subscribe</button>
-                        </form>
-                    </div>
-                    <div class="footer-section">
-                        <h3>CUSTOMER SERVICE</h3>
-                        <ul>
-                            <li><a href="#">Shipping Policy</a></li>
-                            <li><a href="#">Returns & Refunds</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Track Order</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.</p>
-                </div>
-            </footer>
-
         </div>
     </div>
+
+    <!-- FOOTER (Now independent and full width at the very bottom) -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2>GRANDE AUTO HUT LTD</h2>
+                <p>Where our service to you is our top priority.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/GRANDE AUTO HUT LTD" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a> |
+                    <a href="https://www.instagram.com/grandeautohut" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a> |
+                    <a href="https://www.tiktok.com/@grandeautohutltd" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>STAY UPDATED</h3>
+                <p>Get updates on exclusive deals and new arrivals.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section">
+                <h3>CUSTOMER SERVICE</h3>
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GRANDE AUTO HUT LTD. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="JS/auth.js"></script>
     <script src="JS/product.js"></script>
 </body>
